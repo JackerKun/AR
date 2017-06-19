@@ -1,0 +1,29 @@
+var myJsonData = [{
+	"id": "1",
+	"longitude": "121.3963",
+	"latitude": "31.1795",
+	"description": "智汇园#1",
+	"altitude": "50.0",
+	"name": "POI#1"
+}, {
+	"id": "2",
+	"longitude": "121.3964",
+	"latitude": "31.1795",
+	"description": "智汇园#2",
+	"altitude": "50.0",
+	"name": "POI#2"
+}, {
+	"id": "3",
+	"longitude": "121.3963",
+	"latitude": "31.1796",
+	"description": "智汇园#3",
+	"altitude": "40.0",
+	"name": "POI#3"
+}, {
+	"id": "4",
+	"longitude": "121.3964",
+	"latitude": "31.1796",
+	"description": "智汇园#4",
+	"altitude": "40.0",
+	"name": "POI#4"
+}];

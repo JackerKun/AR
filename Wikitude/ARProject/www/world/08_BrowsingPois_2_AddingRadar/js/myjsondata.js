@@ -1,0 +1,36 @@
+var myJsonData = [{
+	"id": "1",
+	"longitude": "121.3950",
+	"latitude": "31.1810",
+	"description": "正常使用",
+	"altitude": "10.0",
+	"name": "厕所"
+}, {
+	"id": "2",
+	"longitude": "121.3960",
+	"latitude": "31.1805",
+	"description": "关闭",
+	"altitude": "10.0",
+	"name": "出口"
+}, {
+	"id": "3",
+	"longitude": "121.3930",
+	"latitude": "31.1770",
+	"description": "正在使用中",
+	"altitude": "10.0",
+	"name": "会议室"
+}, {
+	"id": "4",
+	"longitude": "121.3963",
+	"latitude": "31.1795",
+	"description": "正常",
+	"altitude": "20.0",
+	"name": "吊灯"
+}, {
+	"id": "5",
+	"longitude": "121.3964",
+	"latitude": "31.1796",
+	"description": "异常",
+	"altitude": "20.0",
+	"name": "吊灯"
+}];
