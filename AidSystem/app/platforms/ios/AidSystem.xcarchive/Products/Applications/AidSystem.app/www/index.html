@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=screen-orientation content=portrait><meta name=apple-mobile-web-app-capable content=yes><meta name=format-detection content="telephone=no"><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><title>辅助屏指导</title><link href=./static/css/app.5bae3ae183fe845a8bea65748f10ed47.css rel=stylesheet></head><script>(function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);</script><body><div id=app></div><script type=text/javascript src=./static/js/manifest.62809ced3c12b097956e.js></script><script type=text/javascript src=./static/js/vendor.a64a79803e184b8239da.js></script><script type=text/javascript src=./static/js/app.f6498bf761bc11ae0225.js></script></body></html>
