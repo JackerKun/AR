@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO", "Assembly-CSharp.csproj", "{08443EF4-7366-D5F1-A1F1-FB8F0CF3671F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO", "Assembly-CSharp-Editor.csproj", "{BBFC72AA-F917-5146-7A8E-C4E5565B4C77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08443EF4-7366-D5F1-A1F1-FB8F0CF3671F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08443EF4-7366-D5F1-A1F1-FB8F0CF3671F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08443EF4-7366-D5F1-A1F1-FB8F0CF3671F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08443EF4-7366-D5F1-A1F1-FB8F0CF3671F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBFC72AA-F917-5146-7A8E-C4E5565B4C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBFC72AA-F917-5146-7A8E-C4E5565B4C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBFC72AA-F917-5146-7A8E-C4E5565B4C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBFC72AA-F917-5146-7A8E-C4E5565B4C77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

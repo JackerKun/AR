@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Web/Common/SocketService.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Web/WebManager.cs" Line="13" Column="31" />
+      <File FileName="Assets/Scripts/Web/Services/BucketSceneService.cs" Line="21" Column="36" />
+      <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="64" Column="77" />
+      <File FileName="Assets/Scripts/Other/GlobalManagerSettings.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Trackers/TankTrackableEventHandler.cs" Line="79" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/wangyinan/Documents/Hoperun/AR/UnityVuMark/Assets/Best HTTP (Pro)/BestHTTP/SocketIO/JsonEncoders/DefaultJSonEncoder.cs" line="38" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
