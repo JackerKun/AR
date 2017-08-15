@@ -57,10 +57,12 @@ namespace AR.Common
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 				mySocket = socketManagerRef.Socket;
+
 //				socketManagerRef.Open ();
 			}
 			Debug.Log ("Socket is connected ? " + mySocket.IsOpen);
-			request = new DeviceRequest (true, deviceID, targetID);
+//			request = new DeviceRequest (true, deviceID, targetID);
+			request = new DeviceRequest (true, "2", "1");
 			mySocket.Emit (EventConfig.REQUEST_SOCKET, JsonUtility.ToJson (request));
 			mySocket.On (eventName, callback);// + "_" + targetID
 			Debug.Log ("Socket is connected ? " + mySocket.IsOpen);
@@ -86,6 +88,7 @@ namespace AR.Common
 //			options.ReconnectionAttempts = 3;
 			options.AutoConnect = true;
 			options.ReconnectionDelay = TimeSpan.FromMilliseconds (1000);
+			Debug.LogError ("Set Socket Options Finished!");
 		}
 
 		#endregion

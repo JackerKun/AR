@@ -35,8 +35,6 @@ public class SceneMgr : MonoBehaviour
 		#endif 
 	}
 
-	public float x;
-
 	void ChangeFOV ()
 	{
 		Debug.Log ("ChageView");

@@ -17,12 +17,10 @@ public class TankObj : Container
 	ValveState curValveState;
 	Vector3 targetScale;
 
-	public void InitParam (string drumID, float curH, float fullH)
+	public void InitParam (string drumID)
 	{
 		this.drumID = drumID;
 		ID.text = "ID: " + drumID;
-		currentAmount = curH;
-		totalAmount = fullH;
 		curValveState = ValveToggle.isOn ? ValveState.ON : ValveState.OFF;
 	}
 
@@ -41,7 +39,8 @@ public class TankObj : Container
 	/// <param name="whole">总液位高度</param>
 	public void UpdateHeight (float curH)
 	{
-		LiquidLevel.value = curH / 100f;
+		curH /= 100;
+		LiquidLevel.value = curH;
 		LiquidValue.text = string.Format ("{0:00.00}%", curH);
 		float r = Mathf.Clamp01 ((curH - 1f / 3f) * 3f);
 		float g = Mathf.Max (0, (1f - 3f * curH));

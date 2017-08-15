@@ -63,19 +63,18 @@ namespace Vuforia
 		private void OnTrackingFound ()
 		{
 			Debug.Log ("Trackable " + mTrackableBehaviour.TrackableName + " found");
-			InitDrumObj (5f, 10f);
+			InitDrumObj ();
 			StartCoroutine (UpdateData ());
 		}
 
 		//获取网络数据
-		void InitDrumObj (float curH, float totalH)
+		void InitDrumObj ()
 		{
 			Debug.Log ("init socket");
 			//获取识别物体的ID
 			string _id = mVuMarkBehaviour.VuMarkTarget.InstanceId.StringValue;
-			GlobalManager.CURRENT_DRUM = GlobalManager.InitDrumPanel (_id, curH, totalH);
+			GlobalManager.CURRENT_DRUM = GlobalManager.InitDrumPanel (_id);
 			GlobalManager.CURRENT_DRUM.InitUI ();
-			Debug.Log ("网络" + (WebManager.Instance == null));
 			WebManager.Instance.onScaning (_id, scanCallback);
 		}
 

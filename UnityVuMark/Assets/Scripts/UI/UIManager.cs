@@ -45,4 +45,10 @@ public class UIManager : MonoBehaviour
 			Debug.Log ("CURRENT_DRUM IS NULL!");
 		}
 	}
+
+	public static void ShowDialog (string str)
+	{
+		MessageDialog dialog = Instantiate<MessageDialog> (Resources.Load <MessageDialog> ("Prefabs/Dialog"), GameObject.Find ("Canvas").transform);
+		dialog.InitText (str);
+	}
 }

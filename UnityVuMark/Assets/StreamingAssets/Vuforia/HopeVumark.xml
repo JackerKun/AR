@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <QCARConfig>
     <Tracking>
-        <VuMark name="Vumark0" size="20.0 23.4782608696" />
+        <VuMark name="myVumark" size="1.0 1.17391304348" />
     </Tracking>
 </QCARConfig>

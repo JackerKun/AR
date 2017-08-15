@@ -54,3 +54,6 @@
 /Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/UnityEngine.Timeline.dll
+/Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/ExCSS.Unity.dll
+/Users/wangyinan/Documents/GitHub/AR/UnityVuMark/Temp/bin/Debug/Unity.Legacy.NRefactory.dll

@@ -19,7 +19,6 @@ public class TankSceneService
 	public TankSceneService ()
 	{
 		socketService = new SocketService ();
-		Debug.LogError (socketService.mySocket.IsOpen);
 	}
 
 	//当检索到识别物时触发
