@@ -1,0 +1,17 @@
+#drawingCanvas{
+}
+.Toolbar{
+    text-align: center;
+    
+}
+.Toolbar button{
+	height: 40px;
+	width: 100px;
+	border: 1px solid #000;
+	background-color: #fff;
+	border-radius: 5px;
+}
+body{
+    padding:0;
+    margin:0;
+}
