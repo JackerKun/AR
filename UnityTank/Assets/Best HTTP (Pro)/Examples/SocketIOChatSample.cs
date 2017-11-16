@@ -92,7 +92,7 @@ public sealed class SocketIOChatSample : MonoBehaviour
 		options.AutoConnect = false;
         
 		// Create the Socket.IO manager
-		Manager = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+		Manager = new SocketManager (HopeRun.GlobalManager.IP, options);
 
 		// Set up custom chat events
 		Manager.Socket.On ("login", OnLogin);

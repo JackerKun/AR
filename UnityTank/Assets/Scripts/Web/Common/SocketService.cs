@@ -79,7 +79,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 			}
@@ -120,7 +120,7 @@ namespace AR.Common
 //			BestHTTP.SocketIO.Socket
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 			}
 			mySocket = socketManagerRef.Socket;
@@ -144,7 +144,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 			}
@@ -157,7 +157,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 				mySocket = socketManagerRef.Socket;
@@ -174,7 +174,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 			}
@@ -189,7 +189,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 			}
@@ -205,7 +205,7 @@ namespace AR.Common
 		{
 			//如果初次连接socket
 			if (mySocket == null) {
-				socketManagerRef = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+				socketManagerRef = new SocketManager (GlobalManager.IP, options);
 				Debug.Log ("set connection options");
 				socketManagerRef.Options.AutoConnect = true;
 				mySocket = socketManagerRef.Socket;

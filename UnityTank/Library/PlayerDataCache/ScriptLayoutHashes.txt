@@ -1,6 +1,6 @@
 Android
 268ef825502a475f763a8f3739ab652c Assembly-CSharp.dll:.VRIntegrationHelper
-710605a5ddfa2aca7ff84d7ba2a1b7cd Assembly-CSharp.dll:.TankMgr
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TankMgr
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LargeFileDownloadSample
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UDTTest
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -140,7 +140,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 3d1b89310e77c34bc0c8d7132231345c Assembly-CSharp.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CanvasMgr
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Vuforia.PipeTrackableEventHandler
-2362c4fec29a67e8f79979eabc33d62b Assembly-CSharp.dll:Vuforia.TankTrackableEventHandler
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Vuforia.TankTrackableEventHandler
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.DistortionRenderingBehaviour
 66ee6ce0968b1fa679c5c06187b8e23f Vuforia.UnityExtensions.dll:Vuforia.VuforiaAbstractBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.VuforiaDeinitBehaviour

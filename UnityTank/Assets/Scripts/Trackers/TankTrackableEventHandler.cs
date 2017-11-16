@@ -13,11 +13,12 @@ namespace Vuforia
 	/// A custom handler that implements the ITrackableEventHandler interface.
 	/// </summary>
 	public class TankTrackableEventHandler : MonoBehaviour,
-                                                ITrackableEventHandler
+												ITrackableEventHandler
 	{
 		#region PRIVATE_MEMBER_VARIABLES
 
-		public Text floatingText;
+		Text floatingText;
+		RawImage floatingBG;
 
 		private TrackableBehaviour mTrackableBehaviour;
 		//		private VuMarkBehaviour mVuMarkBehaviour;
@@ -29,14 +30,17 @@ namespace Vuforia
 
 		#region UNTIY_MONOBEHAVIOUR_METHODS
 
-		void Start ()
+		void Start()
 		{
-			mTrackableBehaviour = GetComponent<TrackableBehaviour> ();
-			if (mTrackableBehaviour) {
-				mTrackableBehaviour.RegisterTrackableEventHandler (this);
+			mTrackableBehaviour = GetComponent<TrackableBehaviour>();
+			if (mTrackableBehaviour)
+			{
+				mTrackableBehaviour.RegisterTrackableEventHandler(this);
 			}
 			isTargetFound = false;
-//			mVuMarkBehaviour = GetComponent<VuMarkBehaviour> ();
+			floatingText = GameObject.Find("Canvas/Scroll View/Viewport/Content/Text").GetComponent<Text>();
+			floatingBG = GameObject.Find("Canvas/Scroll View/Viewport/Content/RawImage").GetComponent<RawImage>();
+			//			mVuMarkBehaviour = GetComponent<VuMarkBehaviour> ();
 		}
 
 		#endregion // UNTIY_MONOBEHAVIOUR_METHODS
@@ -49,16 +53,18 @@ namespace Vuforia
 		/// Implementation of the ITrackableEventHandler function called when the
 		/// tracking state changes.
 		/// </summary>
-		public void OnTrackableStateChanged (
+		public void OnTrackableStateChanged(
 			TrackableBehaviour.Status previousStatus,
 			TrackableBehaviour.Status newStatus)
 		{
 			if (newStatus == TrackableBehaviour.Status.DETECTED ||
-			    newStatus == TrackableBehaviour.Status.TRACKED ||
-			    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED) {
-				OnTrackingFound ();
-			} else {
-				OnTrackingLost ();
+				newStatus == TrackableBehaviour.Status.TRACKED ||
+				newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+			{
+				OnTrackingFound();
+			}
+			else {
+				OnTrackingLost();
 			}
 		}
 
@@ -68,65 +74,67 @@ namespace Vuforia
 
 		#region PRIVATE_METHODS
 
-		private void OnTrackingFound ()
+		private void OnTrackingFound()
 		{
-			Debug.Log ("target found");
+			Debug.Log("target found");
 			//隐藏常驻液位页面
 			isTargetFound = true;
-			GyroFlowView.SetFlowPanelActive (false);
-			Debug.Log ("Trackable " + mTrackableBehaviour.TrackableName + " found");
-			InitDrumObj ();
-			StartCoroutine (UpdateData ());
+			GyroFlowView.SetFlowPanelActive(false);
+			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+			InitDrumObj();
+			StartCoroutine(UpdateData());
 		}
 
 		//获取网络数据
-		void InitDrumObj ()
+		void InitDrumObj()
 		{
-			Debug.Log ("init socket");
+			Debug.Log("init socket");
 			//获取识别物体的ID
-//			string _id = mVuMarkBehaviour.VuMarkTarget.InstanceId.StringValue;
+			//			string _id = mVuMarkBehaviour.VuMarkTarget.InstanceId.StringValue;
 			GlobalManager.CURRENT_TANKID = mTrackableBehaviour.TrackableName;
-			TankSocketService.Instance.onScaning (scanCallback);
+			TankSocketService.Instance.onScaning(scanCallback);
 		}
 
-		void scanCallback (Tank data)
+		void scanCallback(Tank data)
 		{
-			UIManager.ChangeValveState (data.valveStatus ? ValveState.ON : ValveState.OFF);
-			UIManager.UpdateLiquidHeight (data.liquidHeight);
-			if (GlobalManager.CURRENT_TANK == null && isTargetFound) {
-				GlobalManager.CURRENT_TANK = GlobalManager.InitTankPanel (transform.Find ("Root"));
-				GlobalManager.CURRENT_TANK.InitUI ();
+			UIManager.ChangeValveState(data.valveStatus ? ValveState.ON : ValveState.OFF);
+			UIManager.UpdateLiquidHeight(data.liquidHeight, data.limitLevel);
+			if (GlobalManager.CURRENT_TANK == null && isTargetFound)
+			{
+				GlobalManager.CURRENT_TANK = GlobalManager.InitTankPanel(transform.Find("Root"));
+				GlobalManager.CURRENT_TANK.InitUI();
 			}
 			//更新漂浮液位页面的高度
-			UpdateFloatingPanel (data.liquidHeight);
-			Debug.Log ("scanCallback..");
+			UpdateFloatingPanel(data.liquidHeight, data.limitLevel);
+			Debug.Log("scanCallback..");
 		}
 
-		void UpdateFloatingPanel (float liquidH)
+		void UpdateFloatingPanel(float liquidH, float limitLevel)
 		{
-			floatingText.text = string.Format ("{0:00.00}%", liquidH / 100);
-			;
+			floatingText.text = string.Format("{0:00.00}%", liquidH);
+			floatingBG.color = GlobalManager.GetWarnColor(liquidH / limitLevel);
 		}
 
 		//更新数据
-		IEnumerator UpdateData ()
+		IEnumerator UpdateData()
 		{
 			yield return 0;
 		}
 
-		private void OnTrackingLost ()
+		private void OnTrackingLost()
 		{
 			isTargetFound = false;
 			//显示常驻液位页面
-			GyroFlowView.SetFlowPanelActive (true);
+			GyroFlowView.SetFlowPanelActive(true);
 			//获取识别物体的ID
-			if (mTrackableBehaviour) {
-				TankSocketService.Instance.onLostScaning (mTrackableBehaviour.TrackableName);
+			if (mTrackableBehaviour)
+			{
+				TankSocketService.Instance.onLostScaning(mTrackableBehaviour.TrackableName);
 			}
 
-			GlobalManager.Deposit (GlobalManager.CURRENT_TANK);
+			GlobalManager.Deposit(GlobalManager.CURRENT_TANK);
 
-			Debug.Log ("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
 		}
 
 		#endregion // PRIVATE_METHODS

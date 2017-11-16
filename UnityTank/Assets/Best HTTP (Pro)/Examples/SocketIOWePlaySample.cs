@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BestHTTP.SocketIO;
 using BestHTTP.SocketIO.Events;
+using HopeRun;
 
 public sealed class SocketIOWePlaySample : MonoBehaviour
 {
@@ -96,7 +97,7 @@ public sealed class SocketIOWePlaySample : MonoBehaviour
 
 		// Create the SocketManager instance
 //		var manager = new SocketManager(new Uri("http://io.weplay.io/socket.io/"), options);
-		var manager = new SocketManager (new Uri (HopeRun.GlobalManager.apiURL), options);
+		var manager = new SocketManager (GlobalManager.IP, options);
 
 		// Keep a reference to the root namespace
 		Socket = manager.Socket;

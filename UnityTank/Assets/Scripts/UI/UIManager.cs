@@ -18,11 +18,11 @@ public class UIManager : MonoBehaviour
 
 	public static MessageDialog dialog;
 
-	void Start ()
+	void Start()
 	{
-		MessageTxt = GameObject.Find ("MainCanvas/StayMessage").GetComponent<UnityEngine.UI.Text> ();
+		MessageTxt = GameObject.Find("MainCanvas/StayMessage").GetComponent<UnityEngine.UI.Text>();
 		mainCamera = Camera.main;
-//		initFov = mainCamera.fieldOfView;
+		//		initFov = mainCamera.fieldOfView;
 	}
 
 	/// <summary>
@@ -30,41 +30,46 @@ public class UIManager : MonoBehaviour
 	/// </summary>
 	/// <param name="cur">当前液位高度</param>
 	/// <param name="whole">总液位高度</param>
-	public static void UpdateLiquidHeight (float cur)
+	public static void UpdateLiquidHeight(float cur, float limitValue)
 	{
-		if (GlobalManager.CURRENT_TANK) {
-			GlobalManager.CURRENT_TANK.UpdateHeight (cur);
+		if (GlobalManager.CURRENT_TANK)
+		{
+			GlobalManager.CURRENT_TANK.UpdateHeight(cur, limitValue);
 		}
 	}
 
-	public static void ShowStayMessage (string strMsg)
+	public static void ShowStayMessage(string strMsg)
 	{
 		MessageTxt.text = strMsg;
 	}
 
 	//更改阀门状态
-	public static void ChangeValveState (ValveState state)
+	public static void ChangeValveState(ValveState state)
 	{
-		if (GlobalManager.CURRENT_TANK) {
-			GlobalManager.CURRENT_TANK.ChangeValveState (state);
-		} else {
-			Debug.Log ("CURRENT_TANK IS NULL!");
+		if (GlobalManager.CURRENT_TANK)
+		{
+			GlobalManager.CURRENT_TANK.ChangeValveState(state);
+		}
+		else {
+			Debug.Log("CURRENT_TANK IS NULL!");
 		}
 	}
 
-	public static void ShowErrorMessage (string str)
+	public static void ShowErrorMessage(string str)
 	{
-		if (dialog == null) {
-			dialog = Instantiate<MessageDialog> (Resources.Load <MessageDialog> ("Prefabs/ErrorMessage"), GameObject.Find ("MainCanvas").transform);
-			dialog.InitText (str);
+		if (dialog == null)
+		{
+			dialog = Instantiate<MessageDialog>(Resources.Load<MessageDialog>("Prefabs/ErrorMessage"), GameObject.Find("MainCanvas").transform);
+			dialog.InitText(str);
 		}
 	}
 
-	public static void ShowMessage (string str)
+	public static void ShowMessage(string str)
 	{
-		if (dialog == null) {
-			dialog = Instantiate<MessageDialog> (Resources.Load <MessageDialog> ("Prefabs/Message"), GameObject.Find ("MainCanvas").transform);
-			dialog.InitText (str);
+		if (dialog == null)
+		{
+			dialog = Instantiate<MessageDialog>(Resources.Load<MessageDialog>("Prefabs/Message"), GameObject.Find("MainCanvas").transform);
+			dialog.InitText(str);
 		}
 	}
 }
