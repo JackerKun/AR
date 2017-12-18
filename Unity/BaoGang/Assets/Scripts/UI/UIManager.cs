@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Vuforia;
 using HopeRun;
 
 public class UIManager : MonoBehaviour
@@ -17,10 +16,9 @@ public class UIManager : MonoBehaviour
 	float curT;
 
 	public static MessageDialog dialog;
-
 	void Start()
 	{
-		MessageTxt = GameObject.Find("MainCanvas/StayMessage").GetComponent<UnityEngine.UI.Text>();
+		MessageTxt = GameObject.Find("MainCanvas/StayMessage").GetComponent<Text>();
 		mainCamera = Camera.main;
 		//		initFov = mainCamera.fieldOfView;
 	}
@@ -50,7 +48,8 @@ public class UIManager : MonoBehaviour
 		{
 			GlobalManager.CURRENT_TANK.ChangeValveState(state);
 		}
-		else {
+		else
+		{
 			Debug.Log("CURRENT_TANK IS NULL!");
 		}
 	}

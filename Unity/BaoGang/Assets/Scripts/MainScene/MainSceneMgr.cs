@@ -1,10 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using HopeRun;
-using HopeRun.Message;
 
 public class MainSceneMgr : MonoBehaviour
 {
@@ -12,6 +10,8 @@ public class MainSceneMgr : MonoBehaviour
 	public static MainSceneMgr MainMgr;
 	public static bool LazyQuit = false;
 	InputField ipInputField;
+
+	bool isIpFieldShow = true;
 
 	void OnGUI()
 	{
@@ -48,12 +48,19 @@ public class MainSceneMgr : MonoBehaviour
 	void Init()
 	{
 		screenEdge = GameObject.Find("MainCanvas/other/edge").GetComponent<Image>();
-		ipInputField = GameObject.Find("Canvas/IPInputField").GetComponent<InputField>();
+		ipInputField = GameObject.Find("SettingCanvas/IPInputField").GetComponent<InputField>();
+		Switch();
 		ipInputField.text = GlobalManager.IP;
 		//		WebManager.Init ();
 		//
 		//		WebErrorProccess.Init ();
 		//		StartCoroutine (RefreshSocket ());
+	}
+
+	public void Switch()
+	{
+		isIpFieldShow = !isIpFieldShow;
+		ipInputField.gameObject.SetActive(isIpFieldShow);
 	}
 
 	IEnumerator RefreshSocket()
