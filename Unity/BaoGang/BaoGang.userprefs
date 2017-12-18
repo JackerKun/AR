@@ -1,15 +1,18 @@
-﻿<Properties StartupConfiguration="{2B87A2DE-081C-C07C-B5FC-78EB4B83BBF6}|单元测试">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainScene/MainSceneMgr.cs">
+﻿<Properties StartupConfiguration="{661FBE64-96CB-9047-E29C-D0C5161BF9B3}|单元测试">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Web/Common/SocketService.cs">
     <Files>
+      <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="99" Column="15" />
       <File FileName="Assets/Scripts/MainScene/TankMgr.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="42" Column="4" />
       <File FileName="Assets/Scripts/UI/HoloGrid.cs" Line="12" Column="30" />
       <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="61" Column="31" />
       <File FileName="Assets/Scripts/UI/InspectionItem.cs" Line="87" Column="14" />
       <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="60" Column="17" />
-      <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="5" Column="15" />
       <File FileName="Assets/Scripts/UI/UIManager.cs" Line="24" Column="3" />
-      <File FileName="Assets/Scripts/Other/ShowHideUtility.cs" Line="13" Column="3" />
+      <File FileName="Assets/Scripts/Web/WebManager.cs" Line="41" Column="22" />
+      <File FileName="Assets/Scripts/Web/Services/TankSocketService.cs" Line="37" Column="20" />
+      <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="120" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
