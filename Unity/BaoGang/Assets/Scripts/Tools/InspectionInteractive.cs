@@ -113,7 +113,7 @@ public class InspectionInteractive : MonoBehaviour
 					curBtn = tmpBtn;
 					//鼠标经过操作
 					curBtn.MouseHover();
-					ShowMouseCountDown(uiMgr.ShowOptionDialog);
+					ShowMouseCountDown(uiMgr.ShowOptionDialog, tmpBtn);
 				}
 				else
 				{
@@ -133,9 +133,9 @@ public class InspectionInteractive : MonoBehaviour
 	}
 
 	//显示鼠标倒计时
-	void ShowMouseCountDown(Action<string> act)
+	void ShowMouseCountDown(Action<InspectionItem> act, InspectionItem item)
 	{
-		mouseCountDown.StartFillImage(act, "北京时间:" + System.DateTime.UtcNow);
+		mouseCountDown.StartFillImage(act, item);
 	}
 
 	void ClearBtnHover()

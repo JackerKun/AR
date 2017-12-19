@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using AR.Common;
 using AR.Configs;
 using AR.Model;
@@ -34,6 +33,7 @@ public class TankSocketService
 
 	public void RegistServices()
 	{
+		Debug.LogError("Not Error");
 		socketService.InitScene("tank",
 			(socket, packet, args) =>
 			{

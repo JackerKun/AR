@@ -209,6 +209,7 @@
      <Compile Include="Assets\Scripts\Web\Model\Tank.cs" />
      <Compile Include="Assets\Scripts\Web\Model\TargetDeviceRequest.cs" />
      <Compile Include="Assets\Scripts\Web\Services\ExpertSocketService.cs" />
+     <Compile Include="Assets\Scripts\Web\Services\InspectionSocketService.cs" />
      <Compile Include="Assets\Scripts\Web\Services\TankSocketService.cs" />
      <Compile Include="Assets\Scripts\Web\WebErrorProccess.cs" />
      <Compile Include="Assets\Scripts\Web\WebManager.cs" />

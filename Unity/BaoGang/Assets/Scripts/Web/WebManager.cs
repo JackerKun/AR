@@ -32,33 +32,14 @@ public class WebManager
 		//通用的注册服务
 		PublicRegistListener(socketService);
 		GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
+		Debug.LogError(sceneName);
 		if (sceneName == "tank")
 		{
 			TankSocketService.Instance.RegistServices();
 		}
 		else
 		{
-			socketService.InitScene(sceneName,
-				(socket, packet, args) =>
-				{
-					Debug.LogError("Init Scene.." + packet.Payload);
-					//GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
-					DealState(packet.Payload, true);
-				});
-			//监听流程
-			socketService.ServerInfo(EventConfig.AR_WORKFLOW,
-				(socket, packet, args) =>
-				{
-					Debug.Log(packet.Payload);
-					DealState(packet.Payload);
-				});
-			socketService.AddListener(EventConfig.PHOTO,
-				(socket, packet, args) =>
-				{
-					Debug.LogError("Callback PHOTO --> " + JSON.Parse(packet.Payload));
-					UIManager.ShowStayMessage(MessageLibrary.GetMessage(JSON.Parse(packet.Payload)[1]["status"]));
-					MainSceneMgr.MainMgr.LoadScene("TakePhoto");
-				});
+			InspectionSocketService.Instance.RegistServices();
 		}
 		#endregion
 	}
