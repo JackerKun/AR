@@ -12,9 +12,4 @@ public class WebErrorProccess
 		Instance = new WebErrorProccess ();
 	}
 	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
 }

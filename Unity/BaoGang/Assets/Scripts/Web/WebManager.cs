@@ -46,7 +46,7 @@ public class WebManager
 					DealState(packet.Payload, true);
 				});
 			//监听流程
-			socketService.ServerInfo(EventConfig.AR_WORKFLOW,
+            socketService.AddListener(EventConfig.AR_WORKFLOW,
 				(socket, packet, args) =>
 				{
 					Debug.Log(packet.Payload);
@@ -77,7 +77,7 @@ public class WebManager
 				IsConnect = true;
 			});
 		//监听错误信息
-		socketService.ServerInfo(EventConfig.WARN_MESSAGE,
+        socketService.AddListener(EventConfig.WARN_MESSAGE,
 			(socket, packet, args) =>
 			{
 				Debug.Log(packet.Payload);
@@ -118,7 +118,7 @@ public class WebManager
 	public static void WARN_MESSAGE()
 	{
 		SocketService socketService = WebManager.socketInstance;
-		socketService.ServerInfo(EventConfig.WARN_MESSAGE,
+        socketService.AddListener(EventConfig.WARN_MESSAGE,
 			(socket, packet, args) =>
 			{
 				Debug.Log(packet.Payload);

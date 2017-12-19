@@ -4,7 +4,7 @@ namespace HopeRun.Model
 {
 	public class TargetDeviceRequest
 	{
-		public TargetDeviceRequest (Boolean isOpen, String deviceID, string targetID)
+		public TargetDeviceRequest (bool isOpen, string deviceID, string targetID)
 		{
 			this.isOpen = isOpen;
 			this.deviceID = deviceID;

@@ -20,13 +20,16 @@ public class InspectionMgr : MonoBehaviour
 	}
 
 	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.X))
+    {
+		if (Input.GetMouseButtonDown(0))
 		{
-			UpdateItems(null, 12);
+            Debug.Log("XXX");
+            UpdateItems(null, 12);
+
 		}
 		else if (Input.GetKeyDown(KeyCode.Z))
-		{
+        {
+            Debug.Log("ZZZ");
 			UpdateItems(null, 36);
 		}
 	}

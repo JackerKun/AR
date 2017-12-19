@@ -41,7 +41,7 @@ public class TankSocketService
 				DealState(packet.Payload, true);
 			});
 		//监听流程
-		socketService.ServerInfo(EventConfig.AR_WORKFLOW,
+        socketService.AddListener(EventConfig.AR_WORKFLOW,
 			(socket, packet, args) =>
 			{
 				Debug.Log(packet.Payload);
