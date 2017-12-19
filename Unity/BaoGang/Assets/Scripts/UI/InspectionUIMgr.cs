@@ -8,6 +8,7 @@ public class InspectionUIMgr : MonoBehaviour
 	public InspectionItem ItemPrefab;
 	public CanvasGroup Items;
 	public Transform GyroUICamera;
+	[HideInInspector]
 	public UIMode curUIMode;
 	Transform itemsRootTran;
 	DialogBox dialogBox;
@@ -88,9 +89,10 @@ public class InspectionUIMgr : MonoBehaviour
 	#region 巡检项
 
 	//显示对话内容面板
-	public void ShowOptionDialog(string info)
+	public void ShowOptionDialog(InspectionItem item)
 	{
-		dialogBox.ShowDialog(info, itemsRootTran.position, itemsRootTran.rotation);
+		//dialogBox.ShowDialog(info, itemsRootTran.position, itemsRootTran.rotation);
+		dialogBox.ShowDialog(item.Info, item.transform.position, item.transform.rotation);
 		curUIMode = UIMode.DialogBox;
 	}
 

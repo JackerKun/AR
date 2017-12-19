@@ -10,7 +10,7 @@ public class UIEffects : MonoBehaviour
 
 	#region 填充饼图操作
 
-	public void StartFillImage(Action<string> callback, string info)
+	public void StartFillImage(Action<InspectionItem> callback, InspectionItem item)
 	{
 		if (!fillImg)
 		{
@@ -21,7 +21,7 @@ public class UIEffects : MonoBehaviour
 			mySque.Append(fillImg.transform.DOScale(Vector3.one * 0.5f, .2f).SetEase(Ease.OutSine).OnComplete(() => { Debug.Log("HLdddLLO"); }));
 			//弹出界面
 			mySque.Append(fillImg.DOFillAmount(0, 5f));
-			mySque.OnComplete(() => { callback.Invoke(info); });
+			mySque.OnComplete(() => { callback.Invoke(item); });
 		}
 	}
 

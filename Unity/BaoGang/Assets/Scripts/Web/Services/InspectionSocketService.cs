@@ -7,25 +7,22 @@ using SimpleJSON;
 using HopeRun;
 using HopeRun.Message;
 
-public class TankSocketService
+public class InspectionSocketService
 {
 	private SocketService socketService;
 	private Socket socket;
 
 	private System.Action<Tank> myCallback;
 
-	// private delegate void mCallback (Socket socket, Packet packet, params object[] args);
-	// Use this for initialization
+	static InspectionSocketService _instance;
 
-	static TankSocketService _instance;
-
-	public static TankSocketService Instance
+	public static InspectionSocketService Instance
 	{
 		get
 		{
 			if (_instance == null)
 			{
-				_instance = new TankSocketService();
+				_instance = new InspectionSocketService();
 			}
 			return _instance;
 		}
@@ -34,7 +31,7 @@ public class TankSocketService
 	public void RegistServices()
 	{
 		Debug.LogError("Not Error");
-		socketService.InitScene("tank",
+		socketService.InitScene("inspection",
 			(socket, packet, args) =>
 			{
 				Debug.LogError("Init Scene.." + packet.Payload);
@@ -71,7 +68,7 @@ public class TankSocketService
 		}
 	}
 
-	public TankSocketService()
+	public InspectionSocketService()
 	{
 		socketService = WebManager.socketInstance;
 	}

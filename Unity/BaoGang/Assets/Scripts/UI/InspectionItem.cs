@@ -17,7 +17,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	}
 	// 点开后显示的描述文字
 	string dialogContent;
-	public string DialogContent
+	public string Info
 	{
 		get { return dialogContent; }
 	}
