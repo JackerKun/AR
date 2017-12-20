@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Collections;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace HopeRun
 			get
 			{
 				string str = PlayerPrefs.GetString("IP");
-				if (string.IsNullOrEmpty(str))
+				if (String.IsNullOrEmpty(str))
 				{
 					str = "192.168.110.82";
 				}
@@ -69,7 +70,7 @@ namespace HopeRun
 		{
 			Transform canvasRoot = tankRoot;
 			//			TankObj drum = Instantiate<TankObj> ((Resources.Load ("Prefabs/TankPanel") as GameObject).GetComponent<TankObj> (), canvasRoot);
-			TankObj drum = Instantiate<TankObj>((Resources.Load("Prefabs/TankPanelNoBG") as GameObject).GetComponent<TankObj>(), canvasRoot);
+			TankObj drum = Instantiate(((GameObject) Resources.Load("Prefabs/TankPanel")).GetComponent<TankObj>(), canvasRoot);
 			drum.InitParam(CURRENT_TANKID);
 			return drum;
 		}
@@ -86,17 +87,46 @@ namespace HopeRun
 			tagRoot.localScale = Vector3.one;
 			//			tagRoot.localEulerAngles = Vector3.zero;
 			tagRoot.localRotation = Quaternion.identity;
-			List<FloatingTag> tags = new List<FloatingTag>();
+			var tags = new List<FloatingTag>();
 			for (int i = 0; i < imageTran.Count; i++)
 			{
-				FloatingTag tag = Instantiate<FloatingTag>((Resources.Load("Prefabs/Tag") as GameObject).GetComponent<FloatingTag>(), tagRoot);
+				FloatingTag tag = Instantiate(((GameObject) Resources.Load("Prefabs/Tag")).GetComponent<FloatingTag>(), tagRoot);
 				tag.Init(imageTran[i]);
 				tags.Add(tag);
 			}
 			return tagRoot;
 		}
 
-		public static Color GetWarnColor(float percent)
+
+	    /// <summary>
+	    /// 显示液位高度
+	    /// </summary>
+	    /// <param name="cur">当前液位高度</param>
+	    /// <param name="whole">总液位高度</param>
+	    public static void UpdateLiquidHeight(float cur, float limitValue)
+	    {
+	        if (GlobalManager.CURRENT_TANK)
+	        {
+	            GlobalManager.CURRENT_TANK.UpdateHeight(cur, limitValue);
+	        }
+	    }
+
+	    //更改阀门状态
+
+	    public static void ChangeValveState(ValveState state)
+	    {
+	        if (GlobalManager.CURRENT_TANK)
+	        {
+	            GlobalManager.CURRENT_TANK.ChangeValveState(state);
+	        }
+	        else
+	        {
+	            Debug.Log("CURRENT_TANK IS NULL!");
+	        }
+	    }
+
+
+	    public static Color GetWarnColor(float percent)
 		{
 			float r = Mathf.Clamp01((percent - 1f / 3f) * 3f);
 			float g = Mathf.Max(0, (1f - 3f * percent));
