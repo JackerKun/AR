@@ -18,7 +18,7 @@ public class ExpertSocketService
 	// Use this for initialization
 	public ExpertSocketService ()
 	{
-		socketService = WebManager.socketInstance;
+		socketService = WebManager.Instance.socket;
 		//开启连接，监听专家的截图消息
 		socketService.Register (
 			EventConfig.REQUEST_CAPTURE_REGISTER,

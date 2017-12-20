@@ -85,7 +85,7 @@ public class TakePhotoMgr : MonoBehaviour
 
 	void SendPictureToServer()
 	{
-		socketService = WebManager.socketInstance;
+		socketService = WebManager.Instance.socket;
 		PhotoObj requestObj = new PhotoObj();
 		socketService.mySocket.Emit(EventConfig.AR_PHOTO, JsonUtility.ToJson(requestObj));
 		//停止拍摄

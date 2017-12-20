@@ -93,8 +93,8 @@ namespace Vuforia
 
 		void ScanCallback (Tank data)
 		{
-			UIManager.ChangeValveState (data.valveStatus ? ValveState.ON : ValveState.OFF);
-			UIManager.UpdateLiquidHeight (data.liquidHeight, data.limitLevel);
+			GlobalManager.ChangeValveState (data.valveStatus ? ValveState.ON : ValveState.OFF);
+            GlobalManager.UpdateLiquidHeight(data.liquidHeight, data.limitLevel);
 			if (GlobalManager.CURRENT_TANK == null && isTargetFound) {
 				GlobalManager.CURRENT_TANK = GlobalManager.InitTankPanel (transform.Find ("Root"));
 				GlobalManager.CURRENT_TANK.InitUI ();

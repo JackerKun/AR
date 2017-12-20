@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -7,20 +8,17 @@ using HopeRun;
 
 public class TankObj : Container
 {
-	public Slider LiquidLevel;
-	public Text LiquidValue;
-	public Image LiquidImg;
+	public CircleSlider LiquidLevel;
 	public Toggle ValveToggle;
 	//桶的ID
-	public Text ID;
-	string drumID;
+	public Text ID,_gaodu;
+	string _drumId;
 	ValveState curValveState;
 	Vector3 targetScale;
-	public static Color CurTankColor;
 
 	public void InitParam(string drumID)
 	{
-		this.drumID = drumID;
+		this._drumId = drumID;
 		ID.text = "ID: " + drumID;
 		curValveState = ValveToggle.isOn ? ValveState.ON : ValveState.OFF;
 	}
@@ -49,12 +47,10 @@ public class TankObj : Container
 		//LiquidImg.color = new Color(r, g, b);
 		//CurTankColor = LiquidImg.color;
 		//currentAmount = curH;
+	    _gaodu.text = curH.ToString(CultureInfo.InvariantCulture);
+	    LiquidLevel.Max = totalAmount;
+	    LiquidLevel.Value = curH;
 
-		float curV = curH / totalAmount;
-		LiquidLevel.value = curV;
-		LiquidValue.text = string.Format("{0:00.00}%", curH);
-		LiquidImg.color = GlobalManager.GetWarnColor(curV);
-		Debug.Log(CurTankColor);
 		currentAmount = curH;
 	}
 

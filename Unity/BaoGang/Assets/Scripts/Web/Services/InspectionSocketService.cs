@@ -70,7 +70,7 @@ public class InspectionSocketService
 
 	public InspectionSocketService()
 	{
-		socketService = WebManager.socketInstance;
+		socketService = WebManager.Instance.socket;
 	}
 
 	//当检索到识别物时触发

@@ -158,6 +158,13 @@
      <Compile Include="Assets\Scripts\Experts\ExpertMgr.cs" />
      <Compile Include="Assets\Scripts\Experts\ExpertsTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IRyanDialog.cs" />
+     <Compile Include="Assets\Scripts\Keefor\CircleSlider.cs" />
+     <Compile Include="Assets\Scripts\Keefor\CustomARCamera.cs" />
+     <Compile Include="Assets\Scripts\Keefor\FixDataConfig.cs" />
+     <Compile Include="Assets\Scripts\Keefor\KeyInput.cs" />
+     <Compile Include="Assets\Scripts\Keefor\MainPanelAni.cs" />
+     <Compile Include="Assets\Scripts\Keefor\TDButtonItem.cs" />
+     <Compile Include="Assets\Scripts\Keefor\TDMouseInput.cs" />
      <Compile Include="Assets\Scripts\MainScene\CanvasMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\InspectionMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\MainSceneMgr.cs" />
@@ -172,9 +179,6 @@
      <Compile Include="Assets\Scripts\Other\SimpleJSON.cs" />
      <Compile Include="Assets\Scripts\Other\TrackableSettings.cs" />
      <Compile Include="Assets\Scripts\Pipe\UI\PipeUIUtility.cs" />
-     <Compile Include="Assets\Scripts\PKF\CustomARCamera.cs" />
-     <Compile Include="Assets\Scripts\PKF\FixDataConfig.cs" />
-     <Compile Include="Assets\Scripts\PKF\KeyInput.cs" />
      <Compile Include="Assets\Scripts\Test\AdjustMatrix.cs" />
      <Compile Include="Assets\Scripts\Test\ChangeFOV.cs" />
      <Compile Include="Assets\Scripts\Test\DebugScreen.cs" />
