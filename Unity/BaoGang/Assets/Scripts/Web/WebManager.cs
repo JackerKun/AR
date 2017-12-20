@@ -39,32 +39,16 @@ public class WebManager : MonoBehaviour
         SocketService socketService = socket;
         IsConnect = false;
         //通用的注册服务
-        PublicRegistListener(socketService);
-        GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
-
-        socketService.InitScene(sceneName,
-            (socket, packet, args) =>
-            {
-                Debug.LogError("Init Scene.." + packet.Payload);
-                //GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
-                DealState(packet.Payload, true);
-            });
-
-        if (sceneName == "tank")
-        {
-            TankSocketService.Instance.RegistServices();
-        }
-        else if (sceneName == "inspection")
-        {
-            //监听流程
-            socketService.AddListener(EventConfig.AR_WORKFLOW,
-                (socket, packet, args) =>
-                {
-                    Debug.Log(packet.Payload);
-                    DealState(packet.Payload);
-                });
-        }
-
+		PublicRegistListener(socketService);
+		GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
+		if (sceneName == "tank")
+		{
+			TankSocketService.Instance.RegistServices();
+		}
+		else if (sceneName == "inspection")
+		{
+			InspectionSocketService.Instance.RegistServices();
+		}
         StopAllCoroutines();
         StartCoroutine(RefreshSocket());
 
@@ -99,45 +83,6 @@ public class WebManager : MonoBehaviour
             });
     }
 
-
-    static void DealState(string payload, bool isOnline = false)
-    {
-        Debug.Log(JSON.Parse(payload));
-        JSONNode jn = JSON.Parse(payload)[1];
-        if (jn["status"] == "error")
-        {
-            UIManager.ShowErrorMessage(jn["message"]);
-        }
-        else
-        {
-            if (GlobalManager.CURRENT_SCENE_SERVICE == "tank")
-            {
-                SceneMsgDealer.DealTankMsg(jn, isOnline);
-            }
-            else if (GlobalManager.CURRENT_SCENE_SERVICE == "inspection")
-            {
-                SceneMsgDealer.DealInspectionMsg(jn, isOnline);
-            }
-        }
-    }
-
-    public void WARN_MESSAGE()
-    {
-        SocketService socketService = socket;
-        socketService.AddListener(EventConfig.WARN_MESSAGE,
-            (socket, packet, args) =>
-            {
-                Debug.Log(packet.Payload);
-                UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
-            });
-        socketService.AddListener(
-            EventConfig.AR_DISCONNECT,
-            (socket, packet, args) =>
-            {
-                Debug.Log(packet.Payload);
-                UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
-            });
-    }
 
 
     IEnumerator RefreshSocket()

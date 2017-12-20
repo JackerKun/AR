@@ -34,6 +34,12 @@ public class TankSocketService
 	public void RegistServices()
 	{
 		Debug.LogError("Not Error");
+		socketService.InitScene("tank",
+			(socket, packet, args) =>
+			{
+				Debug.LogError("Init Scene.." + packet.Payload);
+				DealState(packet.Payload, true);
+			});
 		//监听流程
         socketService.AddListener(EventConfig.AR_WORKFLOW,
 			(socket, packet, args) =>

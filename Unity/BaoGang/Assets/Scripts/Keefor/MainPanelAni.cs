@@ -39,8 +39,4 @@ public class MainPanelAni : MonoBehaviour
         dummy.forward = pos.normalized; 
     }
 
-    void OnDestroy()
-    {
-        Destroy(target.gameObject);
-    }
 }

@@ -79,26 +79,6 @@ public class MainSceneMgr : MonoBehaviour
 
 
 
-//    IEnumerator RefreshSocket()
-//    {
-//        while (true)
-//        {
-//            WebManager.IsConnect = false;
-//            yield return new WaitForSeconds(3);
-//            //断开了连接，重连
-//            if (WebManager.IsConnect)
-//            {
-//                UIManager.ChangeScreenEdgeColor(Color.white);
-//            }
-//            else
-//            {
-//                UIManager.ShowErrorMessage("网络已断开！");
-//                UIManager.ChangeScreenEdgeColor(Color.red);
-//                WebManager.socketInstance.Reconnect();
-//                WebManager.Init(GlobalManager.CURRENT_SCENE_SERVICE);
-//            }
-//        }
-//    }
 
     public void FirstLoadScene(string sceneName)
     {

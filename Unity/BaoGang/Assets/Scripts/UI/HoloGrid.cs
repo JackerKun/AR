@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HoloGrid : MonoBehaviour
 {
-	float radiansX = 10f * Mathf.Deg2Rad;
-	float radiansY = 10f * Mathf.Deg2Rad;
+	float radiansX = 25f * Mathf.Deg2Rad;
+	float radiansY = 25f * Mathf.Deg2Rad;
 	//行数
 	int yCount = 2;
 

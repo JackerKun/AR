@@ -6,10 +6,20 @@ using SimpleJSON;
 public class InspectionMgr : MonoBehaviour
 {
 	List<InspectionItem> items = new List<InspectionItem>();
+	string lastNode;
+	static InspectionMgr instance;
+	public static InspectionMgr Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
 	InspectionUIMgr uiMgr;
 	// Use this for initialization
-	public void Start()
+	public void Awake()
 	{
+		instance = this;
 		uiMgr = GetComponent<InspectionUIMgr>();
 	}
 
@@ -20,32 +30,34 @@ public class InspectionMgr : MonoBehaviour
 	}
 
 	void Update()
-    {
-		if (Input.GetMouseButtonDown(0))
-		{
-            Debug.Log("XXX");
-            UpdateItems(null, 12);
+	{
+		//if (Input.GetKeyDown(KeyCode.X))
+		//{
+		//	UpdateItems(null, 12);
 
-		}
-		else if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("ZZZ");
-			UpdateItems(null, 36);
-		}
+		//}
+		//else if (Input.GetKeyDown(KeyCode.Z))
+		//{
+		//	UpdateItems(null, 36);
+		//}
 	}
 
 	// 更新巡检项按钮
-	void UpdateItems(JSONNode node, int dd)
+	public void UpdateItems(JSONNode nodeRoot)
 	{
-		// 解析Node
+		if (string.IsNullOrEmpty(nodeRoot.ToString()) || lastNode == nodeRoot.ToString())
+		{
+			return;
+		}
+		int count = nodeRoot.Count;
 		// 重置巡检项
 		uiMgr.ResetItems();
-
-		for (int i = 0; i < dd; i++)
+		foreach (JSONNode node in nodeRoot.Children)
 		{
 			// 添加新的巡检项
-			uiMgr.InsertItem("巡检项" + i, "该巡检项是否正常？");
+			uiMgr.InsertItem(node["checkContent"].Value, node["checkDesc"].Value);
 		}
 		uiMgr.UpdateItemsLayout();
+		lastNode = nodeRoot.ToString();
 	}
 }
