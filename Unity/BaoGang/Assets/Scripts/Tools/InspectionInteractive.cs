@@ -38,7 +38,7 @@ public class InspectionInteractive : MonoBehaviour
 		//UI的显隐操作
 		UpdateUIShow();
 		//面板显示的时候可以交互
-		if (uiMgr.curUIMode == InspectionUIMgr.UIMode.ButtonList)
+		if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
 		{
 			//开始检测交互
 			UpdateInteractive();
@@ -52,22 +52,28 @@ public class InspectionInteractive : MonoBehaviour
 		//检测是否显隐UI
 		if (canChangeUI)
 		{
+			//显隐按钮内容
 			if (gyroCameraCtrl.horizonAngle > 45f)
 			{
 				//面板未打开，打开面板
-				if (uiMgr.curUIMode == InspectionUIMgr.UIMode.Off)
+				if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.Off)
 				{
 					uiMgr.ShowItems();
 				}
-				else if (uiMgr.curUIMode == InspectionUIMgr.UIMode.ButtonList)
+				else if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
 				{
 					uiMgr.HideItems();
 				}
-				else if (uiMgr.curUIMode == InspectionUIMgr.UIMode.DialogBox)
+				else if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.DialogBox)
 				{
 					uiMgr.HideOptionDialog();
 				}
 				canChangeUI = false;
+			}
+			//对话框打开着就可以转头做选择
+			if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.DialogBox)
+			{
+				uiMgr.UpdateSliderValue();
 			}
 		}
 		//重制状态，再次抬头可以继续显隐UI

@@ -52,50 +52,16 @@ public class SceneMsgDealer
 		}
 	}
 
-	public static void DealInspectionMsg(JSONNode jn, bool isOnline = false)
+	public static void DealInspectionMsg(JSONNode jn)
 	{
-		Debug.LogError("Hello~" + JSON.Parse(jn));
-		string index;
-		string tankARName = "";
-		if (isOnline)
+		if (string.IsNullOrEmpty(jn.ToString()) || jn["data"].IsNull)
 		{
-			index = jn["data"]["job"]["status"];
+			return;
 		}
-		else
+		InspectionMgr.Instance.UpdateItems(jn["data"]["checkContent"]);
+		foreach (JSONNode node in jn["data"]["checkContent"].Children)
 		{
-			index = jn["data"]["status"];
-		}
-		if (!string.IsNullOrEmpty(index))
-		{
-			string curStep = MessageLibrary.GetMessage(index);
-			if (curStep == "10")
-			{
-				if (isOnline)
-				{
-					tankARName = jn["data"]["job"]["prodTitle"];
-				}
-				else
-				{
-					tankARName = jn["data"]["prodTitle"];
-				}
-				curStep = MessageLibrary.GetMessage("ARTank_" + tankARName);
-			}
-			if (index == "11" || index == "13")
-			{
-				UIManager.ShowStayMessage("");
-			}
-			else
-			{
-				UIManager.ShowStayMessage(curStep);
-			}
-			if (index == "10")
-			{
-				MainSceneMgr.MainMgr.LoadScene("Tank");
-			}
-			else
-			{
-				MainSceneMgr.MainMgr.LoadScene("WorkFlow");
-			}
+			Debug.LogError(node.Value);
 		}
 	}
 }

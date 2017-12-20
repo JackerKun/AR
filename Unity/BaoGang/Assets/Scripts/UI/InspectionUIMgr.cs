@@ -9,7 +9,7 @@ public class InspectionUIMgr : MonoBehaviour
 	public CanvasGroup Items;
 	public Transform GyroUICamera;
 	[HideInInspector]
-	public UIMode curUIMode;
+	public static UIMode curUIMode;
 	Transform itemsRootTran;
 	DialogBox dialogBox;
 	HoloGrid holoGrid;
@@ -20,7 +20,7 @@ public class InspectionUIMgr : MonoBehaviour
 	public enum UIMode
 	{
 		Off,
-		ButtonList,
+		ItemList,
 		DialogBox
 	}
 	public Vector3 ContentPosition
@@ -37,19 +37,6 @@ public class InspectionUIMgr : MonoBehaviour
 		dialogBox = GameObject.Find("Canvas3D/DialogBox").GetComponent<DialogBox>();
 		holoGrid = Items.GetComponent<HoloGrid>();
 		itemsRootTran = Items.transform;
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		//if (Input.GetKeyDown(KeyCode.Z))
-		//{
-		//	ShowContents();
-		//}
-		//else if (Input.GetKeyDown(KeyCode.X))
-		//{
-		//	HideContents();
-		//}
 	}
 
 	//显示提示用户抬头的箭头
@@ -76,7 +63,7 @@ public class InspectionUIMgr : MonoBehaviour
 		Items.transform.position = GyroUICamera.position + tmpForward * zDist;
 		Items.transform.forward = Items.transform.position - GyroUICamera.position;
 		Items.DOFade(1f, .5f).SetEase(Ease.InSine);
-		curUIMode = UIMode.ButtonList;
+		curUIMode = UIMode.ItemList;
 	}
 
 	public void HideItems()
@@ -91,15 +78,26 @@ public class InspectionUIMgr : MonoBehaviour
 	//显示对话内容面板
 	public void ShowOptionDialog(InspectionItem item)
 	{
-		//dialogBox.ShowDialog(info, itemsRootTran.position, itemsRootTran.rotation);
-		dialogBox.ShowDialog(item.Info, item.transform.position, item.transform.rotation);
+		dialogBox.ShowDialog(item.Info, item);
 		curUIMode = UIMode.DialogBox;
 	}
 
 	public void HideOptionDialog()
 	{
 		dialogBox.HideDialog();
-		curUIMode = UIMode.ButtonList;
+		curUIMode = UIMode.ItemList;
+	}
+
+	public void UpdateSliderValue()
+	{
+		#region 检测脸朝向对话框左面还是右面
+		//右侧
+		Vector3 right = Vector3.Cross(Vector3.up, GyroUICamera.forward);
+		float turnValue = Vector3.Dot(right, -dialogBox.transform.forward);
+		//转30度
+		turnValue *= 180f / 30f;
+		#endregion
+		dialogBox.UpdateSlider(turnValue);
 	}
 
 	// 清除巡检项

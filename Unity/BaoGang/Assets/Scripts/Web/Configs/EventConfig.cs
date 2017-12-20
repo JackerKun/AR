@@ -2,12 +2,16 @@
 
 namespace AR.Configs
 {
-	public static class  EventConfig
+	public static class EventConfig
 	{
 		//请求socket连接
 		public readonly static string TANK = "BUCKET";
 		//流程消息
 		public readonly static string AR_WORKFLOW = "AR_WORKFLOW";
+		//监听巡检点事件
+		public readonly static string AR_CHECKPOINT = "AR_CHECKPOINT";
+		//监听巡检点事件
+		public readonly static string CHECKRESULTSUBMIT = "CHECKRESULTSUBMIT";
 		//订阅返回桶的信息
 		public readonly static string RESPONSE_TANK = "AR_BUCKET";
 		//订阅返管道的信息

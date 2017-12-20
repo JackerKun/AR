@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 public class InspectionItem : MonoBehaviour, Ryan3DButton
 {
@@ -21,7 +22,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	{
 		get { return dialogContent; }
 	}
-	SelectStatus curSltStatus;
+	public SelectStatus curSltStatus;
 	public enum SelectStatus
 	{
 		Yes,
@@ -30,6 +31,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	}
 	//显示的文字内容
 	Text textContent;
+	Image itemBG;
 	//用于查看当前选择的是什么
 	public Image markImage;
 	//当前的选项
@@ -46,10 +48,12 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	{
 		if (option == Option.Yes)
 		{
+			curSltStatus = SelectStatus.Yes;
 			markImage.color = Color.green;
 		}
 		else if (option == Option.No)
 		{
+			curSltStatus = SelectStatus.No;
 			markImage.color = Color.red;
 		}
 	}
@@ -60,6 +64,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 		rectTran = GetComponent<RectTransform>();
 		textContent = transform.Find("Text").GetComponent<Text>();
 		textContent.text = summary;
+		itemBG = transform.GetComponent<Image>();
 		this.dialogContent = dialogContent;
 		curSltStatus = SelectStatus.Null;
 		MouseInit();
@@ -70,6 +75,20 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	{
 		transform.DOScale(initScale, .2f).SetEase(Ease.OutSine);
 		isHover = false;
+	}
+
+	internal void CheckStatus(bool isOK)
+	{
+
+		if (isOK)
+		{
+			itemBG.color = Color.green;
+		}
+		else
+		{
+			itemBG.color = Color.red;
+		}
+		InspectionUIMgr.curUIMode = InspectionUIMgr.UIMode.ItemList;
 	}
 
 	public void MouseHover()

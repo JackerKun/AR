@@ -36,29 +36,9 @@ public class WebManager
 		{
 			TankSocketService.Instance.RegistServices();
 		}
-		else
+		else if (sceneName == "inspection")
 		{
-			socketService.InitScene(sceneName,
-				(socket, packet, args) =>
-				{
-					Debug.LogError("Init Scene.." + packet.Payload);
-					//GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
-					DealState(packet.Payload, true);
-				});
-			//监听流程
-            socketService.AddListener(EventConfig.AR_WORKFLOW,
-				(socket, packet, args) =>
-				{
-					Debug.Log(packet.Payload);
-					DealState(packet.Payload);
-				});
-			socketService.AddListener(EventConfig.PHOTO,
-				(socket, packet, args) =>
-				{
-					Debug.LogError("Callback PHOTO --> " + JSON.Parse(packet.Payload));
-					UIManager.ShowStayMessage(MessageLibrary.GetMessage(JSON.Parse(packet.Payload)[1]["status"]));
-					MainSceneMgr.MainMgr.LoadScene("TakePhoto");
-				});
+			InspectionSocketService.Instance.RegistServices();
 		}
 		#endregion
 	}
@@ -77,7 +57,7 @@ public class WebManager
 				IsConnect = true;
 			});
 		//监听错误信息
-        socketService.AddListener(EventConfig.WARN_MESSAGE,
+		socketService.AddListener(EventConfig.WARN_MESSAGE,
 			(socket, packet, args) =>
 			{
 				Debug.Log(packet.Payload);
@@ -94,31 +74,10 @@ public class WebManager
 
 	#endregion
 
-	static void DealState(string payload, bool isOnline = false)
-	{
-		Debug.Log(JSON.Parse(payload));
-		JSONNode jn = JSON.Parse(payload)[1];
-		if (jn["status"] == "error")
-		{
-			UIManager.ShowErrorMessage(jn["message"]);
-		}
-		else
-		{
-			if (GlobalManager.CURRENT_SCENE_SERVICE == "tank")
-			{
-				SceneMsgDealer.DealTankMsg(jn, isOnline);
-			}
-			else if (GlobalManager.CURRENT_SCENE_SERVICE == "inspection")
-			{
-				SceneMsgDealer.DealInspectionMsg(jn, isOnline);
-			}
-		}
-	}
-
 	public static void WARN_MESSAGE()
 	{
 		SocketService socketService = WebManager.socketInstance;
-        socketService.AddListener(EventConfig.WARN_MESSAGE,
+		socketService.AddListener(EventConfig.WARN_MESSAGE,
 			(socket, packet, args) =>
 			{
 				Debug.Log(packet.Payload);

@@ -78,8 +78,8 @@ public class MainSceneMgr : MonoBehaviour
 			{
 				Debug.Log(WebManager.IsConnect);
 				ShowError(WebManager.IsConnect);
-                WebManager.socketInstance.Reconnect();
-                WebManager.Init(GlobalManager.CURRENT_SCENE_SERVICE);
+				WebManager.socketInstance.Reconnect();
+				WebManager.Init(GlobalManager.CURRENT_SCENE_SERVICE);
 			}
 		}
 	}
@@ -101,6 +101,7 @@ public class MainSceneMgr : MonoBehaviour
 		WebManager.Init(sceneName.ToLower());
 
 		WebErrorProccess.Init();
+
 		StartCoroutine(RefreshSocket());
 
 		LoadScene(sceneName);
