@@ -29,19 +29,6 @@ public class InspectionMgr : MonoBehaviour
 
 	}
 
-	void Update()
-	{
-		//if (Input.GetKeyDown(KeyCode.X))
-		//{
-		//	UpdateItems(null, 12);
-
-		//}
-		//else if (Input.GetKeyDown(KeyCode.Z))
-		//{
-		//	UpdateItems(null, 36);
-		//}
-	}
-
 	// 更新巡检项按钮
 	public void UpdateItems(JSONNode nodeRoot)
 	{
