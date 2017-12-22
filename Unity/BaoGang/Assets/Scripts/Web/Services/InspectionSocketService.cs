@@ -45,7 +45,6 @@ public class InspectionSocketService
 
 	void DealState(string payload, bool isOnline = false)
 	{
-		Debug.Log(JSON.Parse(payload));
 		JSONNode jn = JSON.Parse(payload)[1];
 		if (jn["status"] == "error")
 		{
@@ -54,7 +53,6 @@ public class InspectionSocketService
 		else
 		{
 			SceneMsgDealer.DealInspectionMsg(jn);
-			Debug.Log(jn.ToString());
 		}
 	}
 

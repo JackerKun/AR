@@ -58,9 +58,11 @@ public class SceneMsgDealer
 		{
 			return;
 		}
-		Debug.LogError(jn["data"]);
+		Debug.LogError("A");
 		// 创建工单
 		InspectionMgr.Instance.UpdateWorkOrder(jn["data"]);
+		Debug.LogError("B");
+		Debug.LogError(jn["data"]["checkResultData"]);
 		// 保存巡检项数据
 		InspectionMgr.Instance.UpdateItemsData(jn["data"]["checkResultData"]);
 	}

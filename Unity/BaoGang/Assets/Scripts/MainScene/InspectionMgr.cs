@@ -67,9 +67,10 @@ public class InspectionMgr : MonoBehaviour
 		items = new List<InspectionItem>();
 	}
 
+	// 更新数据
 	internal void UpdateItemsData(JSONNode jSONNode)
 	{
-		if (jSONNode.IsNull || itemsDataNode == jSONNode)
+		if (jSONNode.IsNull || jSONNode.Equals(itemsDataNode))
 		{
 			return;
 		}
