@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 
 public class InspectionMgr : MonoBehaviour
 {
-	List<InspectionItem> items = new List<InspectionItem>();
-	string lastNode;
+	public static List<InspectionItem> items = new List<InspectionItem>();
+	// 当前工单号
+	public static string curWorkOrderNumber;
+	// 巡检项数据信息
+	JSONNode itemsDataNode;
 	static InspectionMgr instance;
 	public static InspectionMgr Instance
 	{
@@ -23,28 +25,70 @@ public class InspectionMgr : MonoBehaviour
 		uiMgr = GetComponent<InspectionUIMgr>();
 	}
 
+	public JSONNode GetNode(string key)
+	{
+		Debug.LogError(itemsDataNode);
+		if (itemsDataNode.IsNull)
+			return null;
+		return itemsDataNode[key];
+	}
+
 	// 添加监听事件
 	void InitListener()
 	{
 
 	}
 
-	// 更新巡检项按钮
-	public void UpdateItems(JSONNode nodeRoot)
+	// 更新工单表
+	public void UpdateWorkOrder(JSONNode nodeRoot)
 	{
-		if (string.IsNullOrEmpty(nodeRoot.ToString()) || lastNode == nodeRoot.ToString())
+		if (nodeRoot.IsNull || curWorkOrderNumber == nodeRoot["jobNumber"])
 		{
 			return;
 		}
-		int count = nodeRoot.Count;
+		curWorkOrderNumber = nodeRoot["jobNumber"];
 		// 重置巡检项
-		uiMgr.ResetItems();
-		foreach (JSONNode node in nodeRoot.Children)
+		ResetItems();
+		foreach (JSONNode node in nodeRoot["checkContent"].Children)
 		{
 			// 添加新的巡检项
-			uiMgr.InsertItem(node["checkContent"].Value, node["checkDesc"].Value);
+			uiMgr.InsertItem(node["deviceID"].Value, node["checkContent"].Value, node["checkDesc"].Value);
 		}
 		uiMgr.UpdateItemsLayout();
-		lastNode = nodeRoot.ToString();
+	}
+
+	// 清除巡检项
+	void ResetItems()
+	{
+		for (int i = 0; i < items.Count; i++)
+		{
+			Destroy(items[i].gameObject);
+		}
+		items = new List<InspectionItem>();
+	}
+
+	internal void UpdateItemsData(JSONNode jSONNode)
+	{
+		if (jSONNode.IsNull || itemsDataNode == jSONNode)
+		{
+			return;
+		}
+		itemsDataNode = jSONNode;
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Submit();
+		}
+	}
+
+	// 更新巡检项
+	public void Submit()
+	{
+		// 更新巡检项状态
+		WorkOrderObj.Instance.CommitWorkOrder(items);
+		Debug.LogError("提交工单");
 	}
 }

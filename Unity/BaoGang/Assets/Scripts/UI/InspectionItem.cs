@@ -18,6 +18,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	}
 	// 点开后显示的描述文字
 	string dialogContent;
+	string id;
 	public string Info
 	{
 		get { return dialogContent; }
@@ -32,8 +33,6 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	//显示的文字内容
 	Text textContent;
 	Image itemBG;
-	//用于查看当前选择的是什么
-	public Image markImage;
 	//当前的选项
 	Option curOption;
 	public enum Option
@@ -44,25 +43,12 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	//选择值
 	string optionStr;
 
-	public void BtnSelect(Option option)
-	{
-		if (option == Option.Yes)
-		{
-			curSltStatus = SelectStatus.Yes;
-			markImage.color = Color.green;
-		}
-		else if (option == Option.No)
-		{
-			curSltStatus = SelectStatus.No;
-			markImage.color = Color.red;
-		}
-	}
-
 	//打开对话框后显示的内容
-	public void Init(string summary, string dialogContent)
+	public void Init(string id, string summary, string dialogContent)
 	{
 		rectTran = GetComponent<RectTransform>();
 		textContent = transform.Find("Text").GetComponent<Text>();
+		this.id = id;
 		textContent.text = summary;
 		itemBG = transform.GetComponent<Image>();
 		this.dialogContent = dialogContent;
@@ -82,13 +68,27 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 
 		if (isOK)
 		{
-			itemBG.color = Color.green;
+			BtnSelect(Option.Yes);
 		}
 		else
 		{
-			itemBG.color = Color.red;
+			BtnSelect(Option.No);
 		}
 		InspectionUIMgr.curUIMode = InspectionUIMgr.UIMode.ItemList;
+	}
+
+	public void BtnSelect(Option option)
+	{
+		if (option == Option.Yes)
+		{
+			curSltStatus = SelectStatus.Yes;
+			itemBG.color = Color.green;
+		}
+		else if (option == Option.No)
+		{
+			curSltStatus = SelectStatus.No;
+			itemBG.color = Color.red;
+		}
 	}
 
 	public void MouseHover()

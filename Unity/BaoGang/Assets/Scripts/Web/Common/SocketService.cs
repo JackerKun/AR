@@ -17,25 +17,26 @@ namespace AR.Common
 
 		public SocketManager socketManagerRef;
 
-	    private Socket _socket;
+		private Socket _socket;
 
-	    public Socket mySocket
-	    {
-	        get {
-                if (_socket != null) return _socket;
-	            options = new SocketOptions
-	            {
-	                AutoConnect = true,
-	                Reconnection = true,
-	                ReconnectionDelay = TimeSpan.FromMilliseconds(100)
-	            };
-	            socketManagerRef = new SocketManager(GlobalManager.IP, options);
-	            _socket = socketManagerRef.Socket;
-	            return _socket;
-	        }
-	    }
+		public Socket mySocket
+		{
+			get
+			{
+				if (_socket != null) return _socket;
+				options = new SocketOptions
+				{
+					AutoConnect = true,
+					Reconnection = true,
+					ReconnectionDelay = TimeSpan.FromMilliseconds(100)
+				};
+				socketManagerRef = new SocketManager(GlobalManager.IP, options);
+				_socket = socketManagerRef.Socket;
+				return _socket;
+			}
+		}
 
-	    SocketOptions options;
+		SocketOptions options;
 
 		bool isConnectSucceed = false;
 		TargetDeviceRequest requestObj;
@@ -98,7 +99,7 @@ namespace AR.Common
 		public void Reconnect()
 		{
 			mySocket.Manager.Close();
-		    _socket = null;
+			_socket = null;
 			Debug.LogError("Reconnect");
 			//			MySocket.Manager.Open ();
 		}
@@ -135,7 +136,7 @@ namespace AR.Common
 			mySocket.Emit(request, JsonUtility.ToJson(requestObj));
 			mySocket.On(response, callback);
 			Debug.Log(request + " --- " + response + " register socket..");
-           
+
 		}
 
 

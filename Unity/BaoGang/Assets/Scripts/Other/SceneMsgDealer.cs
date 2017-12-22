@@ -58,10 +58,10 @@ public class SceneMsgDealer
 		{
 			return;
 		}
-		InspectionMgr.Instance.UpdateItems(jn["data"]["checkContent"]);
-		foreach (JSONNode node in jn["data"]["checkContent"].Children)
-		{
-			Debug.LogError(node.Value);
-		}
+		Debug.LogError(jn["data"]);
+		// 创建工单
+		InspectionMgr.Instance.UpdateWorkOrder(jn["data"]);
+		// 保存巡检项数据
+		InspectionMgr.Instance.UpdateItemsData(jn["data"]["checkResultData"]);
 	}
 }

@@ -28,7 +28,7 @@ public class DialogBox : MonoBehaviour, IRyanDialog
 		this.item = item;
 		transform.position = item.transform.position;
 		transform.rotation = item.transform.rotation;
-		Vector3 targetPose = transform.localPosition - transform.forward * 100f;
+		Vector3 targetPose = transform.localPosition - transform.forward * 50f;
 		content.text = info;
 
 		Sequence mySque = DOTween.Sequence();
