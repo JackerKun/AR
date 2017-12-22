@@ -7,7 +7,6 @@ using BestHTTP.SocketIO;
 using SimpleJSON;
 using HopeRun;
 using HopeRun.Message;
-using UnityEngine.SceneManagement;
 
 public class TankSocketService
 {

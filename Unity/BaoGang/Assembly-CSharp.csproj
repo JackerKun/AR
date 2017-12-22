@@ -155,9 +155,12 @@
      <Compile Include="Assets\Scripts\Classes\Container.cs" />
      <Compile Include="Assets\Scripts\Classes\FloatingTag.cs" />
      <Compile Include="Assets\Scripts\Classes\TankObj.cs" />
+     <Compile Include="Assets\Scripts\Classes\TrackingUIObj.cs" />
+     <Compile Include="Assets\Scripts\Classes\WorkOrderObj.cs" />
      <Compile Include="Assets\Scripts\Experts\ExpertMgr.cs" />
      <Compile Include="Assets\Scripts\Experts\ExpertsTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IRyanDialog.cs" />
+     <Compile Include="Assets\Scripts\Interfaces\ITrackingUI.cs" />
      <Compile Include="Assets\Scripts\Keefor\CircleSlider.cs" />
      <Compile Include="Assets\Scripts\Keefor\CustomARCamera.cs" />
      <Compile Include="Assets\Scripts\Keefor\FixDataConfig.cs" />
@@ -183,6 +186,7 @@
      <Compile Include="Assets\Scripts\Test\ChangeFOV.cs" />
      <Compile Include="Assets\Scripts\Test\DebugScreen.cs" />
      <Compile Include="Assets\Scripts\Test\DelayFollow.cs" />
+     <Compile Include="Assets\Scripts\Test\JsonTest.cs" />
      <Compile Include="Assets\Scripts\Test\Scripts\ObbComparison.cs" />
      <Compile Include="Assets\Scripts\Test\Scripts\TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\Test\Test.cs" />
@@ -196,6 +200,7 @@
      <Compile Include="Assets\Scripts\Tools\InspectionInteractive.cs" />
      <Compile Include="Assets\Scripts\Tools\TakePhotoMgr.cs" />
      <Compile Include="Assets\Scripts\Tools\UIEffects.cs" />
+     <Compile Include="Assets\Scripts\Trackers\InspectionTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Trackers\PipeTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Trackers\TankTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\UI\DialogBox.cs" />

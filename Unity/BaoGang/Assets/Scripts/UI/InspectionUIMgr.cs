@@ -15,21 +15,12 @@ public class InspectionUIMgr : MonoBehaviour
 	HoloGrid holoGrid;
 	//面板离自己前方的距离
 	float zDist = 250f;
-	List<InspectionItem> items = new List<InspectionItem>();
 	//当前界面状态
 	public enum UIMode
 	{
 		Off,
 		ItemList,
 		DialogBox
-	}
-	public Vector3 ContentPosition
-	{
-		get { return Items.transform.position; }
-	}
-	public Quaternion ContentRotation
-	{
-		get { return Items.transform.rotation; }
 	}
 	// Use this for initialization
 	void Start()
@@ -49,7 +40,7 @@ public class InspectionUIMgr : MonoBehaviour
 	public void UpdateItemsLayout()
 	{
 		List<RectTransform> itemTrans = new List<RectTransform>();
-		foreach (var item in items)
+		foreach (var item in InspectionMgr.items)
 		{
 			itemTrans.Add(item.RectTran);
 		}
@@ -100,32 +91,11 @@ public class InspectionUIMgr : MonoBehaviour
 		dialogBox.UpdateSlider(turnValue);
 	}
 
-	// 清除巡检项
-	public void ResetItems()
-	{
-		for (int i = 0; i < items.Count; i++)
-		{
-			Destroy(items[i].gameObject);
-		}
-		items = new List<InspectionItem>();
-	}
-
-	public void InsertItem(string summary, string dialog)
+	public void InsertItem(string id, string summary, string dialog)
 	{
 		InspectionItem item = Instantiate(ItemPrefab, Vector3.zero, Quaternion.identity, itemsRootTran);
-		item.Init(summary, dialog);
-		items.Add(item);
-	}
-
-	public void ShowItem()
-	{
-		Items.DOFade(1f, .5f).SetEase(Ease.InSine);
-	}
-
-	//隐藏巡检项
-	public void HideItem()
-	{
-		Items.DOFade(0f, .2f).SetEase(Ease.OutSine);
+		item.Init(id, summary, dialog);
+		InspectionMgr.items.Add(item);
 	}
 	#endregion
 }

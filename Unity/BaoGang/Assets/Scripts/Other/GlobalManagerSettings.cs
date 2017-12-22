@@ -70,7 +70,7 @@ namespace HopeRun
 		{
 			Transform canvasRoot = tankRoot;
 			//			TankObj drum = Instantiate<TankObj> ((Resources.Load ("Prefabs/TankPanel") as GameObject).GetComponent<TankObj> (), canvasRoot);
-			TankObj drum = Instantiate(((GameObject) Resources.Load("Prefabs/TankPanel")).GetComponent<TankObj>(), canvasRoot);
+			TankObj drum = Instantiate(((GameObject)Resources.Load("Prefabs/TankPanel")).GetComponent<TankObj>(), canvasRoot);
 			drum.InitParam(CURRENT_TANKID);
 			return drum;
 		}
@@ -90,7 +90,7 @@ namespace HopeRun
 			var tags = new List<FloatingTag>();
 			for (int i = 0; i < imageTran.Count; i++)
 			{
-				FloatingTag tag = Instantiate(((GameObject) Resources.Load("Prefabs/Tag")).GetComponent<FloatingTag>(), tagRoot);
+				FloatingTag tag = Instantiate(((GameObject)Resources.Load("Prefabs/Tag")).GetComponent<FloatingTag>(), tagRoot);
 				tag.Init(imageTran[i]);
 				tags.Add(tag);
 			}

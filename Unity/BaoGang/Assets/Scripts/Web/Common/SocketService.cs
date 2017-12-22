@@ -62,16 +62,8 @@ namespace AR.Common
 		public void Reconnect()
 		{
 			mySocket.Manager.Close();
-		    _socket = null;
+			_socket = null;
 			Debug.LogError("Reconnect");
-		}
-		public void Register(string request, string response, SocketIOCallback callback)
-		{
-			requestObj = new TargetDeviceRequest(true, deviceID, "1");
-			mySocket.Emit(request, JsonUtility.ToJson(requestObj));
-			mySocket.On(response, callback);
-			Debug.Log(request + " --- " + response + " register socket..");
-           
 		}
 
 		public void InitScene(string sceneName, SocketIOCallback callback)
@@ -101,6 +93,18 @@ namespace AR.Common
 		}
         
 		//订阅指定事件，请求目标物体动态数据（液位高度等实时变化的数据）
+
+		public void Register(string request, string response, SocketIOCallback callback)
+		{
+			requestObj = new TargetDeviceRequest(true, deviceID, "1");
+			mySocket.Emit(request, JsonUtility.ToJson(requestObj));
+			mySocket.On(response, callback);
+			Debug.Log(request + " --- " + response + " register socket..");
+
+		}
+
+
+		//订阅指定事件
 		public void Subscribe(string eventName, SocketIOCallback callback)
 		{
 			//如果初次连接socket
