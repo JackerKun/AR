@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using HopeRun;
 using UnityEngine;
 using SimpleJSON;
 using HopeRun.Message;
@@ -43,11 +44,11 @@ public class SceneMsgDealer
 			}
 			if (index == "10")
 			{
-				MainSceneMgr.MainMgr.LoadScene("Tank");
+				GlobalManager.LoadScene("Tank");
 			}
 			else
 			{
-				MainSceneMgr.MainMgr.LoadScene("WorkFlow");
+                GlobalManager.LoadScene("WorkFlow");
 			}
 		}
 	}

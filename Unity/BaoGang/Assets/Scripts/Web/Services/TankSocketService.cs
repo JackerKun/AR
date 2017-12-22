@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using AR.Common;
 using AR.Configs;
 using AR.Model;
@@ -9,107 +10,152 @@ using HopeRun.Message;
 
 public class TankSocketService
 {
-	private SocketService socketService;
-	private Socket socket;
+    //private SocketService socketService;
+    //private Socket socket;
 
-	private System.Action<Tank> myCallback;
+    //private System.Action<Tank> myCallback;
 
-	// private delegate void mCallback (Socket socket, Packet packet, params object[] args);
-	// Use this for initialization
+    // private delegate void mCallback (Socket socket, Packet packet, params object[] args);
+    // Use this for initialization
 
-	static TankSocketService _instance;
+    private static TankSocketService _instance;
+    public static TankSocketService Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new TankSocketService();
+            }
+            return _instance;
+        }
+    }
 
-	public static TankSocketService Instance
-	{
-		get
-		{
-			if (_instance == null)
-			{
-				_instance = new TankSocketService();
-			}
-			return _instance;
-		}
-	}
+    public void RegistServices()
+    {
+        Debug.LogError("Not Error");
+        #region 旧的代码
+        //        socketService.InitScene("tank",
+//            (socket, packet, args) =>
+//            {
+//                Debug.LogError("Init Scene.." + packet.Payload);
+//                DealState(packet.Payload, true);
+//            });
+        //监听流程
+//        socketService.AddListener(EventConfig.AR_WORKFLOW,
+//            (socket, packet, args) =>
+//            {
+//                Debug.Log(packet.Payload);
+//                DealState(packet.Payload);
+//            });
+//        socketService.AddListener(EventConfig.PHOTO,
+//            (socket, packet, args) =>
+//            {
+//                Debug.LogError("Callback PHOTO --> " + packet.Payload);
+//                UIManager.ShowStayMessage(MessageLibrary.GetMessage(JSON.Parse(packet.Payload)[1]["status"]));
+//                MainSceneMgr.MainMgr.LoadScene("TakePhoto");
+//            });
+        #endregion
+        WebManager.Instance.Connect("tank", node =>
+        {
+            DealTankMsg(node[0],true);
+        });
+        WebManager.Instance.On(EventConfig.AR_WORKFLOW, node =>
+        {
+            DealTankMsg(node[0]);
+        });
+        WebManager.Instance.On(EventConfig.PHOTO, node =>
+        {
+            UIManager.ShowStayMessage(MessageLibrary.GetMessage(node[1]["status"]));
+            GlobalManager.LoadScene("TakePhoto");
+        });
+    }
+    public void onScaning(Action<Tank> callback)
+    {
+        //myCallback = callback;
+        //Debug.Log("onScaning:" + EventConfig.RESPONSE_TANK);
+        //socketService.Subscribe(EventConfig.RESPONSE_TANK, OnResponseTank);
 
-	public void RegistServices()
-	{
-		Debug.LogError("Not Error");
-		socketService.InitScene("tank",
-			(socket, packet, args) =>
-			{
-				Debug.LogError("Init Scene.." + packet.Payload);
-				DealState(packet.Payload, true);
-			});
-		//监听流程
-        socketService.AddListener(EventConfig.AR_WORKFLOW,
-			(socket, packet, args) =>
-			{
-				Debug.Log(packet.Payload);
-				DealState(packet.Payload);
-			});
-		socketService.AddListener(EventConfig.PHOTO,
-			(socket, packet, args) =>
-			{
-				Debug.LogError("Callback PHOTO --> " + JSON.Parse(packet.Payload));
-				UIManager.ShowStayMessage(MessageLibrary.GetMessage(JSON.Parse(packet.Payload)[1]
-["status"]));
-				MainSceneMgr.MainMgr.LoadScene("TakePhoto");
-			});
-	}
+        WebManager.Instance.StartRequestData(EventConfig.TANK,EventConfig.RESPONSE_TANK, node =>
+        {
+            var tank = new Tank(node[0]);
+            GlobalManager.IS_WORKFLOW = (tank.sceneName.Equals("workflow"));
+            callback(tank);
+        });
+    }
+    public void onLostScaning(string targetID)
+    {
+        //socketService.DisSubscribe(EventConfig.RESPONSE_TANK);
+        WebManager.Instance.CancleRequestData(EventConfig.RESPONSE_TANK);
+    }
+    
+    /// <summary>
+    /// 处理加药流程
+    /// </summary>
+    /// <param name="jn"></param>
+    /// <param name="isOnline"></param>
+    public void DealTankMsg(JSONNode jn, bool isOnline = false)
+    {
+        string index = isOnline ? jn["job"]["status"] : jn["status"];
+        if (string.IsNullOrEmpty(index)) return;
 
-	void DealState(string payload, bool isOnline = false)
-	{
-		Debug.Log(JSON.Parse(payload));
-		JSONNode jn = JSON.Parse(payload)[1];
-		if (jn["status"] == "error")
-		{
-			UIManager.ShowErrorMessage(jn["message"]);
-		}
-		else
-		{
-			SceneMsgDealer.DealTankMsg(jn, isOnline);
-		}
-	}
+        string curStep = MessageLibrary.GetMessage(index);
+        if (curStep == "10")
+        {
+            string tankARName = isOnline ? jn["job"]["prodTitle"] : jn["prodTitle"];
+            curStep = MessageLibrary.GetMessage("ARTank_" + tankARName);
+        }
+        if (index == "11" || index == "13")
+        {
+            UIManager.ShowStayMessage("");
+        }
+        else
+        {
+            UIManager.ShowStayMessage(curStep);
+        }
 
-	public TankSocketService()
-	{
-		socketService = WebManager.Instance.socket;
-	}
+        GlobalManager.LoadScene(index == "10" ? "Tank" : "WorkFlow");
+    }
 
-	//当检索到识别物时触发
-	public void onScaning(System.Action<Tank> callback)
-	{
-		myCallback = callback;
-		Debug.Log("onScaning:" + EventConfig.RESPONSE_TANK);
-		socketService.Subscribe(EventConfig.RESPONSE_TANK, OnResponseTank);
-	}
+//
+//    void DealState(string payload, bool isOnline = false)
+//    {
+//        JSONNode jn = JSON.Parse(payload)[1];
+//        if (jn["status"] == "error")
+//        {
+//            UIManager.ShowErrorMessage(jn["message"]);
+//        }
+//        else
+//        {
+//            SceneMsgDealer.DealTankMsg(jn, isOnline);
+//        }
+//    }
 
-	//当离开识别物时
-	public void onLostScaning(string targetID)
-	{
-		socketService.DisSubscribe(EventConfig.RESPONSE_TANK);
-		socketService.Cancel(EventConfig.RESPONSE_TANK);
-	}
+//    public TankSocketService()
+//    {
+//        socketService = WebManager.Instance.socket;
+//    }
 
-	//连接成功后回调
-	private void OnResponseTank(Socket socket, Packet packet, params object[] args)
-	{
-		Debug.Log("Connect...");
-		JSONNode jRoot = JSON.Parse(packet.Payload)[1];
-
-		if (jRoot["status"] == "success")
-		{
-			Debug.Log(packet.Payload);
-			//TODO; 数据的转换
-			JSONNode data = jRoot["data"];
-			Tank bucket = new Tank(data["liquidHeight"].AsFloat, data["limitLevel"].AsFloat, data["highestLevel"].AsFloat, data["valveStatus"].AsBool, data["blowerStatus"].AsBool);
-			GlobalManager.IS_WORKFLOW = (data["sceneName"] == "workflow");
-			myCallback(bucket);
-		}
-		else
-		{
-			UIManager.ShowErrorMessage(jRoot["message"]);
-		}
-	}
+    //当检索到识别物时触发
+//    //连接成功后回调
+//    private void OnResponseTank(Socket socket, Packet packet, params object[] args)
+//    {
+//        Debug.Log("Connect...");
+//        JSONNode jRoot = JSON.Parse(packet.Payload)[1];
+//
+//        if (jRoot["status"] == "success")
+//        {
+//            Debug.Log(packet.Payload);
+//            //TODO; 数据的转换
+//            JSONNode data = jRoot["data"];
+//            Tank bucket = new Tank(data);
+//            GlobalManager.IS_WORKFLOW = (bucket.sceneName.Equals("workflow"));
+//            myCallback(bucket);
+//        }
+//        else
+//        {
+//            UIManager.ShowErrorMessage(jRoot["message"]);
+//        }
+//    }
 }
 

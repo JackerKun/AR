@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 /*
@@ -12,6 +13,15 @@ public class TDButtonItem : MonoBehaviour
     public event Action OnClick;
 
     protected bool m_IsOver;
+    private Vector3 initScale;
+    private Vector3 targetScale;
+
+    void Start()
+    {
+        initScale = transform.localScale;
+        targetScale = initScale * .8f;
+    }
+
     public bool IsOver
     {
         get { return m_IsOver; }
@@ -19,23 +29,27 @@ public class TDButtonItem : MonoBehaviour
 
     public void MouseHover()
     {
+        if(m_IsOver)return;
         m_IsOver = true;
-        Debug.Log("鼠标悬停");
+        initScale = transform.localScale;
+        transform.DOScale(targetScale, .2f).SetEase(Ease.OutSine);
+        //Debug.Log("鼠标悬停");
         if (OnOver != null)
             OnOver();
     }
 
     public void MouseSelect()
     {
-        m_IsOver = false;
-        Debug.Log("鼠标选中");
+        //Debug.Log("鼠标选中");
         if (OnClick != null)
             OnClick();
     }
 
     public void MouseExit()
     {
-        Debug.Log("鼠标离开");
+        transform.DOScale(initScale, .2f).SetEase(Ease.OutSine);
+        m_IsOver = false;
+        //Debug.Log("鼠标离开");
         if (OnOut != null)
             OnOut();
     }

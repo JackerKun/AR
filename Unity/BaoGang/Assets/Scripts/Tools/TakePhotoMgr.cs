@@ -14,7 +14,7 @@ using AR.Configs;
 
 public class TakePhotoMgr : MonoBehaviour
 {
-	private SocketService socketService;
+    //private SocketService socketService;
 	public RawImage gTex;
 	static string photoBase64;
 	static WebCamTexture webcamTexture;
@@ -78,19 +78,19 @@ public class TakePhotoMgr : MonoBehaviour
 		//		File.WriteAllBytes (path, texture2D.EncodeToJPG ());
 		//		FileInfo info = new FileInfo (path);
 		//		info.Attributes = FileAttributes.Normal;
-		GlobalManager.CURRENT_PHOTO_BASE64 = Convert.ToBase64String(texture2D.EncodeToJPG());
+        //GlobalManager.CURRENT_PHOTO_BASE64 = Convert.ToBase64String(texture2D.EncodeToJPG());
 		//		Debug.Log (path);
-		SendPictureToServer();
+		SendPictureToServer(Convert.ToBase64String(texture2D.EncodeToJPG()));
 	}
 
-	void SendPictureToServer()
+	void SendPictureToServer(string photo)
 	{
-		socketService = WebManager.Instance.socket;
-		PhotoObj requestObj = new PhotoObj();
-		socketService.mySocket.Emit(EventConfig.AR_PHOTO, JsonUtility.ToJson(requestObj));
+        //socketService = WebManager.Instance.socket;
+        PhotoObj requestObj = new PhotoObj(photo);
+        WebManager.Instance.Emit(EventConfig.AR_PHOTO, JsonUtility.ToJson(requestObj));
 		//停止拍摄
 		webcamTexture.Stop();
 		//返回场景
-		MainSceneMgr.MainMgr.LoadScene("WorkFlow");
+		GlobalManager.LoadScene("WorkFlow");
 	}
 }

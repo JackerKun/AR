@@ -20,7 +20,7 @@ public class UIEffects : MonoBehaviour
 			mySque = DOTween.Sequence();
 			mySque.Append(fillImg.transform.DOScale(Vector3.one * 0.5f, .2f).SetEase(Ease.OutSine).OnComplete(() => { Debug.Log("HLdddLLO"); }));
 			//弹出界面
-			mySque.Append(fillImg.DOFillAmount(0, 5f));
+			mySque.Append(fillImg.DOFillAmount(0, 3f));
 			mySque.OnComplete(() => { callback.Invoke(item); });
 		}
 	}

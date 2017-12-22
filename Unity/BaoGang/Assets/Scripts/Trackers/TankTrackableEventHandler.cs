@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using AR.Configs;
 using HopeRun;
 using AR.Model;
 using BestHTTP;
