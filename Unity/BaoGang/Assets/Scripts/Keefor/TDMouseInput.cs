@@ -20,7 +20,7 @@ public class TDMouseInput : MonoBehaviour
     Transform mouseIcon3D;
     Image mouseCountDown;
 
-    bool isMouse2D = true;
+    bool isMouse2D ;
 
     void Awake()
     {
@@ -54,6 +54,7 @@ public class TDMouseInput : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(mCamera.ScreenPointToRay(screenCenter), out hit))
         {
+            Debug.DrawLine(Camera.main.transform.position, hit.point);
             if (hit.collider != null)
             {
                 //显示3D鼠标
@@ -148,7 +149,7 @@ public class TDMouseInput : MonoBehaviour
         mouseCountDown.transform.localScale = Vector3.one * 0.1f;
         mySque.Append(mouseCountDown.transform.DOScale(Vector3.one * 0.3f, .2f).SetEase(Ease.OutSine));
         //弹出界面
-        mySque.Append(mouseCountDown.DOFillAmount(0, 5f));
+        mySque.Append(mouseCountDown.DOFillAmount(0, 3f));
         mySque.OnComplete(callback.Invoke);
     }
     public void StopFillImage()

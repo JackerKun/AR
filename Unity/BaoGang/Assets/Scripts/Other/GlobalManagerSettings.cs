@@ -5,6 +5,7 @@ using UnityEngine.Collections;
 using UnityEngine;
 using AR.Common;
 using AR.Model;
+using UnityEngine.SceneManagement;
 
 namespace HopeRun
 {
@@ -28,12 +29,11 @@ namespace HopeRun
 	{
 		public static string DeviceID = SystemInfo.deviceUniqueIdentifier;
 		public static string DeviceName = SystemInfo.deviceModel;
-		public static string CURRENT_PHOTO_BASE64;
+        //public static string CURRENT_PHOTO_BASE64;
 		public static string LAST_LOADED_SCENE;
 		public static string CURRENT_TANKID;
 		public static string CURRENT_SCENE_SERVICE;
 		public static bool IS_WORKFLOW = false;
-		public static SocketService LAST_SOCKET_SERVICE;
 		//服务器
 		//		public static string apiURL = "http://192.168.1.22:1234/socket.io/";
 		public static string PORTAL;
@@ -55,7 +55,7 @@ namespace HopeRun
 		}
 		//现法
 		//		public static  string apiURL = "http://192.168.110.89:1234/socket.io/";
-		/// 客户
+		// 客户
 		//		public static  string apiURL = "http://192.168.0.111:1234/socket.io/";
 
 
@@ -105,9 +105,9 @@ namespace HopeRun
 	    /// <param name="whole">总液位高度</param>
 	    public static void UpdateLiquidHeight(float cur, float limitValue)
 	    {
-	        if (GlobalManager.CURRENT_TANK)
+	        if (CURRENT_TANK)
 	        {
-	            GlobalManager.CURRENT_TANK.UpdateHeight(cur, limitValue);
+	            CURRENT_TANK.UpdateHeight(cur, limitValue);
 	        }
 	    }
 
@@ -115,15 +115,22 @@ namespace HopeRun
 
 	    public static void ChangeValveState(ValveState state)
 	    {
-	        if (GlobalManager.CURRENT_TANK)
+	        if (CURRENT_TANK)
 	        {
-	            GlobalManager.CURRENT_TANK.ChangeValveState(state);
+	            CURRENT_TANK.ChangeValveState(state);
 	        }
 	        else
 	        {
 	            Debug.Log("CURRENT_TANK IS NULL!");
 	        }
 	    }
+
+        public static void LoadScene(string sceneName)
+        {
+            LAST_LOADED_SCENE = SceneManager.GetActiveScene().name;
+            //载入场景
+            SceneManager.LoadScene(sceneName);
+        }
 
 
 	    public static Color GetWarnColor(float percent)

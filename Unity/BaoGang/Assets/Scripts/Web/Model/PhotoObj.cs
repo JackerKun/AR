@@ -14,19 +14,25 @@ namespace AR.Model
 		//session
 		public string status;
 
-		public PhotoObj ()
-		{
-			this.deviceID = GlobalManager.DeviceID;
-			this.photoBase64 = GlobalManager.CURRENT_PHOTO_BASE64;
-		}
+	    public PhotoObj(string photo)
+        {
+            this.deviceID = GlobalManager.DeviceID;
+            this.photoBase64 = photo;
+	    }
 
-		public PhotoObj (string scene, string status)
-		{
-			this.deviceID = GlobalManager.DeviceID;
-			this.photoBase64 = GlobalManager.CURRENT_PHOTO_BASE64;
-			this.scene = scene;
-			this.status = status;
-		}
+        //public PhotoObj ()
+        //{
+        //    this.deviceID = GlobalManager.DeviceID;
+        //    this.photoBase64 = GlobalManager.CURRENT_PHOTO_BASE64;
+        //}
+
+        //public PhotoObj (string scene, string status)
+        //{
+        //    this.deviceID = GlobalManager.DeviceID;
+        //    this.photoBase64 = GlobalManager.CURRENT_PHOTO_BASE64;
+        //    this.scene = scene;
+        //    this.status = status;
+        //}
 
 		public override string ToString ()
 		{

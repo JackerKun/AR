@@ -10,7 +10,10 @@ public class MainSceneMgr : MonoBehaviour
 {
     public static MainSceneMgr MainMgr;
     public static bool LazyQuit = false;
-    InputField ipInputField;
+    private InputField ipInputField;
+
+    private TDButtonItem[] btns;
+    private Text tiptext;
 
     bool isIpFieldShow = true;
 
@@ -49,6 +52,11 @@ public class MainSceneMgr : MonoBehaviour
 
     void Init()
     {
+        btns = new TDButtonItem[3];
+        btns[0] = GameObject.Find("Canvas/btns/btn_jiayao").GetComponent<TDButtonItem>();
+        btns[1] = GameObject.Find("Canvas/btns/btn_xunjian").GetComponent<TDButtonItem>();
+        btns[2] = GameObject.Find("Canvas/btns/btn_guandao").GetComponent<TDButtonItem>();
+        tiptext = GameObject.Find("Canvas/textbg/name").GetComponent<Text>();
         ipInputField = GameObject.Find("SettingCanvas/IPInputField").GetComponent<InputField>();
         Switch();
         ipInputField.text = GlobalManager.IP;
@@ -56,6 +64,14 @@ public class MainSceneMgr : MonoBehaviour
         //
         //		WebErrorProccess.Init ();
         //		StartCoroutine (RefreshSocket ());
+
+        btns[0].OnClick += () => { FirstLoadScene("Tank");};
+        btns[1].OnClick += () => { FirstLoadScene("Inspection"); };
+        btns[0].OnOver += () => { tiptext.text = "加药"; };
+        btns[1].OnOver += () => { tiptext.text = "巡检"; };
+
+        btns[0].OnOut += () => { tiptext.text = "请选择场景"; };
+        btns[1].OnOut += () => { tiptext.text = "请选择场景"; };
     }
 
 
@@ -95,18 +111,9 @@ public class MainSceneMgr : MonoBehaviour
         Debug.Log(GlobalManager.IP + GlobalManager.PORTAL);
 
         WebManager.Instance.Init(sceneName.ToLower());
-
-        WebErrorProccess.Init();
+        GlobalManager.LoadScene(sceneName);
+        //WebErrorProccess.Init();
 //        StartCoroutine(RefreshSocket());
-
-        LoadScene(sceneName);
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        GlobalManager.LAST_LOADED_SCENE = SceneManager.GetActiveScene().name;
-        //载入场景
-        SceneManager.LoadScene(sceneName);
     }
 
 

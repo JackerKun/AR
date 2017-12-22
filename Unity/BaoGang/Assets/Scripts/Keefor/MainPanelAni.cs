@@ -18,7 +18,7 @@ public class MainPanelAni : MonoBehaviour
     {
         target = new GameObject("target").transform;
         target.SetParent(Camera.main.transform);
-        target.localPosition = Vector3.forward * 700;
+        target.localPosition = Vector3.forward * 400;
 
         dummy = this.transform;
         //        obj = new Transform[8];

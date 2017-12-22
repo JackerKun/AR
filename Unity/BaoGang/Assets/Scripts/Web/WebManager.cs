@@ -35,7 +35,6 @@ public class WebManager : MonoBehaviour
 
     public void Init(string sceneName)
     {
-        #region 服务器注册
         SocketService socketService = socket;
         IsConnect = false;
         //通用的注册服务
@@ -49,10 +48,10 @@ public class WebManager : MonoBehaviour
 		{
 			InspectionSocketService.Instance.RegistServices();
 		}
+
         StopAllCoroutines();
         StartCoroutine(RefreshSocket());
 
-        #endregion
     }
 
 
@@ -64,25 +63,35 @@ public class WebManager : MonoBehaviour
             EventConfig.RESPONSE_HEART,
             (socket, packet, args) =>
             {
-                Debug.Log("yes!");
                 IsConnect = true;
             });
+        #region 旧代码
         //监听错误信息
-        socketService.AddListener(EventConfig.WARN_MESSAGE,
-            (socket, packet, args) =>
+        //socketService.AddListener(EventConfig.WARN_MESSAGE,
+        //    (socket, packet, args) =>
+        //    {
+        //        Debug.Log(packet.Payload);
+        //        UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
+        //    });
+        //socketService.AddListener(
+        //    EventConfig.AR_DISCONNECT,
+        //    (socket, packet, args) =>
+        //    {
+        //        Debug.Log(packet.Payload);
+        //        UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
+        //    });
+        #endregion
+        On(EventConfig.WARN_MESSAGE,
+            node =>
             {
-                Debug.Log(packet.Payload);
-                UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
+                UIManager.ShowErrorMessage(node[1]["message"]);
             });
-        socketService.AddListener(
-            EventConfig.AR_DISCONNECT,
-            (socket, packet, args) =>
+        On(EventConfig.AR_DISCONNECT,
+            node =>
             {
-                Debug.Log(packet.Payload);
-                UIManager.ShowErrorMessage(JSON.Parse(packet.Payload)[1]["message"]);
+                UIManager.ShowErrorMessage(node[1]["message"]);
             });
     }
-
 
 
     IEnumerator RefreshSocket()
@@ -105,4 +114,38 @@ public class WebManager : MonoBehaviour
             }
         }
     }
+
+
+
+    #region 新添加的
+
+    public void Connect(string sceneName, KSuccessCallback callback)
+    {
+        socket.ConnectServer(sceneName,callback);
+    }
+    /// <summary>
+    /// 注册事件，回调函数为jsonnode数组，0是data，1是原始json  {state:"",data:{},message:""}
+    /// </summary>
+    /// <param name="response">回调名称</param>
+    /// <param name="callback">回调方法</param>
+    public void On(string response, KSuccessCallback callback)
+    {
+        socket.AddListener(response, callback);
+    }
+
+    public void Emit(string request,string data)
+    {
+        socket.Request(request,data);
+    }
+
+    public void StartRequestData(string request,string eventName, KSuccessCallback callback)
+    {
+        socket.StartGetData(request,eventName, callback);
+    }
+
+    public void CancleRequestData(string request)
+    {
+        socket.CancleGetData(request);
+    }
+    #endregion
 }

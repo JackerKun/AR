@@ -19,7 +19,7 @@ namespace HopeRun.Model
 		public string deviceName;
 		//设备编号（每个识别的设备具有唯一编号）
 		public string deviceType;
-		//设备编号（每个识别的设备具有唯一编号）
+		//
 		public string scene;
 	}
 }
