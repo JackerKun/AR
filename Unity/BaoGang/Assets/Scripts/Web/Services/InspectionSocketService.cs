@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using AR.Common;
 using AR.Configs;
 using AR.Model;
-using BestHTTP.SocketIO;
 using SimpleJSON;
 using HopeRun;
 
@@ -55,6 +53,12 @@ public class InspectionSocketService
 		{
 			DealInspectionMsg(node[0]);
 		});
+	}
+
+	// 提交工单
+	public void SubmitWorkOrder(JSONNode node)
+	{
+		WebManager.Instance.Emit(EventConfig.CHECKRESULTSUBMIT, node.ToString());
 	}
 
 	public void onScaning(System.Action<Tank> callback)

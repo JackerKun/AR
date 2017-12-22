@@ -12,9 +12,19 @@ public class InspectionUIMgr : MonoBehaviour
 	public static UIMode curUIMode;
 	Transform itemsRootTran;
 	DialogBox dialogBox;
+	Transform submitBtn;
+	Vector3 initSubmitPose;
 	HoloGrid holoGrid;
 	//面板离自己前方的距离
 	float zDist = 250f;
+	static InspectionUIMgr instance;
+	public static InspectionUIMgr Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
 	//当前界面状态
 	public enum UIMode
 	{
@@ -22,10 +32,17 @@ public class InspectionUIMgr : MonoBehaviour
 		ItemList,
 		DialogBox
 	}
+
+	void Awake()
+	{
+		instance = this;
+	}
 	// Use this for initialization
 	void Start()
 	{
 		dialogBox = GameObject.Find("Canvas3D/DialogBox").GetComponent<DialogBox>();
+		submitBtn = GameObject.Find("Canvas3D/SubmitBtn").transform;
+		initSubmitPose = submitBtn.localPosition;
 		holoGrid = Items.GetComponent<HoloGrid>();
 		itemsRootTran = Items.transform;
 	}
@@ -54,12 +71,17 @@ public class InspectionUIMgr : MonoBehaviour
 		Items.transform.position = GyroUICamera.position + tmpForward * zDist;
 		Items.transform.forward = Items.transform.position - GyroUICamera.position;
 		Items.DOFade(1f, .5f).SetEase(Ease.InSine);
+		// 显示提交工单按钮
+		submitBtn.position = Items.transform.position + Vector3.down * 10f;
+		submitBtn.forward = -submitBtn.position;
+		submitBtn.gameObject.SetActive(true);
 		curUIMode = UIMode.ItemList;
 	}
 
 	public void HideItems()
 	{
 		Items.DOFade(0f, .2f).SetEase(Ease.OutSine);
+		submitBtn.gameObject.SetActive(false);
 		curUIMode = UIMode.Off;
 	}
 	#endregion

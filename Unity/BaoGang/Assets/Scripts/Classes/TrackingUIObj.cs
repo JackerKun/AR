@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
@@ -37,10 +35,12 @@ public class TrackingUIObj : MonoBehaviour, ITrackingUI
 		{
 			JSONNode node = InspectionMgr.Instance.GetNode(KeyID);
 			Debug.LogError(node.ToString());
-			foreach (var v in node.Children)
+			string tmpStr = "";
+			foreach (JSONNode v in node.Children)
 			{
-				Debug.LogError(v.ToString());
+				tmpStr += "\n" + v;
 			}
+			text.text = tmpStr;
 		}
 
 	}

@@ -87,7 +87,7 @@ public class InspectionInteractive : MonoBehaviour
 
 	#region UI的交互操作
 
-	InspectionItem curBtn;
+	Ryan3DButton curBtn;
 
 	void UpdateInteractive()
 	{
@@ -100,7 +100,7 @@ public class InspectionInteractive : MonoBehaviour
 				SetMouse2D(false);
 				mouseIcon3D.transform.position = hit.point;
 				mouseIcon3D.forward = -hit.normal;
-				InspectionItem tmpBtn = hit.transform.GetComponent<InspectionItem>();
+				Ryan3DButton tmpBtn = hit.transform.GetComponent<Ryan3DButton>();
 				if (tmpBtn != null)
 				{
 					//同一个按钮不作操作
@@ -119,7 +119,8 @@ public class InspectionInteractive : MonoBehaviour
 					curBtn = tmpBtn;
 					//鼠标经过操作
 					curBtn.MouseHover();
-					ShowMouseCountDown(uiMgr.ShowOptionDialog, tmpBtn);
+					ShowMouseCountDown(tmpBtn);
+					//ShowMouseCountDown(uiMgr.ShowOptionDialog, tmpBtn);
 				}
 				else
 				{
@@ -139,14 +140,19 @@ public class InspectionInteractive : MonoBehaviour
 	}
 
 	//显示鼠标倒计时
-	void ShowMouseCountDown(Action<InspectionItem> act, InspectionItem item)
+	//void ShowMouseCountDown(Action<InspectionItem> act, InspectionItem item)
+	//{
+	//	mouseCountDown.StartFillImage(act, item);
+	//}
+
+	void ShowMouseCountDown(Ryan3DButton btn)
 	{
-		mouseCountDown.StartFillImage(act, item);
+		mouseCountDown.StartFillImage(btn);
 	}
 
 	void ClearBtnHover()
 	{
-		if (curBtn)
+		if (curBtn != null)
 		{
 			//上一个按钮执行退出操作
 			curBtn.MouseExit();

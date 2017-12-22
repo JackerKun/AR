@@ -5,11 +5,8 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System;
 
-public class InspectionItem : MonoBehaviour, Ryan3DButton
+public class InspectionItem : Ryan3DButton
 {
-	Vector3 initScale;
-	Vector3 targetScale;
-	bool isHover = false;
 	bool selectStatus;
 	RectTransform rectTran;
 	public RectTransform RectTran
@@ -18,7 +15,7 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	}
 	// 点开后显示的描述文字
 	string dialogContent;
-	string id;
+	public string id;
 	public string Info
 	{
 		get { return dialogContent; }
@@ -26,9 +23,9 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 	public SelectStatus curSltStatus;
 	public enum SelectStatus
 	{
-		Yes,
+		Null = 1,
 		No,
-		Null
+		Yes
 	}
 	//显示的文字内容
 	Text textContent;
@@ -53,15 +50,9 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 		itemBG = transform.GetComponent<Image>();
 		this.dialogContent = dialogContent;
 		curSltStatus = SelectStatus.Null;
-		MouseInit();
 	}
 
 	#region 实现按钮类
-	public void MouseExit()
-	{
-		transform.DOScale(initScale, .2f).SetEase(Ease.OutSine);
-		isHover = false;
-	}
 
 	internal void CheckStatus(bool isOK)
 	{
@@ -91,23 +82,9 @@ public class InspectionItem : MonoBehaviour, Ryan3DButton
 		}
 	}
 
-	public void MouseHover()
+	public override void MouseSelect()
 	{
-		if (!isHover)
-		{
-			transform.DOScale(targetScale, .2f).SetEase(Ease.OutSine);
-			isHover = true;
-		}
-	}
-
-	public void MouseInit()
-	{
-		initScale = transform.localScale;
-		targetScale = initScale * .8f;
-	}
-
-	public void MouseSelect()
-	{
+		InspectionUIMgr.Instance.ShowOptionDialog(this);
 	}
 	#endregion
 }
