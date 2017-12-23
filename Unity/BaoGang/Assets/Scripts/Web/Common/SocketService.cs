@@ -2,7 +2,6 @@
 using BestHTTP.SocketIO;
 using BestHTTP.SocketIO.Events;
 using AR.Configs;
-using AR.Model;
 using HopeRun.Model;
 using UnityEngine;
 using HopeRun;
@@ -18,7 +17,6 @@ namespace AR.Common
         public string currentChannel;
 
         public SocketManager socketManagerRef;
-
         private Socket _socket;
 
         public Socket mySocket
@@ -218,5 +216,7 @@ namespace AR.Common
     public delegate void KSuccessCallback(params JSONNode[] node);
 
     public delegate void KErrorCallback();
+
+
 }
 

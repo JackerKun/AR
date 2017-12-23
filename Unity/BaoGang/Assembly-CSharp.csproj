@@ -154,11 +154,13 @@
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\Scripts\Classes\Container.cs" />
      <Compile Include="Assets\Scripts\Classes\FloatingTag.cs" />
+     <Compile Include="Assets\Scripts\Classes\Submit3DButton.cs" />
      <Compile Include="Assets\Scripts\Classes\TankObj.cs" />
      <Compile Include="Assets\Scripts\Classes\TrackingUIObj.cs" />
      <Compile Include="Assets\Scripts\Classes\WorkOrderObj.cs" />
      <Compile Include="Assets\Scripts\Experts\ExpertMgr.cs" />
      <Compile Include="Assets\Scripts\Experts\ExpertsTrackableEventHandler.cs" />
+     <Compile Include="Assets\Scripts\Interfaces\IRyan3DButton.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IRyanDialog.cs" />
      <Compile Include="Assets\Scripts\Interfaces\ITrackingUI.cs" />
      <Compile Include="Assets\Scripts\Keefor\CircleSlider.cs" />
@@ -289,6 +291,10 @@
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>C:/Users/keefor/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{E4F024DE-9953-FFCA-A9CB-65757FF1AFEE}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

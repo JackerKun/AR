@@ -128,6 +128,10 @@ public class MainSceneMgr : MonoBehaviour
         {
             StartCoroutine(CalLazyQuit());
         }
+		if (Input.GetKeyDown(KeyCode.Alpha0))
+		{
+			FirstLoadScene("Inspection");
+		}
     }
 
     IEnumerator CalLazyQuit()
