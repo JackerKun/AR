@@ -60,6 +60,7 @@
      <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
+     <None Include="Assets\Plugins\Android\GlassLive\AndroidManifest.xml" />
      <None Include="Assets\Scripts\Keefor\model\UIOverlay.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\Vuforia\Shaders\BrightTexture.shader" />
@@ -170,18 +171,10 @@
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>C:/Users/keefor/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
-<<<<<<< HEAD
-  </ItemGroup>
-  <ItemGroup>
-=======
- <Reference Include="UnityEditor.iOS.Extensions.Common">
- <HintPath>/Volumes/RW/Applications/Unity2017.2/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{E4F024DE-9953-FFCA-A9CB-65757FF1AFEE}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
->>>>>>> a0b3da9f61bff42031e832f2c102b0746923a048
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{661FBE64-96CB-9047-E29C-D0C5161BF9B3}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
