@@ -63,18 +63,8 @@ namespace HopeRun
 		//		public static  string apiURL = "http://192.168.120.179:1234/socket.io/";
 		//		public static  string apiURL = "http://localhost:1234/socket.io/";
 
-		public static TankObj CURRENT_TANK;
 		public static Transform CURRENT_TAG_CANVAS;
-
-		public static TankObj InitTankPanel(Transform tankRoot)
-		{
-			Transform canvasRoot = tankRoot;
-			//			TankObj drum = Instantiate<TankObj> ((Resources.Load ("Prefabs/TankPanel") as GameObject).GetComponent<TankObj> (), canvasRoot);
-			TankObj drum = Instantiate(((GameObject)Resources.Load("Prefabs/TankPanel")).GetComponent<TankObj>(), canvasRoot);
-			drum.InitParam(CURRENT_TANKID);
-			return drum;
-		}
-
+        
 		public static Transform InitFloatingPanel(Transform rootTran, List<Transform> imageTran)
 		{
 			Transform canvasRoot = GameObject.Find("TagCanvas").transform;
@@ -98,34 +88,7 @@ namespace HopeRun
 		}
 
 
-	    /// <summary>
-	    /// 显示液位高度
-	    /// </summary>
-	    /// <param name="cur">当前液位高度</param>
-	    /// <param name="whole">总液位高度</param>
-	    public static void UpdateLiquidHeight(float cur, float limitValue)
-	    {
-	        if (CURRENT_TANK)
-	        {
-	            CURRENT_TANK.UpdateHeight(cur, limitValue);
-	        }
-	    }
-
-	    //更改阀门状态
-
-	    public static void ChangeValveState(ValveState state)
-	    {
-	        if (CURRENT_TANK)
-	        {
-	            CURRENT_TANK.ChangeValveState(state);
-	        }
-	        else
-	        {
-	            Debug.Log("CURRENT_TANK IS NULL!");
-	        }
-	    }
-
-        public static void LoadScene(string sceneName)
+	    public static void LoadScene(string sceneName)
         {
             LAST_LOADED_SCENE = SceneManager.GetActiveScene().name;
             //载入场景
@@ -141,13 +104,6 @@ namespace HopeRun
 			return new Color(r, g, b);
 		}
 
-		public static void Deposit(Container container)
-		{
-			if (container != null)
-			{
-				container.Deposit();
-			}
-		}
 
 		public static void Deposit(Transform tran)
 		{

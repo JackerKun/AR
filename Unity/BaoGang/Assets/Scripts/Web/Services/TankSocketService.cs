@@ -72,10 +72,7 @@ public class TankSocketService
     }
     public void onScaning(Action<Tank> callback)
     {
-        //myCallback = callback;
-        //Debug.Log("onScaning:" + EventConfig.RESPONSE_TANK);
-        //socketService.Subscribe(EventConfig.RESPONSE_TANK, OnResponseTank);
-
+        //接收实时数据
         WebManager.Instance.StartRequestData(EventConfig.TANK,EventConfig.RESPONSE_TANK, node =>
         {
             var tank = new Tank(node[0]);
@@ -83,10 +80,10 @@ public class TankSocketService
             callback(tank);
         });
     }
-    public void onLostScaning(string targetID)
+    public void onLostScaning()
     {
-        //socketService.DisSubscribe(EventConfig.RESPONSE_TANK);
-        WebManager.Instance.CancleRequestData(EventConfig.RESPONSE_TANK);
+        //取消接收实时数据
+        WebManager.Instance.Off(EventConfig.RESPONSE_TANK);
     }
     
     /// <summary>
@@ -98,7 +95,7 @@ public class TankSocketService
     {
         string index = isOnline ? jn["job"]["status"] : jn["status"];
         if (string.IsNullOrEmpty(index)) return;
-
+        
         string curStep = MessageLibrary.GetMessage(index);
         if (curStep == "10")
         {

@@ -9,8 +9,6 @@ public class SceneMgr : MonoBehaviour
 {
 	Camera mainCamera;
 	bool scanCamera = true;
-	float initFov;
-	Camera[] cameras;
 	Vector3 canvasPivot;
 	public Device DeviceName;
 	Dictionary<Device, Vector3> targetOffset = new Dictionary<Device, Vector3>();
@@ -39,7 +37,6 @@ public class SceneMgr : MonoBehaviour
 		vuforia.RegisterVuforiaInitializedCallback(ChangeFOV);
 		vuforia.RegisterOnPauseCallback(OnPaused);
 		mainCamera = Camera.main;
-		initFov = mainCamera.fieldOfView;
 		switch (CurrentScene)
 		{
 			case SCENE.EXPERT:
@@ -104,7 +101,6 @@ public class SceneMgr : MonoBehaviour
 	{
 		CameraDevice.Instance.SetFocusMode(
 			CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
-		cameras = GameObject.Find("ARCamera").GetComponentsInChildren<Camera>();
 	}
 
 	private void OnPaused(bool paused)

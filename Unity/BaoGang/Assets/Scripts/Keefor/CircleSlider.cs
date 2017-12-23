@@ -15,7 +15,7 @@ public class CircleSlider : MonoBehaviour {
     private float _value = 0;
     private float _percent;
 
-	void Start () {
+	void Awake () {
         circleImage = this.transform.Find("circle").GetComponent<Image>();
         valueText = this.transform.Find("value").GetComponent<Text>();
 	}

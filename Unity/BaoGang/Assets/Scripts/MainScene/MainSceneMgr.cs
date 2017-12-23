@@ -132,9 +132,9 @@ public class MainSceneMgr : MonoBehaviour
 
     IEnumerator CalLazyQuit()
     {
+        LazyQuit = false;
         yield return new WaitForSeconds(5f);
         Debug.Log("Quit!");
-        LazyQuit = false;
         Application.Quit();
     }
 }

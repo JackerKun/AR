@@ -133,6 +133,11 @@ public class WebManager : MonoBehaviour
         socket.AddListener(response, callback);
     }
 
+    public void Off(string response)
+    {
+        socket.RemoveListener(response);
+    }
+
     public void Emit(string request,string data)
     {
         socket.Request(request,data);
