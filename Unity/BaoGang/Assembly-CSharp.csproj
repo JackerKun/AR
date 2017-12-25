@@ -204,6 +204,7 @@
      <Compile Include="Assets\Scripts\Tools\InspectionInteractive.cs" />
      <Compile Include="Assets\Scripts\Tools\TakePhotoMgr.cs" />
      <Compile Include="Assets\Scripts\Tools\UIEffects.cs" />
+     <Compile Include="Assets\Scripts\Trackers\BaseTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Trackers\InspectionTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Trackers\PipeTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Trackers\TankTrackableEventHandler.cs" />
@@ -235,6 +236,7 @@
      <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
+     <None Include="Assets\Plugins\Android\GlassLive\AndroidManifest.xml" />
      <None Include="Assets\StreamingAssets\Vuforia\Hoperun.xml" />
      <None Include="Assets\Scripts\Keefor\model\UIOverlay.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />

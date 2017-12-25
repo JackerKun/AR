@@ -73,7 +73,7 @@ public class InspectionUIMgr : MonoBehaviour
 		Items.DOFade(1f, .5f).SetEase(Ease.InSine);
 		// 显示提交工单按钮
 		submitBtn.position = Items.transform.position + Vector3.down * 10f;
-		submitBtn.forward = -submitBtn.position;
+		submitBtn.forward = submitBtn.position;
 		submitBtn.gameObject.SetActive(true);
 		curUIMode = UIMode.ItemList;
 	}
