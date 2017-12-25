@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -11,7 +9,7 @@ public class TankObj : Container
 	public CircleSlider LiquidLevel;
 	public Toggle ValveToggle;
 	//桶的ID
-	public Text ID,_gaodu;
+	public Text ID, _gaodu;
 	string _drumId;
 	ValveState curValveState;
 	Vector3 targetScale;
@@ -47,9 +45,9 @@ public class TankObj : Container
 		//LiquidImg.color = new Color(r, g, b);
 		//CurTankColor = LiquidImg.color;
 		//currentAmount = curH;
-	    _gaodu.text = curH.ToString(CultureInfo.InvariantCulture);
-	    LiquidLevel.Max = totalAmount;
-	    LiquidLevel.Value = curH;
+		_gaodu.text = curH.ToString(CultureInfo.InvariantCulture);
+		LiquidLevel.Max = totalAmount;
+		LiquidLevel.Value = curH;
 
 		currentAmount = curH;
 	}
