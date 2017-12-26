@@ -69,6 +69,8 @@ public class InspectionTrackableEventHandler : MonoBehaviour, ITrackableEventHan
 
 	protected virtual void OnTrackingFound()
 	{
+		if (!InspectionMgr.isInspecting)
+			return;
 		var rendererComponents = GetComponentsInChildren<Renderer>(true);
 		var colliderComponents = GetComponentsInChildren<Collider>(true);
 		var canvasComponents = GetComponentsInChildren<Canvas>(true);

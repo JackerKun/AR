@@ -9,7 +9,7 @@ namespace AR.Configs
 		//流程消息
 		public readonly static string AR_WORKFLOW = "AR_WORKFLOW";
 		//监听巡检点事件
-		public readonly static string AR_CHECKPOINT = "AR_CHECKPOINT";
+		public readonly static string AR_CHECKPOINT = "AR_BLUETOOTHCHECKPOINT";
 		//监听巡检点事件
 		public readonly static string CHECKRESULTSUBMIT = "CHECKRESULTSUBMIT";
 		//订阅返回桶的信息
