@@ -12,7 +12,6 @@ namespace AR.Common
 
     public class SocketService
     {
-
         //Set Namespace For Current
         public string currentChannel;
 
@@ -44,18 +43,6 @@ namespace AR.Common
 
         #region PUBLIC_METHODS
 
-
-        public void Dispose()
-        {
-            Debug.LogError("dispose listener..");
-            if (_socket != null)
-            {
-                mySocket.Off(EventConfig.AR_ONLINE, (e0, e1, e2) =>
-                {
-                    Debug.Log("dispose listener..");
-                });
-            }
-        }
 
 
         public void Reconnect()

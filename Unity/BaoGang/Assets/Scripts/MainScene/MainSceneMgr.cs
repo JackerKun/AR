@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using HopeRun;
-using UnityEngine.Assertions.Must;
 
 public class MainSceneMgr : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class MainSceneMgr : MonoBehaviour
     public static bool LazyQuit = false;
     private InputField ipInputField;
 
+    private Transform canvas;
     private TDButtonItem[] btns;
     private Text tiptext;
 
@@ -48,15 +48,18 @@ public class MainSceneMgr : MonoBehaviour
             //记录上一个场景号
             Debug.LogError(first.name + " --->> " + second.name);
         });
+
+        GyroInput.inst.AddNodListener(CorrecteUIPostion);
     }
 
     void Init()
     {
         btns = new TDButtonItem[3];
-        btns[0] = GameObject.Find("Canvas/btns/btn_jiayao").GetComponent<TDButtonItem>();
-        btns[1] = GameObject.Find("Canvas/btns/btn_xunjian").GetComponent<TDButtonItem>();
-        btns[2] = GameObject.Find("Canvas/btns/btn_guandao").GetComponent<TDButtonItem>();
-        tiptext = GameObject.Find("Canvas/textbg/name").GetComponent<Text>();
+        canvas = GameObject.Find("Canvas").transform;
+        btns[0] = canvas.Find("btns/btn_jiayao").GetComponent<TDButtonItem>();
+        btns[1] = canvas.Find("btns/btn_xunjian").GetComponent<TDButtonItem>();
+        btns[2] = canvas.Find("btns/btn_guandao").GetComponent<TDButtonItem>();
+        tiptext = canvas.Find("textbg/name").GetComponent<Text>();
         ipInputField = GameObject.Find("SettingCanvas/IPInputField").GetComponent<InputField>();
         Switch();
         ipInputField.text = GlobalManager.IP;
@@ -93,24 +96,29 @@ public class MainSceneMgr : MonoBehaviour
     }
     #endregion
 
-
+    void CorrecteUIPostion()
+    {
+        GyroInput.CorrecteUIPostion(canvas);
+    }
 
 
     public void FirstLoadScene(string sceneName)
     {
+
+        GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
         //释放场景资源
         GlobalManager.IP = ipInputField.text;
         if (sceneName == "Tank")
         {
             GlobalManager.PORTAL = ":1234";
+             WebManager.Instance.Init(TankSocketService.Instance);
         }
         else if (sceneName == "Inspection")
         {
             GlobalManager.PORTAL = ":1235";
+             WebManager.Instance.Init(InspectionSocketService.Instance);
         }
         Debug.Log(GlobalManager.IP + GlobalManager.PORTAL);
-
-        WebManager.Instance.Init(sceneName.ToLower());
         GlobalManager.LoadScene(sceneName);
         //WebErrorProccess.Init();
 //        StartCoroutine(RefreshSocket());

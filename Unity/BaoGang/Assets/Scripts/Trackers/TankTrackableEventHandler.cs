@@ -21,8 +21,9 @@ namespace Vuforia
         {
             base.OnTrackingFound();
             GlobalManager.CURRENT_TANKID = trackName;
-            TankSocketService.Instance.onLostScaning();
-            TankSocketService.Instance.onScaning(ScanCallback);
+            var server = TankSocketService.Instance;
+            server.onLostScaning();
+            server.onScaning(ScanCallback);
         }
         protected override void OnTrackingLost()
         {
