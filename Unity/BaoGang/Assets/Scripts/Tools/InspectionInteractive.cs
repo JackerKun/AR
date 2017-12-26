@@ -29,9 +29,10 @@ public class InspectionInteractive : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (!InspectionMgr.isInspecting)
+			return;
 		//UI的显隐操作
 		UpdateUIShow();
-		Debug.LogError(InspectionUIMgr.curUIMode);
 		//面板显示的时候可以交互
 		if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
 		{

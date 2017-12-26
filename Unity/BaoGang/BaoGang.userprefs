@@ -1,20 +1,15 @@
-﻿<Properties StartupConfiguration="{E4F024DE-9953-FFCA-A9CB-65757FF1AFEE}|单元测试">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Classes/Submit3DButton.cs">
+﻿<Properties StartupConfiguration="{661FBE64-96CB-9047-E29C-D0C5161BF9B3}|单元测试">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainScene/SceneMgr.cs">
     <Files>
+      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="27" Column="3" />
       <File FileName="Assets/Scripts/Classes/LiquidUI.cs" Line="78" Column="37" />
       <File FileName="Assets/Scripts/Classes/MeterObj.cs" Line="17" Column="19" />
-      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="143" Column="39" />
-      <File FileName="Assets/Scripts/Classes/WorkOrderObj.cs" Line="42" Column="14" />
-      <File FileName="Assets/Scripts/UI/DialogBox.cs" Line="28" Column="20" />
-      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="24" Column="36" />
-      <File FileName="Assets/Scripts/Interfaces/IRyanDialog.cs" Line="8" Column="7" />
-      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="52" Column="52" />
+      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="32" Column="28" />
+      <File FileName="Assets/Scripts/Classes/WorkOrderObj.cs" Line="43" Column="3" />
+      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="19" Column="50" />
       <File FileName="Assets/Scripts/Interfaces/IRyan3DButton.cs" Line="9" Column="7" />
-      <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="73" Column="18" />
-      <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="52" Column="39" />
-      <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="64" Column="28" />
-      <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="111" Column="1" />
-      <File FileName="Assets/Scripts/Classes/Submit3DButton.cs" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/MainScene/SceneMgr.cs" Line="85" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

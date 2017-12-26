@@ -6,9 +6,15 @@ public class InspectionMgr : MonoBehaviour
 {
 	public static List<InspectionItem> items = new List<InspectionItem>();
 	public static float LastMsgT = 0;
+	// 正在巡检流程中
+	public static bool isInspecting = false;
 	// 当前工单号
 	public static string curWorkOrderNumber;
 	public static string orderId;
+	// 判断失去连接的时间
+	float outT = 10f;
+	// 进出巡检点的缓冲时间
+	float buffT = 0;
 	// 巡检项数据信息
 	JSONNode itemsDataNode;
 	static InspectionMgr instance;
@@ -87,18 +93,39 @@ public class InspectionMgr : MonoBehaviour
 			Submit();
 		}
 		CheckDataCommunicate();
+		UpdateBuff();
+	}
+
+	void UpdateBuff()
+	{
+		if (buffT > 0)
+		{
+			buffT -= Time.deltaTime;
+			if (buffT <= 0)
+			{
+				buffT = 0;
+			}
+		}
 	}
 
 	// 检测数据通信
 	void CheckDataCommunicate()
 	{
-		if (Time.time - LastMsgT < 10f)
+		if (Time.time + buffT - LastMsgT < outT)
 		{
-			Debug.Log("at check point");
+			if (!isInspecting)
+			{
+				SetInspectStatus(true);
+				Debug.Log("at check point");
+			}
 		}
 		else
 		{
-			Debug.Log("not in position");
+			if (isInspecting)
+			{
+				SetInspectStatus(false);
+				Debug.Log("not in position");
+			}
 		}
 	}
 
@@ -129,13 +156,13 @@ public class InspectionMgr : MonoBehaviour
 		order.UpdateCheckPoint(orderId, ((int)curOrderStatus).ToString());
 		JSONNode _orderNode = JSONNode.Parse(JsonUtility.ToJson(order));
 		InspectionSocketService.Instance.SubmitWorkOrder(_orderNode);
-		HideAllUI();
-		InspectionUIMgr.Instance.SetMouse2D(true);
+		SetInspectStatus(false);
 		Debug.Log("提交工单");
 	}
 
 	void HideAllUI()
 	{
+		buffT = outT + 5f;
 		if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
 		{
 			uiMgr.HideItems();
@@ -145,6 +172,17 @@ public class InspectionMgr : MonoBehaviour
 			uiMgr.HideOptionDialog();
 			uiMgr.HideItems();
 		}
+		InspectionUIMgr.Instance.SetMouse2D(true);
 		InspectionInteractive.CanChangeUI = true;
+	}
+
+	// 设置巡检状态
+	void SetInspectStatus(bool isInspect)
+	{
+		if (!isInspect)
+		{
+			HideAllUI();
+		}
+		isInspecting = isInspect;
 	}
 }
