@@ -1,11 +1,12 @@
 using System;
-using System.Collections;
+using HopeRun;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkOrderObj
 {
 	public string jobNumber;
+	public string deviceID;
 	public NoName checkPoint;
 	public List<NoName> checkContent = new List<NoName>();
 	static WorkOrderObj instance;
@@ -25,6 +26,7 @@ public class WorkOrderObj
 
 	public WorkOrderObj(string jobNumber)
 	{
+		deviceID = GlobalManager.DeviceID;
 		this.jobNumber = jobNumber;
 		checkContent = new List<NoName>();
 	}
