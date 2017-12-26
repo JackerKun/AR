@@ -1,12 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using AR.Common;
 using AR.Configs;
-using SimpleJSON;
-using HopeRun.Message;
 using HopeRun;
-
 public class WebManager : MonoBehaviour
 {
     public bool IsConnect = true;
