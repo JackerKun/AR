@@ -25,7 +25,7 @@ public class MainSceneMgr : MonoBehaviour
     //    }
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         //屏幕常量
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -50,6 +50,8 @@ public class MainSceneMgr : MonoBehaviour
         });
 
         GyroInput.inst.AddNodListener(CorrecteUIPostion);
+        yield return new WaitForSeconds(0.2f);
+        GyroInput.CorrecteUIPostion(canvas);
     }
 
     void Init()

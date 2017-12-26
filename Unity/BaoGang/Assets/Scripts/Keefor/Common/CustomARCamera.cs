@@ -22,8 +22,8 @@ public class CustomARCamera : MonoBehaviour
 		yield return new WaitForSeconds (0.5f);
 		camlist = transform.GetComponentsInChildren<Camera> ();
 		var cu = camlist [0].projectionMatrix;
-		if (System.IO.File.Exists (FixDataConfig.ConfigPath))
-			cu = ReadDate (FixDataConfig.ConfigPath);
+		if (System.IO.File.Exists (K_Config.ConfigPath))
+			cu = ReadDate (K_Config.ConfigPath);
 		for (int i = 0; i < camlist.Length; i++) {
 			var vbb = camlist [i].gameObject.GetComponent<Vuforia.VideoBackgroundBehaviour> ();
 			if (vbb == null) {

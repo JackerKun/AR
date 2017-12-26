@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixDataConfig
+public class K_Config
 {
 #if UNITY_EDITOR_OSX 
     public const string ConfigPath = "User/ArConfig.txt";
