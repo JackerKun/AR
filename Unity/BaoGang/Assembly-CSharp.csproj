@@ -169,14 +169,15 @@
      <Compile Include="Assets\Scripts\Keefor\BaseTrackableEventHandler.cs" />
      <Compile Include="Assets\Scripts\Keefor\CircleSlider.cs" />
      <Compile Include="Assets\Scripts\Keefor\Common\CustomARCamera.cs" />
-     <Compile Include="Assets\Scripts\Keefor\Common\FixDataConfig.cs" />
      <Compile Include="Assets\Scripts\Keefor\Common\GyroInput.cs" />
+     <Compile Include="Assets\Scripts\Keefor\Common\K_Config.cs" />
      <Compile Include="Assets\Scripts\Keefor\Common\KeyInput.cs" />
      <Compile Include="Assets\Scripts\Keefor\Common\TDButtonItem.cs" />
      <Compile Include="Assets\Scripts\Keefor\Common\TDMouseInput.cs" />
      <Compile Include="Assets\Scripts\Keefor\down\GyroAccel.cs" />
      <Compile Include="Assets\Scripts\Keefor\IRegistServer.cs" />
      <Compile Include="Assets\Scripts\Keefor\MainPanelAni.cs" />
+     <Compile Include="Assets\Scripts\Keefor\xuanjian\XunjianModel.cs" />
      <Compile Include="Assets\Scripts\MainScene\CanvasMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\InspectionMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\MainSceneMgr.cs" />

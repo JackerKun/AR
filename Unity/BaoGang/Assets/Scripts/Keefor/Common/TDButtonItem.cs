@@ -18,6 +18,11 @@ public class TDButtonItem : MonoBehaviour
 
     void Start()
     {
+        Init();
+    }
+
+    protected virtual void Init()
+    {
         initScale = transform.localScale;
         targetScale = initScale * .8f;
     }
@@ -27,7 +32,7 @@ public class TDButtonItem : MonoBehaviour
         get { return m_IsOver; }
     }
 
-    public void MouseHover()
+    public virtual void MouseHover()
     {
         if(m_IsOver)return;
         m_IsOver = true;
@@ -38,14 +43,14 @@ public class TDButtonItem : MonoBehaviour
             OnOver();
     }
 
-    public void MouseSelect()
+    public virtual void MouseSelect()
     {
         //Debug.Log("鼠标选中");
         if (OnClick != null)
             OnClick();
     }
 
-    public void MouseExit()
+    public virtual void MouseExit()
     {
         transform.DOScale(initScale, .2f).SetEase(Ease.OutSine);
         m_IsOver = false;
