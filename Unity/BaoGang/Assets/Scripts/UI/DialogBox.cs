@@ -23,13 +23,13 @@ public class DialogBox : MonoBehaviour, IRyanDialog
 		curPanel.alpha = 0;
 	}
 
-	public void ShowDialog(string info, InspectionItem item)
+	public void ShowDialog(InspectionItem item)
 	{
 		this.item = item;
 		transform.position = item.transform.position;
 		transform.rotation = item.transform.rotation;
-		Vector3 targetPose = transform.localPosition - transform.forward * 50f;
-		content.text = info;
+		Vector3 targetPose = InspectionUIMgr.Instance.GyroUICamera.forward.normalized * 200f;
+		content.text = item.Info;
 
 		Sequence mySque = DOTween.Sequence();
 		mySque.Append(curPanel.DOFade(1, .3f).SetEase(Ease.InOutSine));
@@ -60,16 +60,11 @@ public class DialogBox : MonoBehaviour, IRyanDialog
 	{
 		item.CheckStatus(isOK);
 		HideDialog();
+		InspectionUIMgr.curUIMode = InspectionUIMgr.UIMode.ItemList;
 	}
 
 	public void HideDialog()
 	{
 		curPanel.alpha = 0;
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
 	}
 }

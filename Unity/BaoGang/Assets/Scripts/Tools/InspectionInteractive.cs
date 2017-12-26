@@ -10,13 +10,10 @@ public class InspectionInteractive : MonoBehaviour
 	Camera gyroCamera;
 	Vector2 screenCenter;
 	InspectionUIMgr uiMgr;
-	GameObject mouseIcon2D;
-	Transform mouseIcon3D;
-	UIEffects mouseCountDown;
 
-	bool isMouse2D = true;
+	public static bool isMouse2D = true;
 	//已经有过一次抬头或低头了，再次抬头低头可改变UI显隐
-	bool canChangeUI = true;
+	public static bool CanChangeUI = true;
 
 	// Use this for initialization
 	void Start()
@@ -24,9 +21,6 @@ public class InspectionInteractive : MonoBehaviour
 		uiMgr = gameObject.GetComponent<InspectionUIMgr>();
 		gyroCameraCtrl = FindObjectOfType<GyroCamera>();
 		gyroCamera = gyroCameraCtrl.GetComponent<Camera>();
-		mouseIcon2D = GameObject.Find("Canvas2D/MouseIcon");
-		mouseIcon3D = GameObject.Find("Canvas3D/Mouse").transform;
-		mouseCountDown = GameObject.Find("Canvas3D/Mouse/MouseCountDown").GetComponent<UIEffects>();
 		screenCenter = new Vector2(Screen.width >> 1, Screen.height >> 1);
 		//隐藏UI内容
 		uiMgr.HideItems();
@@ -37,6 +31,7 @@ public class InspectionInteractive : MonoBehaviour
 	{
 		//UI的显隐操作
 		UpdateUIShow();
+		Debug.LogError(InspectionUIMgr.curUIMode);
 		//面板显示的时候可以交互
 		if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
 		{
@@ -50,7 +45,7 @@ public class InspectionInteractive : MonoBehaviour
 	void UpdateUIShow()
 	{
 		//检测是否显隐UI
-		if (canChangeUI)
+		if (CanChangeUI)
 		{
 			//显隐按钮内容
 			if (gyroCameraCtrl.horizonAngle > 45f)
@@ -68,7 +63,7 @@ public class InspectionInteractive : MonoBehaviour
 				{
 					uiMgr.HideOptionDialog();
 				}
-				canChangeUI = false;
+				CanChangeUI = false;
 			}
 			//对话框打开着就可以转头做选择
 			if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.DialogBox)
@@ -79,7 +74,7 @@ public class InspectionInteractive : MonoBehaviour
 		//重制状态，再次抬头可以继续显隐UI
 		else if (gyroCameraCtrl.horizonAngle < 20f)
 		{
-			canChangeUI = true;
+			CanChangeUI = true;
 		}
 	}
 
@@ -97,9 +92,9 @@ public class InspectionInteractive : MonoBehaviour
 			if (hit.collider != null)
 			{
 				//显示3D鼠标
-				SetMouse2D(false);
-				mouseIcon3D.transform.position = hit.point;
-				mouseIcon3D.forward = -hit.normal;
+				InspectionUIMgr.Instance.SetMouse2D(false);
+				InspectionUIMgr.Instance.mouseIcon3D.transform.position = hit.point;
+				InspectionUIMgr.Instance.mouseIcon3D.forward = -hit.normal;
 				Ryan3DButton tmpBtn = hit.transform.GetComponent<Ryan3DButton>();
 				if (tmpBtn != null)
 				{
@@ -114,13 +109,12 @@ public class InspectionInteractive : MonoBehaviour
 						//上一个按钮执行退出操作
 						curBtn.MouseExit();
 						//隐藏鼠标倒计时
-						mouseCountDown.StopFillImage();
+						InspectionUIMgr.Instance.StopFillImage();
 					}
 					curBtn = tmpBtn;
 					//鼠标经过操作
 					curBtn.MouseHover();
-					ShowMouseCountDown(tmpBtn);
-					//ShowMouseCountDown(uiMgr.ShowOptionDialog, tmpBtn);
+					InspectionUIMgr.Instance.ShowMouseCountDown(tmpBtn);
 				}
 				else
 				{
@@ -139,17 +133,6 @@ public class InspectionInteractive : MonoBehaviour
 		}
 	}
 
-	//显示鼠标倒计时
-	//void ShowMouseCountDown(Action<InspectionItem> act, InspectionItem item)
-	//{
-	//	mouseCountDown.StartFillImage(act, item);
-	//}
-
-	void ShowMouseCountDown(Ryan3DButton btn)
-	{
-		mouseCountDown.StartFillImage(btn);
-	}
-
 	void ClearBtnHover()
 	{
 		if (curBtn != null)
@@ -157,26 +140,7 @@ public class InspectionInteractive : MonoBehaviour
 			//上一个按钮执行退出操作
 			curBtn.MouseExit();
 			curBtn = null;
-			SetMouse2D(true);
-		}
-	}
-
-	/// <summary>
-	/// 切换鼠标样式2d/3d
-	/// </summary>
-	/// <param name="is2D">If set to <c>true</c> is2 d.</param>
-	void SetMouse2D(bool is2D)
-	{
-		if (is2D != isMouse2D)
-		{
-			isMouse2D = !isMouse2D;
-			mouseIcon2D.SetActive(is2D);
-			mouseIcon3D.gameObject.SetActive(!is2D);
-			//进入2D模式后，停止倒计时
-			if (isMouse2D)
-			{
-				mouseCountDown.StopFillImage();
-			}
+			InspectionUIMgr.Instance.SetMouse2D(true);
 		}
 	}
 

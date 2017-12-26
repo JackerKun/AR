@@ -155,6 +155,7 @@
      <Compile Include="Assets\Scripts\Classes\Container.cs" />
      <Compile Include="Assets\Scripts\Classes\FloatingTag.cs" />
      <Compile Include="Assets\Scripts\Classes\LiquidUI.cs" />
+     <Compile Include="Assets\Scripts\Classes\MeterObj.cs" />
      <Compile Include="Assets\Scripts\Classes\Submit3DButton.cs" />
      <Compile Include="Assets\Scripts\Classes\TankObj.cs" />
      <Compile Include="Assets\Scripts\Classes\TrackingUIObj.cs" />
@@ -190,7 +191,6 @@
      <Compile Include="Assets\Scripts\Test\ChangeFOV.cs" />
      <Compile Include="Assets\Scripts\Test\DebugScreen.cs" />
      <Compile Include="Assets\Scripts\Test\DelayFollow.cs" />
-     <Compile Include="Assets\Scripts\Test\JsonTest.cs" />
      <Compile Include="Assets\Scripts\Test\Scripts\ObbComparison.cs" />
      <Compile Include="Assets\Scripts\Test\Scripts\TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\Test\Test.cs" />

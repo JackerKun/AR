@@ -7,28 +7,27 @@ using System.Collections.Generic;
 
 public class LiquidUI : IChangableUI
 {
-	public CircleSlider circleLeft;
-	public CircleSlider circleRight;
-	public Toggle ValveToggle;
 	public Toggle valvePrefab;
+	public CircleSlider MeterPrefab;
 	//桶的ID
 	public Text ID;
 	string _drumId;
-	ValveState curValveState;
 	Vector3 targetScale;
 	List<Toggle> valves = new List<Toggle>();
+	List<CircleSlider> meterSliders = new List<CircleSlider>();
 	Transform valveRoot;
+	Transform meterRoot;
 
 	void Awake()
 	{
 		valveRoot = transform.Find("ValvesRoot");
+		meterRoot = transform.Find("MetersRoot");
 	}
 
 	public void InitParam(string drumID)
 	{
 		this._drumId = drumID;
 		ID.text = "ID: " + drumID;
-		curValveState = ValveToggle.isOn ? ValveState.ON : ValveState.OFF;
 	}
 
 	public void InitUI()
@@ -39,49 +38,34 @@ public class LiquidUI : IChangableUI
 		transform.DOScaleY(targetScale.y, .4f).SetEase(Ease.OutBounce);
 	}
 
-	public override void CreateValvesUI(List<string> valvesName)
+	public override void CreateValvesUI(List<string> valveNames)
 	{
 		foreach (var v in valves)
 		{
 			Destroy(v.gameObject);
 		}
 		valves = new List<Toggle>();
-		for (int i = 0; i < valvesName.Count; i++)
+		for (int i = 0; i < valveNames.Count; i++)
 		{
 			Toggle tmpTg = Instantiate(valvePrefab, valveRoot);
-			tmpTg.name = valvesName[i];
+			tmpTg.name = valveNames[i];
 			valves.Add(tmpTg);
 		}
 	}
 
-	/// <summary>
-	/// 显示液位高度
-	public override void UpdatePercentLeft(float curH, float totalAmount)
+	public override void CreateMeterUI(List<MeterObj> meterObjs)
 	{
-		circleLeft.Max = totalAmount;
-		circleLeft.Value = curH;
-	}
-
-	public override void UpdatePercentRight(float curH, float totalAmount)
-	{
-		circleRight.Max = totalAmount;
-		circleRight.Value = curH;
-	}
-
-	public void ChangeValveState(ValveState state)
-	{
-		switch (state)
+		foreach (var v in meterSliders)
 		{
-			case ValveState.ON:
-				{
-					ValveToggle.isOn = true;
-				}
-				break;
-			case ValveState.OFF:
-				{
-					ValveToggle.isOn = false;
-				}
-				break;
+			Destroy(v.gameObject);
+		}
+		meterSliders = new List<CircleSlider>();
+		for (int i = 0; i < meterObjs.Count; i++)
+		{
+			CircleSlider tmpSli = Instantiate(MeterPrefab, meterRoot);
+			tmpSli.name = meterObjs[i].CurrentValueKey;
+			meterObjs[i].SetSliderObj(tmpSli);
+			meterSliders.Add(tmpSli);
 		}
 	}
 
@@ -93,6 +77,18 @@ public class LiquidUI : IChangableUI
 
 	public override void UpdateValvesUI(List<string> valveNames, List<bool> isOn)
 	{
-		Debug.LogError("Hello World!!!");
+		for (int i = 0; i < valves.Count; i++)
+		{
+			valves[i].isOn = isOn[i];
+			Debug.Log(valves[i] + " >> " + isOn[i]);
+		}
+	}
+
+	public override void UpdateMetersUI(List<MeterObj> meters)
+	{
+		for (int i = 0; i < meters.Count; i++)
+		{
+			meters[i].SetValues(meters[i].curValue, meters[i].maxValue);
+		}
 	}
 }
