@@ -35,3 +35,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Unity/BaoGang/Assembly-CSharp-Editor.csproj
+Unity/BaoGang/Assembly-CSharp-Editor.csproj
+Unity/BaoGang/Assembly-CSharp-Editor.csproj
+Unity/BaoGang/Assembly-CSharp.csproj

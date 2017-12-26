@@ -5,6 +5,7 @@ using SimpleJSON;
 public class InspectionMgr : MonoBehaviour
 {
 	public static List<InspectionItem> items = new List<InspectionItem>();
+	public static float LastMsgT = 0;
 	// 当前工单号
 	public static string curWorkOrderNumber;
 	public static string orderId;
@@ -28,7 +29,7 @@ public class InspectionMgr : MonoBehaviour
 
 	public JSONNode GetNode(string key)
 	{
-		Debug.LogError(itemsDataNode);
+		Debug.Log(itemsDataNode);
 		if (itemsDataNode.IsNull)
 			return null;
 		return itemsDataNode[key];
@@ -49,7 +50,6 @@ public class InspectionMgr : MonoBehaviour
 		}
 		curWorkOrderNumber = nodeRoot["jobNumber"];
 		orderId = nodeRoot["checkPoint"]["checkPointID"];
-		Debug.LogError(nodeRoot);
 		// 重置巡检项
 		ResetItems();
 		foreach (JSONNode node in nodeRoot["checkContent"].Children)
@@ -86,6 +86,20 @@ public class InspectionMgr : MonoBehaviour
 		{
 			Submit();
 		}
+		CheckDataCommunicate();
+	}
+
+	// 检测数据通信
+	void CheckDataCommunicate()
+	{
+		if (Time.time - LastMsgT < 10f)
+		{
+			Debug.Log("at check point");
+		}
+		else
+		{
+			Debug.Log("not in position");
+		}
 	}
 
 	// 更新巡检项
@@ -115,6 +129,22 @@ public class InspectionMgr : MonoBehaviour
 		order.UpdateCheckPoint(orderId, ((int)curOrderStatus).ToString());
 		JSONNode _orderNode = JSONNode.Parse(JsonUtility.ToJson(order));
 		InspectionSocketService.Instance.SubmitWorkOrder(_orderNode);
+		HideAllUI();
+		InspectionUIMgr.Instance.SetMouse2D(true);
 		Debug.Log("提交工单");
+	}
+
+	void HideAllUI()
+	{
+		if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.ItemList)
+		{
+			uiMgr.HideItems();
+		}
+		else if (InspectionUIMgr.curUIMode == InspectionUIMgr.UIMode.DialogBox)
+		{
+			uiMgr.HideOptionDialog();
+			uiMgr.HideItems();
+		}
+		InspectionInteractive.CanChangeUI = true;
 	}
 }

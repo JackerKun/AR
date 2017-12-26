@@ -1,16 +1,20 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainScene/InspectionMgr.cs">
+﻿<Properties StartupConfiguration="{E4F024DE-9953-FFCA-A9CB-65757FF1AFEE}|单元测试">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Classes/Submit3DButton.cs">
     <Files>
-      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="11" Column="12" />
-      <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="14" Column="27" />
-      <File FileName="Assets/Scripts/Other/SceneMsgDealer.cs" Line="65" Column="35" />
-      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="121" Column="17" />
-      <File FileName="Assets/Scripts/Classes/TrackingUIObj.cs" Line="30" Column="3" />
-      <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="119" Column="34" />
-      <File FileName="Assets/Scripts/UI/InspectionItem.cs" Line="85" Column="28" />
-      <File FileName="Assets/Scripts/Classes/Submit3DButton.cs" Line="3" Column="38" />
-      <File FileName="Assets/Scripts/UI/Ryan3DButton.cs" Line="34" Column="28" />
-      <File FileName="Assets/Scripts/Interfaces/IRyan3DButton.cs" Line="11" Column="14" />
+      <File FileName="Assets/Scripts/Classes/LiquidUI.cs" Line="78" Column="37" />
+      <File FileName="Assets/Scripts/Classes/MeterObj.cs" Line="17" Column="19" />
+      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="143" Column="39" />
+      <File FileName="Assets/Scripts/Classes/WorkOrderObj.cs" Line="42" Column="14" />
+      <File FileName="Assets/Scripts/UI/DialogBox.cs" Line="28" Column="20" />
+      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="24" Column="36" />
+      <File FileName="Assets/Scripts/Interfaces/IRyanDialog.cs" Line="8" Column="7" />
+      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="52" Column="52" />
+      <File FileName="Assets/Scripts/Interfaces/IRyan3DButton.cs" Line="9" Column="7" />
+      <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="73" Column="18" />
+      <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="52" Column="39" />
+      <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="64" Column="28" />
+      <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="111" Column="1" />
+      <File FileName="Assets/Scripts/Classes/Submit3DButton.cs" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -18,5 +22,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

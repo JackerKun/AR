@@ -85,25 +85,27 @@ public class InspectionTrackableEventHandler : MonoBehaviour, ITrackableEventHan
 		foreach (var component in canvasComponents)
 			component.enabled = true;
 
-		DealData(mTrackableBehaviour.TrackableName);
+		StartUpdateData();
 	}
 
-	void DealData(string trackerName)
+	void StartUpdateData()
 	{
-		switch (trackerName)
+		ITrackingUI[] uis = mTrackableBehaviour.GetComponentsInChildren<ITrackingUI>();
+		Debug.LogError(uis.Length);
+		foreach (ITrackingUI obj in uis)
 		{
-			case "inspection0":
-				{
-					TrackingUIObj[] uis = mTrackableBehaviour.GetComponentsInChildren<TrackingUIObj>();
-					foreach (TrackingUIObj obj in uis)
-					{
-						obj.StartUpdateValue();
-					}
-				}
-				break;
+			obj.StartUpdateValue();
 		}
 	}
 
+	void StopUpdateData()
+	{
+		ITrackingUI[] uis = mTrackableBehaviour.GetComponentsInChildren<ITrackingUI>();
+		foreach (ITrackingUI obj in uis)
+		{
+			obj.StopUpdateValue();
+		}
+	}
 
 	protected virtual void OnTrackingLost()
 	{
@@ -122,6 +124,8 @@ public class InspectionTrackableEventHandler : MonoBehaviour, ITrackableEventHan
 		// Disable canvas':
 		foreach (var component in canvasComponents)
 			component.enabled = false;
+
+		StopUpdateData();
 	}
 
 	#endregion // PRIVATE_METHODS

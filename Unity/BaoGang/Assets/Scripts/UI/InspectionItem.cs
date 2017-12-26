@@ -56,7 +56,6 @@ public class InspectionItem : Ryan3DButton
 
 	internal void CheckStatus(bool isOK)
 	{
-
 		if (isOK)
 		{
 			BtnSelect(Option.Yes);
@@ -65,7 +64,6 @@ public class InspectionItem : Ryan3DButton
 		{
 			BtnSelect(Option.No);
 		}
-		InspectionUIMgr.curUIMode = InspectionUIMgr.UIMode.ItemList;
 	}
 
 	public void BtnSelect(Option option)
