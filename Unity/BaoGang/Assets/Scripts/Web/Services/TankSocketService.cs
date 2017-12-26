@@ -8,7 +8,7 @@ using SimpleJSON;
 using HopeRun;
 using HopeRun.Message;
 
-public class TankSocketService
+public class TankSocketService : IRegistServer
 {
     //private SocketService socketService;
     //private Socket socket;

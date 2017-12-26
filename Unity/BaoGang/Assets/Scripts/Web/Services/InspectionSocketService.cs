@@ -4,7 +4,7 @@ using AR.Model;
 using SimpleJSON;
 using HopeRun;
 
-public class InspectionSocketService
+public class InspectionSocketService : IRegistServer
 {
 	//private SocketService socketService;
 	//private Socket socket;

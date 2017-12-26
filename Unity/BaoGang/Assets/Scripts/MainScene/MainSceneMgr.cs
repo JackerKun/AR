@@ -104,19 +104,21 @@ public class MainSceneMgr : MonoBehaviour
 
     public void FirstLoadScene(string sceneName)
     {
+
+        GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
         //释放场景资源
         GlobalManager.IP = ipInputField.text;
         if (sceneName == "Tank")
         {
             GlobalManager.PORTAL = ":1234";
+             WebManager.Instance.Init(TankSocketService.Instance);
         }
         else if (sceneName == "Inspection")
         {
             GlobalManager.PORTAL = ":1235";
+             WebManager.Instance.Init(InspectionSocketService.Instance);
         }
         Debug.Log(GlobalManager.IP + GlobalManager.PORTAL);
-
-        WebManager.Instance.Init(sceneName.ToLower());
         GlobalManager.LoadScene(sceneName);
         //WebErrorProccess.Init();
 //        StartCoroutine(RefreshSocket());

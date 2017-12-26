@@ -29,22 +29,28 @@ public class WebManager : MonoBehaviour
         }
     }
 
-    public void Init(string sceneName)
+    public IRegistServer _registServer { private set; get; }
+
+    public T GetServer<T>()
     {
-        SocketService socketService = socket;
+        return (T) _registServer;
+    }
+
+    public void Init(IRegistServer registServer)
+    {
+        _registServer = registServer;
         IsConnect = false;
         //通用的注册服务
-		PublicRegistListener(socketService);
-		GlobalManager.CURRENT_SCENE_SERVICE = sceneName;
-		if (sceneName == "tank")
-		{
-			TankSocketService.Instance.RegistServices();
-		}
-		else if (sceneName == "inspection")
-		{
-			InspectionSocketService.Instance.RegistServices();
-		}
-
+        PublicRegistListener(socket);
+        //		if (sceneName == "tank")
+        //		{
+        //			TankSocketService.Instance.RegistServices();
+        //		}
+        //		else if (sceneName == "inspection")
+        //		{
+        //			InspectionSocketService.Instance.RegistServices();
+        //		}
+        _registServer.RegistServices();
         StopAllCoroutines();
         StartCoroutine(RefreshSocket());
 
@@ -106,7 +112,7 @@ public class WebManager : MonoBehaviour
                 UIManager.ShowErrorMessage("网络已断开！");
                 UIManager.ChangeScreenEdgeColor(Color.red);
                 socket.Reconnect();
-                Init(GlobalManager.CURRENT_SCENE_SERVICE);
+                Init(_registServer);
             }
         }
     }
@@ -117,7 +123,7 @@ public class WebManager : MonoBehaviour
 
     public void Connect(string sceneName, KSuccessCallback callback)
     {
-        socket.ConnectServer(sceneName,callback);
+        socket.ConnectServer(sceneName, callback);
     }
     /// <summary>
     /// 注册事件，回调函数为jsonnode数组，0是data，1是原始json  {state:"",data:{},message:""}
@@ -134,14 +140,14 @@ public class WebManager : MonoBehaviour
         socket.RemoveListener(response);
     }
 
-    public void Emit(string request,string data)
+    public void Emit(string request, string data)
     {
-        socket.Request(request,data);
+        socket.Request(request, data);
     }
 
-    public void StartRequestData(string request,string eventName, KSuccessCallback callback)
+    public void StartRequestData(string request, string eventName, KSuccessCallback callback)
     {
-        socket.StartGetData(request,eventName, callback);
+        socket.StartGetData(request, eventName, callback);
     }
 
     public void CancleRequestData(string request)
