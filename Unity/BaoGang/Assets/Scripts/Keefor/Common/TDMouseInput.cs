@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,14 @@ using UnityEngine.UI;
 /// </summary>
 public class TDMouseInput : MonoBehaviour
 {
-
-    Camera mCamera;
+    Camera _mCamera;
     Vector2 screenCenter;
 
     GameObject mouseIcon2D;
     Transform mouseIcon3D;
     Image mouseCountDown;
 
-    bool isMouse2D ;
+    bool isMouse2D;
 
     void Awake()
     {
@@ -31,8 +31,8 @@ public class TDMouseInput : MonoBehaviour
         mouseIcon3D = obj.transform.Find("Mouse").transform;
         mouseCountDown = mouseIcon3D.Find("MouseCountDown").GetComponent<Image>();
         screenCenter = new Vector2(Screen.width >> 1, Screen.height >> 1);
-        mCamera = GetComponent<Camera>() ?? GetComponentInChildren<Camera>();
-        if (mCamera == null)
+        _mCamera = GetComponent<Camera>() ?? GetComponentInChildren<Camera>();
+        if (_mCamera == null)
             throw new Exception("TDMouseInput mCamera is null");
     }
 
@@ -52,7 +52,7 @@ public class TDMouseInput : MonoBehaviour
     void UpdateInteractive()
     {
         RaycastHit hit;
-        if (Physics.Raycast(mCamera.ScreenPointToRay(screenCenter), out hit))
+        if (Physics.Raycast(_mCamera.ScreenPointToRay(screenCenter), out hit))
         {
             Debug.DrawLine(Camera.main.transform.position, hit.point);
             if (hit.collider != null)
@@ -81,7 +81,7 @@ public class TDMouseInput : MonoBehaviour
                     //鼠标经过操作
                     curBtn.MouseHover();
 
-                    var dis = Vector3.Distance(mCamera.transform.position, hit.point);
+                    var dis = Vector3.Distance(_mCamera.transform.position, hit.point);
 
                     ShowMouseCountDown(tmpBtn.MouseSelect, dis);
 
@@ -140,6 +140,12 @@ public class TDMouseInput : MonoBehaviour
     }
     #endregion
 
+    public void SetVisiable(bool isvis)
+    {
+        SetMouse2D(true);
+        mouseIcon3D.gameObject.SetActive(isvis);
+    }
+
     #region CircleFill
     Sequence mySque;
     void StartFillImage(Action callback, float dis)
@@ -152,9 +158,35 @@ public class TDMouseInput : MonoBehaviour
         mySque.Append(mouseCountDown.DOFillAmount(0, 3f));
         mySque.OnComplete(callback.Invoke);
     }
-    public void StopFillImage()
+    void StopFillImage()
     {
         mySque.Kill();
     }
     #endregion
+}
+
+public partial class GyroInput
+{
+    private TDMouseInput tdInput;
+
+    public TDMouseInput TDInst
+    {
+        get
+        {
+            if (tdInput == null)
+                tdInput = FindObjectOfType<TDMouseInput>();
+            if (tdInput == null)
+                tdInput = inst.gameObject.AddComponent<TDMouseInput>();
+            return tdInput;
+        }
+    }
+    /// <summary>
+    /// 设置3D鼠标输入开启关闭
+    /// </summary>
+    /// <param name="isopen"></param>
+    public void SetTDInput(bool isopen)
+    {
+        TDInst.enabled = isopen;
+        TDInst.SetVisiable(isopen);
+    }
 }

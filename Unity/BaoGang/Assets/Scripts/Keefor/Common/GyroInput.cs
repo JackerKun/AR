@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /*
 *Create By Keefor On 12/25/2017
 */
 
-
-public class GyroInput : MonoBehaviour
+/// <summary>
+/// 陀螺仪输入
+/// 控制附着物体旋转
+/// 添加点头事件，校正目标物体位置，获取与目标物体夹角
+/// </summary>
+public partial class GyroInput : MonoBehaviour
 {
     private static GyroInput instance;
     public static GyroInput inst
@@ -58,7 +63,7 @@ public class GyroInput : MonoBehaviour
                 if (verticalAngle < 20)
                 {
                     //调用
-                    if (NodHandle != null) NodHandle();
+                    CallNod();
                     _nodtimer = Time.unscaledTime;
                     isnod = false;
                 }
@@ -114,15 +119,31 @@ public class GyroInput : MonoBehaviour
             NodHandle -= func;
     }
 
-
-    public static void CorrecteUIPostion(Transform ui)
+    private void CallNod()
     {
         Debug.Log("diantou");
+        if (NodHandle != null) NodHandle();
+    }
+    /// <summary>
+    /// 校正位置，使传入物体显示在视口正前方，高度不变
+    /// </summary>
+    /// <param name="target"></param>
+    public static void CorrecteUIPostion(Transform target)
+    {
+        target.RotateAround(inst.transform.position, Vector3.up, GetViewAngle(target));
+    }
+    /// <summary>
+    /// 获取传入物体与视口水平夹角
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static float GetViewAngle(Transform target)
+    {
         var cent = inst.transform.position;
         var forw = inst.transform.forward;
-        var pos = (ui.position - cent).normalized;
+        var pos = (target.position - cent).normalized;
         pos.y = forw.y = 0;
-        var angle = Vector3.SignedAngle(pos, forw, Vector3.up);
-        ui.RotateAround(cent, Vector3.up, angle);
+        return Vector3.SignedAngle(pos, forw, Vector3.up);
     }
+
 }
