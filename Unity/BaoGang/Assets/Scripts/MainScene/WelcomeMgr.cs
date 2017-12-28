@@ -18,7 +18,9 @@ public class WelcomeMgr : MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start()
 	{
-		Init();
+        Init();
+        WebManager.Instance.Disconnect();
+        GyroInput.inst.AddNodListener(CorrecteUIPostion);
 		yield return new WaitForSeconds(0.2f);
 		GyroInput.CorrecteUIPostion(canvas);
 	}

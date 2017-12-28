@@ -25,7 +25,7 @@ public class MainSceneMgr : MonoBehaviour
 	//    }
 
 	// Use this for initialization
-	IEnumerator Start()
+	void Start()
 	{
 		//屏幕常量
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -46,17 +46,9 @@ public class MainSceneMgr : MonoBehaviour
 			//记录上一个场景号
 			Debug.LogError(first.name + " --->> " + second.name);
 		});
-
-		GyroInput.inst.AddNodListener(CorrecteUIPostion);
-		yield return new WaitForSeconds(0.2f);
-
-		GlobalManager.LoadScene("Welcome");
+        GlobalManager.LoadScene("Welcome");
 	}
 
-	void CorrecteUIPostion()
-	{
-		GyroInput.CorrecteUIPostion(canvas);
-	}
 
 	void Update()
 	{
@@ -76,17 +68,18 @@ public class MainSceneMgr : MonoBehaviour
 		{
 			FindObjectOfType<WelcomeMgr>().FirstLoadScene("Tank");
 		}
-		else if (Input.GetKeyDown(KeyCode.J))
-		{
-			GlobalManager.LoadScene("Welcome");
-		}
+//		else if (Input.GetKeyDown(KeyCode.J))
+//		{
+//			GlobalManager.LoadScene("Welcome");
+//		}
 	}
 
 	IEnumerator CalLazyQuit()
 	{
 		LazyQuit = false;
-		yield return new WaitForSeconds(5f);
-		Debug.Log("Quit!");
-		Application.Quit();
+		yield return new WaitForSeconds(2f);
+        Debug.Log("Quit!");
+        GlobalManager.LoadScene("Welcome");
+//		Application.Quit();
 	}
 }

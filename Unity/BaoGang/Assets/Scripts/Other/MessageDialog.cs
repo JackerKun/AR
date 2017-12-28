@@ -24,7 +24,7 @@ public class MessageDialog : MonoBehaviour
 
 	public void DestroyDialog ()
 	{
-		rectTran.DOAnchorPosY (Screen.height * .5f, .5f).SetDelay (3f).SetEase (Ease.InSine).OnComplete (() => {
+		rectTran.DOAnchorPosY (Screen.height * .5f, .5f).SetDelay (2f).SetEase (Ease.InSine).OnComplete (() => {
 			Destroy (gameObject);
 		});
 	}
