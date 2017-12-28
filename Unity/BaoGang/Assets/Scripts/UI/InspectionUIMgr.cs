@@ -100,6 +100,7 @@ public class InspectionUIMgr : MonoBehaviour
 		Vector3 tmpForward = Vector3.Cross(GyroUICamera.right, Vector3.up);
 		Items.transform.position = GyroUICamera.position + tmpForward * zDist;
 		Items.transform.forward = Items.transform.position - GyroUICamera.position;
+		Items.gameObject.SetActive(true);
 		Items.DOFade(1f, .5f).SetEase(Ease.InSine);
 		// 显示提交工单按钮
 		submitBtn.position = itemsRootTran.position;
@@ -111,8 +112,11 @@ public class InspectionUIMgr : MonoBehaviour
 
 	public void HideItems()
 	{
-		Items.DOFade(0f, .2f).SetEase(Ease.OutSine);
-		submitBtn.gameObject.SetActive(false);
+		Items.DOFade(0f, .2f).SetEase(Ease.OutSine).OnComplete(() =>
+		{
+			Items.gameObject.SetActive(true);
+			submitBtn.gameObject.SetActive(false);
+		});
 		curUIMode = UIMode.Off;
 	}
 	#endregion

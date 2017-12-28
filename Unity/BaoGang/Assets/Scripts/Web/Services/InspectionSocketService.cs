@@ -42,12 +42,16 @@ public class InspectionSocketService : IRegistServer
 		//        DealState(packet.Payload);
 		//    });
 		#endregion
-
 		WebManager.Instance.Connect("inspection", node =>
 		{
 			DealInspectionMsg(node[0]);
 		});
-		WebManager.Instance.On(EventConfig.AR_CHECKPOINT, node =>
+		WebManager.Instance.On(EventConfig.AR_INSPECTIONCOMMIT, node =>
+		{
+			Debug.Log("返回首页");
+			GlobalManager.LoadScene("Welcome");
+		});
+		WebManager.Instance.On(EventConfig.AR_BLUETOOTHCHECKPOINT, node =>
 		{
 			InspectionMgr.LastMsgT = Time.time;
 			DealInspectionMsg(node[0]);
@@ -58,26 +62,6 @@ public class InspectionSocketService : IRegistServer
 	public void SubmitWorkOrder(JSONNode node)
 	{
 		WebManager.Instance.Emit(EventConfig.CHECKRESULTSUBMIT, node.ToString());
-	}
-
-	public void onScaning(System.Action<Tank> callback)
-	{
-		//		myCallback = callback;
-		//		Debug.Log("onScaning:" + EventConfig.RESPONSE_TANK);
-		//		socketService.Subscribe(EventConfig.RESPONSE_TANK, OnResponseTank);
-
-		WebManager.Instance.StartRequestData(EventConfig.TANK, EventConfig.RESPONSE_TANK, node =>
-		{
-			var tank = new Tank(node[0]);
-			GlobalManager.IS_WORKFLOW = (tank.sceneName.Equals("workflow"));
-			callback(tank);
-		});
-	}
-
-	public void onLostScaning(string targetID)
-	{
-		//socketService.DisSubscribe(EventConfig.RESPONSE_TANK);
-		WebManager.Instance.CancleRequestData(EventConfig.RESPONSE_TANK);
 	}
 
 	public void DealInspectionMsg(JSONNode jn)
@@ -91,45 +75,5 @@ public class InspectionSocketService : IRegistServer
 		// 保存巡检项数据
 		InspectionMgr.Instance.UpdateItemsData(jn["checkResultData"]);
 	}
-
-	//void DealState(string payload, bool isOnline = false)
-	//{
-	//    Debug.Log(JSON.Parse(payload));
-	//    JSONNode jn = JSON.Parse(payload)[1];
-	//    if (jn["status"] == "error")
-	//    {
-	//        UIManager.ShowErrorMessage(jn["message"]);
-	//    }
-	//    else
-	//    {
-	//        SceneMsgDealer.DealInspectionMsg(jn);
-	//    }
-	//}
-
-
-	//public InspectionSocketService()
-	//{
-	//    socketService = WebManager.Instance.socket;
-	//}
-	////连接成功后回调
-	//private void OnResponseTank(Socket socket, Packet packet, params object[] args)
-	//{
-	//    Debug.Log("Connect...");
-	//    JSONNode jRoot = JSON.Parse(packet.Payload)[1];
-
-	//    if (jRoot["status"] == "success")
-	//    {
-	//        Debug.Log(packet.Payload);
-	//        //TODO; 数据的转换
-	//        JSONNode data = jRoot["data"];
-	//        Tank bucket = new Tank(data);
-	//        GlobalManager.IS_WORKFLOW = (data["sceneName"] == "workflow");
-	//        myCallback(bucket);
-	//    }
-	//    else
-	//    {
-	//        UIManager.ShowErrorMessage(jRoot["message"]);
-	//    }
-	//}
 }
 

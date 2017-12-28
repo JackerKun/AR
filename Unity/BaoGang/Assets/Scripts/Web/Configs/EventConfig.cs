@@ -8,8 +8,15 @@ namespace AR.Configs
 		public readonly static string TANK = "BUCKET";
 		//流程消息
 		public readonly static string AR_WORKFLOW = "AR_WORKFLOW";
-		//监听巡检点事件
-		public readonly static string AR_CHECKPOINT = "AR_BLUETOOTHCHECKPOINT";
+		//结束流程
+		public readonly static string AR_INSPECTIONCOMMIT = "AR_INSPECTIONCOMMIT";
+
+
+		/// <summary>
+		/// The ar checkpoint.
+		/// </summary>
+		public readonly static string AR_CHECKPOINT = "AR_CHECKPOINT";
+		public readonly static string AR_BLUETOOTHCHECKPOINT = "AR_BLUETOOTHCHECKPOINT";
 		//监听巡检点事件
 		public readonly static string CHECKRESULTSUBMIT = "CHECKRESULTSUBMIT";
 		//订阅返回桶的信息

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using HopeRun;
 [RequireComponent(typeof(glasslive.GlassLive))]
 public class OpenLive : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class OpenLive : MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start()
 	{
+		liveurl = "rtmp://" + GlobalManager.IP + ":1935/live/test";
 		yield return new WaitForSeconds(0.1f);
 		glasslive.GlassLive.SetLiveURL(liveurl);
 		glasslive.GlassLive.UseGLES30API();

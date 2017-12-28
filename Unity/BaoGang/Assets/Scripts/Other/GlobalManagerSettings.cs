@@ -29,7 +29,7 @@ namespace HopeRun
 	{
 		public static string DeviceID = SystemInfo.deviceUniqueIdentifier;
 		public static string DeviceName = SystemInfo.deviceModel;
-        //public static string CURRENT_PHOTO_BASE64;
+		//public static string CURRENT_PHOTO_BASE64;
 		public static string LAST_LOADED_SCENE;
 		public static string CURRENT_TANKID;
 		public static string CURRENT_SCENE_SERVICE;
@@ -53,18 +53,9 @@ namespace HopeRun
 				return str;
 			}
 		}
-		//现法
-		//		public static  string apiURL = "http://192.168.110.89:1234/socket.io/";
-		// 客户
-		//		public static  string apiURL = "http://192.168.0.111:1234/socket.io/";
-
-
-		//		public static  string apiURL = "http://192.168.110.43:1234/socket.io/";
-		//		public static  string apiURL = "http://192.168.120.179:1234/socket.io/";
-		//		public static  string apiURL = "http://localhost:1234/socket.io/";
 
 		public static Transform CURRENT_TAG_CANVAS;
-        
+
 		public static Transform InitFloatingPanel(Transform rootTran, List<Transform> imageTran)
 		{
 			Transform canvasRoot = GameObject.Find("TagCanvas").transform;
@@ -88,15 +79,15 @@ namespace HopeRun
 		}
 
 
-	    public static void LoadScene(string sceneName)
-        {
-            LAST_LOADED_SCENE = SceneManager.GetActiveScene().name;
-            //载入场景
-            SceneManager.LoadScene(sceneName);
-        }
+		public static void LoadScene(string sceneName)
+		{
+			LAST_LOADED_SCENE = SceneManager.GetActiveScene().name;
+			//载入场景
+			SceneManager.LoadScene(sceneName);
+		}
 
 
-	    public static Color GetWarnColor(float percent)
+		public static Color GetWarnColor(float percent)
 		{
 			float r = Mathf.Clamp01((percent - 1f / 3f) * 3f);
 			float g = Mathf.Max(0, (1f - 3f * percent));

@@ -177,12 +177,13 @@
      <Compile Include="Assets\Scripts\Keefor\down\GyroAccel.cs" />
      <Compile Include="Assets\Scripts\Keefor\IRegistServer.cs" />
      <Compile Include="Assets\Scripts\Keefor\MainPanelAni.cs" />
+     <Compile Include="Assets\Scripts\Keefor\OpenLive.cs" />
      <Compile Include="Assets\Scripts\Keefor\xuanjian\XunjianModel.cs" />
      <Compile Include="Assets\Scripts\MainScene\CanvasMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\InspectionMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\MainSceneMgr.cs" />
      <Compile Include="Assets\Scripts\MainScene\SceneMgr.cs" />
-     <Compile Include="Assets\Scripts\MainScene\TankMgr.cs" />
+     <Compile Include="Assets\Scripts\MainScene\WelcomeMgr.cs" />
      <Compile Include="Assets\Scripts\Other\ExampleScript.cs" />
      <Compile Include="Assets\Scripts\Other\FrameRateSettings.cs" />
      <Compile Include="Assets\Scripts\Other\GlobalManagerSettings.cs" />
@@ -239,10 +240,10 @@
      <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\Editor\Vuforia\HopeVumark\authoringinfo.xml" />
+     <None Include="Assets\StreamingAssets\Vuforia\Hoperun.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
      <None Include="Assets\Plugins\Android\GlassLive\AndroidManifest.xml" />
-     <None Include="Assets\StreamingAssets\Vuforia\Hoperun.xml" />
      <None Include="Assets\StreamingAssets\Vuforia\HopeVumark.xml" />
      <None Include="Assets\Scripts\Keefor\model\UIOverlay.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
