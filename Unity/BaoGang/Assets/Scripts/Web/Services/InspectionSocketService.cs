@@ -48,8 +48,7 @@ public class InspectionSocketService : IRegistServer
 		});
 		WebManager.Instance.On(EventConfig.AR_INSPECTIONCOMMIT, node =>
 		{
-			Debug.Log("返回首页");
-			GlobalManager.LoadScene("Welcome");
+            MainSceneMgr.LazyQuit = true;
 		});
 		WebManager.Instance.On(EventConfig.AR_BLUETOOTHCHECKPOINT, node =>
 		{

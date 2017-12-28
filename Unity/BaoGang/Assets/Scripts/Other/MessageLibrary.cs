@@ -80,9 +80,8 @@ namespace HopeRun.Message
 					break;
 				case "19":
 					{
-						Debug.LogError("Hello World!");
-						GlobalManager.LoadScene("Welcome");
-						//MainSceneMgr.LazyQuit = true;
+//						GlobalManager.LoadScene("Welcome");
+						MainSceneMgr.LazyQuit = true;
 						// "加药结束";
 						return "";
 					}
