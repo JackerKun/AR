@@ -16,7 +16,7 @@ public class TDButtonItem : MonoBehaviour
     private Vector3 initScale;
     private Vector3 targetScale;
 
-    void Start()
+    void Awake()
     {
         Init();
     }
