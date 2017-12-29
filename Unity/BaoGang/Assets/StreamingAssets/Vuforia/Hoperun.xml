@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="inspection_jbq10" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_jbq9" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_jbq8" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_jbq7" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_jbq6" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_jbq5" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_jbq4" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_jbq3" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_chizi7" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_chizi6" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_chizi5" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_chizi4" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_chizi3" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_chizi2" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_chizi1" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_chizi0" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_gmgtjfkd8" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_gmgtjfkd7" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_gmgtjfkd6" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_gmgtjfkd5" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_gmgtjfkd4" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_gmgtjfkd3" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj14" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj13" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj12" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj11" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj10" size="100.000000 177.777771" />
+    <ImageTarget name="inspection_clj9" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj8" size="100.000000 56.250000" />
+    <ImageTarget name="inspection_clj7" size="100.000000 56.250000" />
     <ImageTarget name="inspection_clj6" size="100.000000 129.907410" />
     <ImageTarget name="inspection_clj5" size="100.000000 104.074074" />
     <ImageTarget name="inspection_clj4" size="100.000000 113.333336" />
