@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{661FBE64-96CB-9047-E29C-D0C5161BF9B3}|单元测试">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Web/WebManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainScene/InspectionMgr.cs">
     <Files>
-      <File FileName="Assets/Scripts/Web/WebManager.cs" Line="68" Column="27" />
       <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="79" Column="20" />
       <File FileName="Assets/Scripts/MainScene/WelcomeMgr.cs" Line="23" Column="34" />
       <File FileName="Assets/Scripts/Other/GlobalManagerSettings.cs" Line="10" Column="18" />
-      <File FileName="Assets/Scripts/UI/DialogBox.cs" Line="49" Column="21" />
-      <File FileName="Assets/Scripts/Trackers/InspectionTrackableEventHandler.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Keefor/Common/GyroInput.cs" Line="31" Column="35" />
       <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="23" Column="13" />
+      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="36" Column="38" />
+      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="11" Column="16" />
+      <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="87" Column="31" />
+      <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="29" Column="3" />
+      <File FileName="Assets/Scripts/Other/SceneMsgDealer.cs" Line="63" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
