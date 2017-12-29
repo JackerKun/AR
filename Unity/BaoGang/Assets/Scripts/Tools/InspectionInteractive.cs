@@ -20,7 +20,7 @@ public class InspectionInteractive : MonoBehaviour
 	{
 		uiMgr = gameObject.GetComponent<InspectionUIMgr>();
 		gyroCameraCtrl = FindObjectOfType<GyroCamera>();
-		gyroCamera = gyroCameraCtrl.GetComponent<Camera>();
+		gyroCamera = gyroCameraCtrl.GetComponentInChildren<Camera>();
 		screenCenter = new Vector2(Screen.width >> 1, Screen.height >> 1);
 		//隐藏UI内容
 		uiMgr.HideItems();

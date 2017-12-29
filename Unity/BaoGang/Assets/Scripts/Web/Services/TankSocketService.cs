@@ -7,6 +7,7 @@ using BestHTTP.SocketIO;
 using SimpleJSON;
 using HopeRun;
 using HopeRun.Message;
+using HopeRun.Model;
 
 public class TankSocketService : IRegistServer
 {
@@ -31,7 +32,7 @@ public class TankSocketService : IRegistServer
 		}
 	}
 
-	public void RegistServices()
+	public void AddSelfEvent()
 	{
 		Debug.LogError("Not Error");
 		#region 旧的代码
@@ -59,7 +60,11 @@ public class TankSocketService : IRegistServer
 		WebManager.Instance.Connect("tank", node =>
 		{
 			DealTankMsg(node[0], true);
-		});
+        });
+//        WebManager.Instance.On(EventConfig.AR_ONLINE, node =>
+//        {
+//            DealTankMsg(node[0], true);
+//        });
 		WebManager.Instance.On(EventConfig.AR_WORKFLOW, node =>
 		{
 			DealTankMsg(node[0]);
@@ -70,7 +75,14 @@ public class TankSocketService : IRegistServer
 			GlobalManager.LoadScene("TakePhoto");
 		});
 	}
-	public void onScaning(Action<Tank> callback)
+
+//    public void FirstRequest()
+//    {
+//        LocalDeviceRequest requestDevice = new LocalDeviceRequest("tank");
+//        WebManager.Instance.Emit(EventConfig.ONLINE, JsonUtility.ToJson(requestDevice));
+//    }
+
+    public void onScaning(Action<Tank> callback)
 	{
 		//接收实时数据
 		WebManager.Instance.StartRequestData(EventConfig.TANK, EventConfig.RESPONSE_TANK, node =>

@@ -30,7 +30,7 @@ public class GyroCamera : MonoBehaviour
 		// find the current parent of the camera's transform
 		// instantiate a new transform
 		// match the transform to the camera position
-		camParent.position = transform.position;
+        //camParent.position = transform.position;
 		// make the new transform the parent of the camera transform
         //transform.parent = camParent;
 

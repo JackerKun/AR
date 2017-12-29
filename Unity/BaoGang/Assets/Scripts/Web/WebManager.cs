@@ -3,6 +3,8 @@ using UnityEngine;
 using AR.Common;
 using AR.Configs;
 using HopeRun;
+using HopeRun.Model;
+
 public class WebManager : MonoBehaviour
 {
     public bool IsConnect = true;
@@ -33,54 +35,72 @@ public class WebManager : MonoBehaviour
 
     public T GetServer<T>()
     {
-        return (T) _registServer;
+        return (T)_registServer;
     }
 
     public void Init(IRegistServer registServer)
     {
         _registServer = registServer;
         IsConnect = false;
-        //通用的注册服务
-        PublicRegistListener();
-        //		if (sceneName == "tank")
-        //		{
-        //			TankSocketService.Instance.RegistServices();
-        //		}
-        //		else if (sceneName == "inspection")
-        //		{
-        //			InspectionSocketService.Instance.RegistServices();
-        //		}
-        _registServer.RegistServices();
+        AddCommonEvent();
+        _registServer.AddSelfEvent();
+
         StopAllCoroutines();
         StartCoroutine(CheckNetwork());
-
     }
 
-
-    private void PublicRegistListener()
+    IEnumerator CheckNetwork()
+    {
+        while (true)
+        {
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                UIManager.ShowErrorMessage("网络未连接");
+                UIManager.ChangeScreenEdgeColor(Color.red);
+                break;
+            }
+            //IsConnect = false;
+            yield return new WaitForSeconds(2f);
+            if (!IsConnect)
+            {
+                UIManager.ShowErrorMessage("服务断开连接");
+                UIManager.ChangeScreenEdgeColor(Color.red);
+                break;
+            }
+        }
+        socket.CloseServer();
+        Init(_registServer);
+    }
+    /// <summary>
+    /// 注册通用事件
+    /// </summary>
+    private void AddCommonEvent()
     {
 
-        socket.ServerConnect(() =>
+        socket.AddConnectListener(() =>
         {
+            IsConnect = true;
             UIManager.ShowMessage("服务连接成功");
             UIManager.ChangeScreenEdgeColor(Color.white);
         });
-        socket.ServerDisConnect(() =>
+        socket.AddDisconnectListener(() =>
         {
-            UIManager.ShowErrorMessage("服务连接断开");
-            UIManager.ChangeScreenEdgeColor(Color.red);
-            socket.Reconnect();
-            Init(_registServer);
+            IsConnect = false;
         });
+        //心跳检测
+        //On(EventConfig.RESPONSE_HEART, node =>
+        //{
+        //    IsConnect = true;
+        //});
         #region 旧代码
         //心跳连接
-//        socketService.Register(
-//            EventConfig.REQUEST_HEART,
-//            EventConfig.RESPONSE_HEART,
-//            (socket, packet, args) =>
-//            {
-//                IsConnect = true;
-//            });
+        //        socketService.Register(
+        //            EventConfig.REQUEST_HEART,
+        //            EventConfig.RESPONSE_HEART,
+        //            (socket, packet, args) =>
+        //            {
+        //                IsConnect = true;
+        //            });
         //监听错误信息
         //socketService.AddListener(EventConfig.WARN_MESSAGE,
         //    (socket, packet, args) =>
@@ -108,30 +128,25 @@ public class WebManager : MonoBehaviour
             });
     }
 
-    IEnumerator CheckNetwork()
-    {
-        yield return new WaitForSeconds(5f);
-        while (Application.internetReachability != NetworkReachability.NotReachable)
-        {
-            yield return 0;
-        }
-        UIManager.ShowErrorMessage("网络未连接");
-        UIManager.ChangeScreenEdgeColor(Color.red);
-        socket.Reconnect();
-        Init(_registServer);
-    }
 
 
     #region 新添加的
 
     public void Connect(string sceneName, KNodeCallback callback)
     {
-        socket.ConnectServer(sceneName, callback);
+        On(EventConfig.AR_ONLINE, callback);
+
+        socket.Open();
+
+        Emit(EventConfig.ONLINE, JsonUtility.ToJson(new LocalDeviceRequest(sceneName)));
+        //心跳检测
+        //Emit(EventConfig.REQUEST_HEART, JsonUtility.ToJson(new TargetDeviceRequest(true, GlobalManager.DeviceID, "1")));
     }
 
     public void Disconnect()
     {
-        socket.Reconnect();
+        StopAllCoroutines();
+        socket.CloseServer();
     }
 
     /// <summary>

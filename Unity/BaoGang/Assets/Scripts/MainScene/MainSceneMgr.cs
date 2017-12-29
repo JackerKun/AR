@@ -77,7 +77,8 @@ public class MainSceneMgr : MonoBehaviour
 	IEnumerator CalLazyQuit()
 	{
 		LazyQuit = false;
-		yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
+        WebManager.Instance.Disconnect();
         Debug.Log("Quit!");
         GlobalManager.LoadScene("Welcome");
 //		Application.Quit();
