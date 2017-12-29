@@ -32,6 +32,9 @@ public class InspectionMgr : MonoBehaviour
 	{
 		instance = this;
 		uiMgr = GetComponent<InspectionUIMgr>();
+		curWorkOrderNumber = "";
+		items = new List<InspectionItem>();
+		Debug.LogError("Hello~~Awake");
 	}
 
 	public JSONNode GetNode(string key)
