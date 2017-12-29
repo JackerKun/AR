@@ -25,7 +25,7 @@ public class InspectionSocketService : IRegistServer
 		}
 	}
 
-	public void RegistServices()
+	public void AddSelfEvent()
 	{
 		#region 旧的代码
 		//socketService.InitScene("inspection",

@@ -96,7 +96,7 @@ namespace glasslive {
 				camera.name = "BackMostCamera";
 				camera.clearFlags = CameraClearFlags.Nothing;
 				camera.cullingMask = 0;
-				camera.depth = Single.MaxValue;
+			    camera.depth = 10;//Single.MaxValue;
 				endHanlder = camera.gameObject.AddComponent<OnFrameEndHandler>();
 				endHanlder.enabled = false;
 				cameraObject.SetActive(true);

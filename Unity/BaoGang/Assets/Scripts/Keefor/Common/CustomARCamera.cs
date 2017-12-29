@@ -27,10 +27,11 @@ public class CustomARCamera : MonoBehaviour
 		for (int i = 0; i < camlist.Length; i++) {
 			var vbb = camlist [i].gameObject.GetComponent<Vuforia.VideoBackgroundBehaviour> ();
 			if (vbb == null) {
-				camlist [i] = null;
+				camlist [i] = null;continue;
 			}
+		    camlist[i].depth = 50;
 		}
-
+	    int lay = 1;
 		camlist [0].transform.GetChild (0).gameObject.layer = 10;
 		foreach (var camera1 in camlist) {
 			if (camera1 == null)
@@ -38,7 +39,9 @@ public class CustomARCamera : MonoBehaviour
 			if (fixCamera) {
 				camera1.projectionMatrix = cu;
 			}
-			if (!ShowBg) {
+			if (!ShowBg)
+			{
+			    lay = camera1.cullingMask;
 				camera1.cullingMask &= ~(1 << 10);
 
 			}
@@ -57,8 +60,9 @@ public class CustomARCamera : MonoBehaviour
 			camObj.transform.rotation = Quaternion.identity;
 			camObj.transform.localPosition = Vector3.zero;
 			camObj.clearFlags = CameraClearFlags.SolidColor;
-			camObj.backgroundColor = Color.black;
-			camObj.gameObject.layer = 10;
+            camObj.backgroundColor = Color.black;
+            camObj.cullingMask = lay;
+            //camObj.gameObject.layer = 10;
 		}
 	}
 

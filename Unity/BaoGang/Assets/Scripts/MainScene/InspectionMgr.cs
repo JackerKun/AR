@@ -25,6 +25,7 @@ public class InspectionMgr : MonoBehaviour
 			return instance;
 		}
 	}
+
 	InspectionUIMgr uiMgr;
 	// Use this for initialization
 	public void Awake()
@@ -73,7 +74,7 @@ public class InspectionMgr : MonoBehaviour
 		{
 			Destroy(items[i].gameObject);
 		}
-		items = new List<InspectionItem>();
+		items.Clear();
 	}
 
 	// 更新数据

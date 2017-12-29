@@ -25,9 +25,8 @@ namespace AR.Common
                 if (_socket != null) return _socket;
                 var options = new SocketOptions
                 {
-                    AutoConnect = true,
-                    Reconnection = true,
-                    ReconnectionDelay = TimeSpan.FromMilliseconds(100)
+                    AutoConnect = false
+//                    ReconnectionDelay = TimeSpan.FromMilliseconds(3000)
                 };
                 socketManagerRef = new SocketManager(GlobalManager.IP, options);
                 _socket = socketManagerRef.Socket;
@@ -38,18 +37,13 @@ namespace AR.Common
 
         TargetDeviceRequest requestObj;
 
-        private string deviceID = SystemInfo.deviceUniqueIdentifier;
 
-
-        #region PUBLIC_METHODS
-
-
-
-        public void Reconnect()
+        public void CloseServer()
         {
+            mySocket.Off();
             mySocket.Manager.Close();
             _socket = null;
-            Debug.LogError("Reconnect");
+            Debug.LogError("CloseServer");
         }
 
         //public void InitScene(string sceneName, SocketIOCallback callback)
@@ -98,72 +92,51 @@ namespace AR.Common
         //    mySocket.Emit(EventConfig.TANK, JsonUtility.ToJson(requestObj));
         //    Debug.Log("Socket is Off");
         //}
-        public void Register(string request, string response, SocketIOCallback callback)
-        {
-            requestObj = new TargetDeviceRequest(true, deviceID, "1");
-            Request(request, JsonUtility.ToJson(requestObj));
-            mySocket.On(response, callback);
-            Debug.Log(request + " --- " + response + " register socket..");
-
-        }
-
-
-
-
-        #endregion
-
-
+//        public void Register(string request, string response, SocketIOCallback callback)
+//        {
+//            requestObj = new TargetDeviceRequest(true, deviceID, "1");
+//            Request(request, JsonUtility.ToJson(requestObj));
+//            mySocket.On(response, callback);
+//            Debug.Log(request + " --- " + response + " register socket..");
+//
+//        }
 
 
         #region 新添加的东西
-        /// <summary>
-        /// 请求连接服务器
-        /// </summary>
-        /// <param name="sceneName">场景名称</param>
-        /// <param name="callback">回调方法</param>
-        public void ConnectServer(string sceneName, KNodeCallback callback)
+        public void Open()
         {
-
-//            mySocket.Manager.Handshake.OnError += (e1, e2) =>
-//            {
-//                Debug.LogError("HandshakeError" + e2);
-//            };
-//            mySocket.Manager.Handshake.OnReceived += (A) =>
-//            {
-//                UIManager.ShowMessage("已成功连接服务");
-//                Debug.Log("Handshake OnReceived");
-//            };
-            LocalDeviceRequest requestDevice = new LocalDeviceRequest(sceneName);
-
-            Request(EventConfig.ONLINE, JsonUtility.ToJson(requestDevice));
-            AddListener(EventConfig.AR_ONLINE, callback);
-            Debug.Log("register socket..");
+            socketManagerRef.Open();
         }
 
-        public void ServerConnect(KCallback callback)
+        public void AddConnectListener(KCallback callback)
         {
             mySocket.On(SocketIOEventTypes.Connect, (a1, a2, a3) =>
             {
-                if(callback!=null)callback();
+                Debug.Log("------------------->建立连接" + a2.Payload);
+                if (callback != null) callback();
             });
         }
 
-        public void ServerDisConnect(KCallback callback)
+        public void AddDisconnectListener(KCallback callback)
         {
             mySocket.On(SocketIOEventTypes.Disconnect, (a1, a2, a3) =>
             {
+                Debug.Log("------------------->断开连接" + a2.Payload);
                 if (callback != null) callback();
             });
 //            mySocket.On(SocketIOEventTypes.Error, (a1, a2, a3) =>
 //            {
+//                Debug.Log("------------------->出错了" + a2.Payload);
 //                if (callback != null) callback();
-//            }); 
+//            });
 //            mySocket.On(SocketIOEventTypes.Unknown, (a1, a2, a3) =>
 //            {
+//                Debug.Log("------------------->未知反馈" + a2.Payload);
 //                if (callback != null) callback();
 //            });
         }
 
+        
         /// <summary>
         /// 添加监听回调
         /// </summary>
@@ -207,7 +180,7 @@ namespace AR.Common
         /// <param name="callback">回调方法</param>
         public void StartGetData(string request, string eventName, KNodeCallback callback)
         {
-            requestObj = new TargetDeviceRequest(true, deviceID, GlobalManager.CURRENT_TANKID);
+            requestObj = new TargetDeviceRequest(true, GlobalManager.DeviceID, GlobalManager.CURRENT_TANKID);
             Request(request, JsonUtility.ToJson(requestObj));
             AddListener(eventName, callback);
 
@@ -218,7 +191,7 @@ namespace AR.Common
         /// <param name="request">请求命令</param>
         public void CancleGetData(string request)
         {
-            requestObj = new TargetDeviceRequest(false, deviceID, GlobalManager.CURRENT_TANKID);
+            requestObj = new TargetDeviceRequest(false, GlobalManager.DeviceID, GlobalManager.CURRENT_TANKID);
             Request(request, JsonUtility.ToJson(requestObj));
         }
         #endregion

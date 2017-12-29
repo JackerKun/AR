@@ -8,5 +8,10 @@ using UnityEngine;
 
 public interface IRegistServer
 {
-    void RegistServices();
+    /// <summary>
+    /// 注册独立监听事件
+    /// </summary>
+    void AddSelfEvent();
+
+//    void FirstRequest();
 }
