@@ -2,16 +2,18 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainScene/InspectionMgr.cs">
     <Files>
+      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="61" Column="3" />
       <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="79" Column="20" />
       <File FileName="Assets/Scripts/MainScene/WelcomeMgr.cs" Line="23" Column="34" />
       <File FileName="Assets/Scripts/Other/GlobalManagerSettings.cs" Line="10" Column="18" />
       <File FileName="Assets/Scripts/Keefor/Common/GyroInput.cs" Line="31" Column="35" />
-      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="23" Column="13" />
-      <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="36" Column="38" />
-      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="11" Column="16" />
+      <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="118" Column="58" />
       <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="87" Column="31" />
       <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="29" Column="3" />
-      <File FileName="Assets/Scripts/Other/SceneMsgDealer.cs" Line="63" Column="35" />
+      <File FileName="Assets/Scripts/Other/SceneMsgDealer.cs" Line="17" Column="4" />
+      <File FileName="Assets/Scripts/Keefor/Common/CustomARCamera.cs" Line="41" Column="16" />
+      <File FileName="Assets/Scripts/Tools/UIEffects.cs" Line="15" Column="16" />
+      <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="149" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

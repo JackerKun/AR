@@ -9,7 +9,8 @@ public class InspectionMgr : MonoBehaviour
 	// 正在巡检流程中
 	public static bool isInspecting = false;
 	// 当前工单号
-	public static string curWorkOrderNumber;
+	public string curWorkOrderNumber;
+	public string curCheckContent;
 	public static string orderId;
 	// 判断失去连接的时间
 	float outT = 10f;
@@ -32,9 +33,8 @@ public class InspectionMgr : MonoBehaviour
 	{
 		instance = this;
 		uiMgr = GetComponent<InspectionUIMgr>();
-		curWorkOrderNumber = "";
+		curCheckContent = "";
 		items = new List<InspectionItem>();
-		Debug.LogError("Hello~~Awake");
 	}
 
 	public JSONNode GetNode(string key)
@@ -54,11 +54,13 @@ public class InspectionMgr : MonoBehaviour
 	// 更新工单表
 	public void UpdateWorkOrder(JSONNode nodeRoot)
 	{
-		if (nodeRoot.IsNull || curWorkOrderNumber == nodeRoot["jobNumber"])
+		if (nodeRoot.IsNull || curCheckContent == nodeRoot["checkContent"].ToString())
 		{
 			return;
 		}
+
 		curWorkOrderNumber = nodeRoot["jobNumber"];
+		curCheckContent = nodeRoot["checkContent"].ToString();
 		orderId = nodeRoot["checkPoint"]["checkPointID"];
 		// 重置巡检项
 		ResetItems();
