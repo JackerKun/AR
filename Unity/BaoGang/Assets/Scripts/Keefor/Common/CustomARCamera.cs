@@ -48,13 +48,12 @@ public class CustomARCamera : MonoBehaviour
 			{
 				lay = camera1.cullingMask;
 				camera1.cullingMask &= ~(1 << 10);
-
 			}
 		}
 		if (isRec)
 		{
 
-			var obj = new GameObject("VedioCamera");
+			var obj = new GameObject("VideoCamera");
 			var camObj = obj.AddComponent<Camera>();
 			camObj.nearClipPlane = camlist[0].nearClipPlane;
 			camObj.farClipPlane = camlist[0].farClipPlane;
