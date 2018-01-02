@@ -24,9 +24,7 @@ public partial class GyroInput : MonoBehaviour
     /// <summary>
     /// 竖直角度
     /// </summary>
-    public float verticalAngle = 0;
-    public Vector3 gyroAngle = Vector3.zero;
-    public Vector3 forward = Vector3.zero;
+    private float verticalAngle = 0;
 
     private event Action NodHandle;
 
