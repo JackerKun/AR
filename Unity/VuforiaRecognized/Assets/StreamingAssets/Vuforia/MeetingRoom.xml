@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="glassoffice9" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice8" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice7" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice6" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice5" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice4" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice3" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice2" size="100.000000 75.000000" />
+    <ImageTarget name="glassoffice1" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070443" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070440" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070436" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070425" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070421" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070411" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070407" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070359" size="100.000000 75.000000" />
+    <ImageTarget name="20180108070348" size="100.000000 75.000000" />
+    <ImageTarget name="c" size="100.000000 75.000000" />
+    <ImageTarget name="zx" size="100.000000 75.000000" />
+    <ImageTarget name="zs" size="100.000000 75.000000" />
+    <ImageTarget name="z" size="100.000000 75.000000" />
+    <ImageTarget name="yx" size="100.000000 75.000000" />
+    <ImageTarget name="ys" size="100.000000 75.000000" />
+    <ImageTarget name="y" size="100.000000 75.000000" />
+    <ImageTarget name="x" size="100.000000 75.000000" />
+    <ImageTarget name="s" size="100.000000 75.000000" />
+  </Tracking>
+</QCARConfig>
