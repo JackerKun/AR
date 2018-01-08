@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -23,13 +22,15 @@ public class MainSceneMgr : MonoBehaviour
 	//        GUILayout.Label(SystemInfo.deviceModel);
 	//        GUILayout.Label("Net State: " + Application.internetReachability);
 	//    }
-
-	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		//屏幕常量
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		Application.runInBackground = true;
+	}
+	// Use this for initialization
+	void Start()
+	{
 		if (MainMgr == null)
 		{
 			MainMgr = this;
@@ -46,7 +47,7 @@ public class MainSceneMgr : MonoBehaviour
 			//记录上一个场景号
 			Debug.LogError(first.name + " --->> " + second.name);
 		});
-        GlobalManager.LoadScene("Welcome");
+		GlobalManager.LoadScene("Welcome");
 	}
 
 
