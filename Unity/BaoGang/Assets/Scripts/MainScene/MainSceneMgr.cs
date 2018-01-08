@@ -68,10 +68,10 @@ public class MainSceneMgr : MonoBehaviour
 		{
 			FindObjectOfType<WelcomeMgr>().FirstLoadScene("Tank");
 		}
-//		else if (Input.GetKeyDown(KeyCode.J))
-//		{
-//			GlobalManager.LoadScene("Welcome");
-//		}
+		else if (Input.GetKeyDown(KeyCode.J))
+		{
+            FindObjectOfType<WelcomeMgr>().FirstLoadScene("Pipe");
+		}
 	}
 
 	IEnumerator CalLazyQuit()

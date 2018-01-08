@@ -9,7 +9,7 @@ using Vuforia;
 public class BaseTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
     private TrackableBehaviour mTrackableBehaviour;
-    private bool isfound;
+    private bool isfound = true;
     protected bool isFound
     {
         get { return isfound; }
@@ -57,8 +57,42 @@ public class BaseTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         Debug.Log("Trackable " + trackName + " Lost");
     }
 
+    protected void DisableRender()
+    {
+        var rendererComponents = GetComponentsInChildren<Renderer>(true);
+        foreach (var component in rendererComponents)
+            component.enabled = false;
+    }
+
+    protected void DisableCollider()
+    {
+        var colliderComponents = GetComponentsInChildren<Collider>(true);
+        foreach (var component in colliderComponents)
+            component.enabled = false;
+    }
+
     protected virtual void OnTrackingFound()
     {
         Debug.Log("Trackable " + trackName + " Found");
+
     }
+
+    protected void EnableRender()
+    {
+        var rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+        // Enable rendering:
+        foreach (var component in rendererComponents)
+            component.enabled = true;
+    }
+
+    protected void EnableCollider()
+    {
+        var colliderComponents = GetComponentsInChildren<Collider>(true);
+        // Enable colliders:
+        foreach (var component in colliderComponents)
+            component.enabled = true;
+
+    }
+
 }

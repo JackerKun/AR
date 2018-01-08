@@ -36,7 +36,6 @@ public class TDButtonItem : MonoBehaviour
     {
         if(m_IsOver)return;
         m_IsOver = true;
-        initScale = transform.localScale;
         transform.DOScale(targetScale, .2f).SetEase(Ease.OutSine);
         //Debug.Log("鼠标悬停");
         if (OnOver != null)
