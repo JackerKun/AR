@@ -1,13 +1,13 @@
-﻿<Properties StartupConfiguration="{661FBE64-96CB-9047-E29C-D0C5161BF9B3}|单元测试">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Keefor/Common/CustomARCamera.cs">
+﻿<Properties StartupConfiguration="{E4F024DE-9953-FFCA-A9CB-65757FF1AFEE}|单元测试">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Tools/TakePhotoForDev.cs">
     <Files>
+      <File FileName="Assets/Scripts/Tools/TakePhotoMgr.cs" Line="15" Column="26" />
       <File FileName="Assets/Scripts/MainScene/InspectionMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Keefor/Common/CustomARCamera.cs" Line="48" Column="5" />
+      <File FileName="Assets/Scripts/Keefor/Common/CustomARCamera.cs" Line="41" Column="24" />
       <File FileName="Assets/Scripts/MainScene/MainSceneMgr.cs" Line="29" Column="38" />
       <File FileName="Assets/Scripts/MainScene/WelcomeMgr.cs" Line="23" Column="34" />
       <File FileName="Assets/Scripts/Other/GlobalManagerSettings.cs" Line="10" Column="18" />
-      <File FileName="Assets/Scripts/Keefor/Common/GyroInput.cs" Line="31" Column="35" />
+      <File FileName="Assets/Scripts/Keefor/Common/GyroInput.cs" Line="31" Column="29" />
       <File FileName="Assets/Scripts/Tools/InspectionInteractive.cs" Line="63" Column="42" />
       <File FileName="Assets/Scripts/UI/InspectionUIMgr.cs" Line="76" Column="3" />
       <File FileName="Assets/Scripts/Web/Services/InspectionSocketService.cs" Line="29" Column="3" />
@@ -16,6 +16,7 @@
       <File FileName="Assets/Scripts/Web/Common/SocketService.cs" Line="149" Column="43" />
       <File FileName="Assets/Scripts/Test/Test.cs" Line="9" Column="54" />
       <File FileName="Assets/Scripts/Web/Services/TankSocketService.cs" Line="37" Column="4" />
+      <File FileName="Assets/Scripts/Tools/TakePhotoForDev.cs" Line="54" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -23,5 +24,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
