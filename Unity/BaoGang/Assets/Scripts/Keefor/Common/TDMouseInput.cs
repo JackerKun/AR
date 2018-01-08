@@ -13,6 +13,20 @@ using UnityEngine.UI;
 /// </summary>
 public class TDMouseInput : MonoBehaviour
 {
+    private static TDMouseInput tdInput;
+
+    public static TDMouseInput inst
+    {
+        get
+        {
+            if (tdInput == null)
+                tdInput = FindObjectOfType<TDMouseInput>();
+            if (tdInput == null)
+                tdInput = new GameObject("TDInput").AddComponent<TDMouseInput>();
+            return tdInput;
+        }
+    }
+
     Camera _mCamera;
     Vector2 screenCenter;
 
@@ -21,6 +35,8 @@ public class TDMouseInput : MonoBehaviour
     Image mouseCountDown;
 
     bool isMouse2D;
+
+    private bool invisible;
 
     void Awake()
     {
@@ -44,6 +60,10 @@ public class TDMouseInput : MonoBehaviour
         UpdateInteractive();
     }
 
+    void OnDestroy()
+    {
+        tdInput = null;
+    }
 
     #region UI的交互操作
 
@@ -58,7 +78,8 @@ public class TDMouseInput : MonoBehaviour
             if (hit.collider != null)
             {
                 //显示3D鼠标
-                SetMouse2D(false);
+                if (!invisible)
+                    SetMouse2D(false);
                 mouseIcon3D.transform.position = hit.point;
                 mouseIcon3D.forward = -hit.normal;
                 TDButtonItem tmpBtn = hit.transform.GetComponent<TDButtonItem>();
@@ -80,10 +101,11 @@ public class TDMouseInput : MonoBehaviour
                     curBtn = tmpBtn;
                     //鼠标经过操作
                     curBtn.MouseHover();
-
-                    var dis = Vector3.Distance(_mCamera.transform.position, hit.point);
-
-                    ShowMouseCountDown(tmpBtn.MouseSelect, dis);
+                    if (!invisible)
+                    {
+                        var dis = Vector3.Distance(_mCamera.transform.position, hit.point);
+                        ShowMouseCountDown(tmpBtn.MouseSelect, dis);
+                    }
 
                 }
                 else
@@ -144,7 +166,20 @@ public class TDMouseInput : MonoBehaviour
     {
         SetMouse2D(true);
         mouseIcon3D.gameObject.SetActive(isvis);
+        invisible = !isvis;
     }
+
+
+    /// <summary>
+    /// 设置3D鼠标输入开启关闭
+    /// </summary>
+    /// <param name="isopen"></param>
+    public void SetEnable(bool isopen)
+    {
+        this.enabled = isopen;
+        SetVisiable(isopen);
+    }
+
 
     #region CircleFill
     Sequence mySque;
@@ -163,30 +198,4 @@ public class TDMouseInput : MonoBehaviour
         mySque.Kill();
     }
     #endregion
-}
-
-public partial class GyroInput
-{
-    private TDMouseInput tdInput;
-
-    public TDMouseInput TDInst
-    {
-        get
-        {
-            if (tdInput == null)
-                tdInput = FindObjectOfType<TDMouseInput>();
-            if (tdInput == null)
-                tdInput = inst.gameObject.AddComponent<TDMouseInput>();
-            return tdInput;
-        }
-    }
-    /// <summary>
-    /// 设置3D鼠标输入开启关闭
-    /// </summary>
-    /// <param name="isopen"></param>
-    public void SetTDInput(bool isopen)
-    {
-        TDInst.enabled = isopen;
-        TDInst.SetVisiable(isopen);
-    }
 }

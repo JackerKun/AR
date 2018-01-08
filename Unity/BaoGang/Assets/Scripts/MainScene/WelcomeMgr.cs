@@ -36,12 +36,15 @@ public class WelcomeMgr : MonoBehaviour
 		Switch();
 		ipInputField.text = GlobalManager.IP;
 		btns[0].OnClick += () => { FirstLoadScene("Tank"); };
-		btns[1].OnClick += () => { FirstLoadScene("Inspection"); };
-		btns[0].OnOver += () => { tiptext.text = "加药"; };
-		btns[1].OnOver += () => { tiptext.text = "巡检"; };
+        btns[1].OnClick += () => { FirstLoadScene("Inspection"); };
+        btns[2].OnClick += () => { FirstLoadScene("Pipe"); };
+        btns[0].OnOver += () => { tiptext.text = "加药"; };
+        btns[1].OnOver += () => { tiptext.text = "巡检"; };
+        btns[2].OnOver += () => { tiptext.text = "管道"; };
 
 		btns[0].OnOut += () => { tiptext.text = "请选择场景"; };
-		btns[1].OnOut += () => { tiptext.text = "请选择场景"; };
+        btns[1].OnOut += () => { tiptext.text = "请选择场景"; };
+        btns[2].OnOut += () => { tiptext.text = "请选择场景"; };
 	}
 
 
@@ -81,10 +84,15 @@ public class WelcomeMgr : MonoBehaviour
 		}
 		else if (sceneName == "Inspection")
 		{
-			GlobalManager.PORTAL = ":1235";
-			WebManager.Instance.Init(InspectionSocketService.Instance);
+		    GlobalManager.PORTAL = ":1235";
+		    WebManager.Instance.Init(InspectionSocketService.Instance);
 		}
-		Debug.Log(GlobalManager.IP + GlobalManager.PORTAL);
+		else
+		{
+		    GlobalManager.PORTAL = ":1235";
+            WebManager.Instance.Init(new PipeServices());
+		}
+	    Debug.Log(GlobalManager.IP + GlobalManager.PORTAL);
 		GlobalManager.LoadScene(sceneName);
 	}
 }

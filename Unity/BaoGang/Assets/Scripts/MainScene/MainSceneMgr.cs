@@ -69,19 +69,19 @@ public class MainSceneMgr : MonoBehaviour
 		{
 			FindObjectOfType<WelcomeMgr>().FirstLoadScene("Tank");
 		}
-		//		else if (Input.GetKeyDown(KeyCode.J))
-		//		{
-		//			GlobalManager.LoadScene("Welcome");
-		//		}
+		else if (Input.GetKeyDown(KeyCode.J))
+		{
+            FindObjectOfType<WelcomeMgr>().FirstLoadScene("Pipe");
+		}
 	}
 
 	IEnumerator CalLazyQuit()
 	{
 		LazyQuit = false;
-		yield return new WaitForSeconds(2f);
-		WebManager.Instance.Disconnect();
-		Debug.Log("Quit!");
-		GlobalManager.LoadScene("Welcome");
-		//		Application.Quit();
+        yield return new WaitForSeconds(2f);
+        WebManager.Instance.Disconnect();
+        Debug.Log("Quit!");
+        GlobalManager.LoadScene("Welcome");
+//		Application.Quit();
 	}
 }
